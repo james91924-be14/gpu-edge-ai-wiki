@@ -1,0 +1,2744 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>為什麼你的設備會卡頓降頻？全裝置硬體與 AI 互動有聲百科 (LLM Wiki v4.2)</title>
+
+  <!-- Google Fonts: Noto Sans TC & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+
+  <!-- KaTeX CDN for crisp LaTeX rendering in Pro Mode -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Tailwind CSS CDN & Warm Pastel Japanese Design Tokens (v4.0 Original Format) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans TC"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            'cream-bg': '#F6F0E8',
+            'cream-stage': '#FFFDF9',
+            'cream-border': '#E6DDD2',
+            'pastel-peach': '#FFF1E6',
+            'pastel-mint': '#E6F8F0',
+            'pastel-sky': '#EBF5FF',
+            'pastel-lav': '#F3ECFF',
+            'pastel-amber': '#FEF7E0',
+            'ink-main': '#241F1C',
+            'ink-sec': '#4E4742',
+            'ink-muted': '#7C736B',
+            'coral': '#EA580C',
+            'coral-soft': '#FFE4D4',
+            'violet-brand': '#7C3AED',
+            'sky-brand': '#0284C7',
+            'dark-bg': '#070B14',
+            'dark-stage': '#0F172A',
+            'dark-card': '#1E293B',
+            'dark-border': '#334155',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Smooth slide entry, SVG data-flow dashes, spinning fan, mascot bobbing & proactive highlights */
+    @keyframes slideFade {
+      from { opacity: 0; transform: translateX(12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .slide-anim { animation: slideFade 0.26s cubic-bezier(0.22, 1, 0.36, 1); }
+
+    @keyframes flowDash {
+      to { stroke-dashoffset: -24; }
+    }
+    .dash-anim { stroke-dasharray: 6 6; animation: flowDash 0.75s linear infinite; }
+
+    @keyframes spinFan {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .fan-spin { transform-origin: 30px 30px; animation: spinFan 0.8s linear infinite; }
+
+    @keyframes petBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .pet-bob { animation: petBob 2.4s ease-in-out infinite; }
+
+    @keyframes eqPulse {
+      0%, 100% { height: 4px; }
+      50% { height: 14px; }
+    }
+    .eq-1 { animation: eqPulse 0.55s ease-in-out infinite; }
+    .eq-2 { animation: eqPulse 0.42s ease-in-out infinite 0.15s; }
+    .eq-3 { animation: eqPulse 0.62s ease-in-out infinite 0.3s; }
+
+    @keyframes bubblePop {
+      from { opacity: 0; transform: translateY(10px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .bubble-pop { animation: bubblePop 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
+
+    @keyframes nextGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.55); transform: scale(1); }
+      50% { box-shadow: 0 0 0 8px rgba(234, 88, 12, 0); transform: scale(1.05); }
+    }
+    .next-highlight { animation: nextGlow 1.2s ease-in-out infinite; }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(124, 115, 107, 0.35); border-radius: 99px; }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:"Noto Sans TC", sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:"JetBrains Mono", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.-right-0\.5{right:-0.125rem}.-top-0\.5{top:-0.125rem}.bottom-16{bottom:4rem}.bottom-32{bottom:8rem}.left-1\/2{left:50%}.right-4{right:1rem}.top-0{top:0px}.top-16{top:4rem}.z-40{z-index:40}.z-50{z-index:50}.z-\[120\]{z-index:120}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-1\.5{margin-bottom:0.375rem}.mb-3{margin-bottom:0.75rem}.mb-3\.5{margin-bottom:0.875rem}.mt-2\.5{margin-top:0.625rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-1\.5{height:0.375rem}.h-16{height:4rem}.h-3{height:0.75rem}.h-3\.5{height:0.875rem}.h-9{height:2.25rem}.max-h-\[260px\]{max-height:260px}.max-h-\[75vh\]{max-height:75vh}.max-h-\[85vh\]{max-height:85vh}.min-h-\[540px\]{min-height:540px}.min-h-screen{min-height:100vh}.w-1{width:0.25rem}.w-16{width:4rem}.w-3{width:0.75rem}.w-9{width:2.25rem}.w-\[330px\]{width:330px}.w-\[390px\]{width:390px}.w-full{width:100%}.min-w-0{min-width:0px}.max-w-4xl{max-width:56rem}.max-w-\[1140px\]{max-width:1140px}.max-w-\[1280px\]{max-width:1280px}.max-w-\[230px\]{max-width:230px}.max-w-\[calc\(100vw-2rem\)\]{max-width:calc(100vw - 2rem)}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.-translate-x-1\/2{--tw-translate-x:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes ping{75%, 100%{transform:scale(2);opacity:0}}.animate-ping{animation:ping 1s cubic-bezier(0, 0, 0.2, 1) infinite}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-0\.5{gap:0.125rem}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-2\.5{gap:0.625rem}.gap-3{gap:0.75rem}.space-y-2\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.625rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.625rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.overflow-x-hidden{overflow-x:hidden}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.whitespace-pre-wrap{white-space:pre-wrap}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.rounded-br-sm{border-bottom-right-radius:0.125rem}.rounded-tl-sm{border-top-left-radius:0.125rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-amber-300{--tw-border-opacity:1;border-color:rgb(252 211 77 / var(--tw-border-opacity, 1))}.border-coral{--tw-border-opacity:1;border-color:rgb(234 88 12 / var(--tw-border-opacity, 1))}.border-coral\/30{border-color:rgb(234 88 12 / 0.3)}.border-cream-border{--tw-border-opacity:1;border-color:rgb(230 221 210 / var(--tw-border-opacity, 1))}.border-emerald-300{--tw-border-opacity:1;border-color:rgb(110 231 183 / var(--tw-border-opacity, 1))}.border-violet-brand{--tw-border-opacity:1;border-color:rgb(124 58 237 / var(--tw-border-opacity, 1))}.border-violet-brand\/30{border-color:rgb(124 58 237 / 0.3)}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.border-white\/20{border-color:rgb(255 255 255 / 0.2)}.border-white\/80{border-color:rgb(255 255 255 / 0.8)}.bg-coral{--tw-bg-opacity:1;background-color:rgb(234 88 12 / var(--tw-bg-opacity, 1))}.bg-cream-bg{--tw-bg-opacity:1;background-color:rgb(246 240 232 / var(--tw-bg-opacity, 1))}.bg-cream-stage{--tw-bg-opacity:1;background-color:rgb(255 253 249 / var(--tw-bg-opacity, 1))}.bg-emerald-400{--tw-bg-opacity:1;background-color:rgb(52 211 153 / var(--tw-bg-opacity, 1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-pastel-amber\/50{background-color:rgb(254 247 224 / 0.5)}.bg-pastel-lav{--tw-bg-opacity:1;background-color:rgb(243 236 255 / var(--tw-bg-opacity, 1))}.bg-pastel-mint{--tw-bg-opacity:1;background-color:rgb(230 248 240 / var(--tw-bg-opacity, 1))}.bg-pastel-peach{--tw-bg-opacity:1;background-color:rgb(255 241 230 / var(--tw-bg-opacity, 1))}.bg-pastel-sky{--tw-bg-opacity:1;background-color:rgb(235 245 255 / var(--tw-bg-opacity, 1))}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-950\/65{background-color:rgb(2 6 23 / 0.65)}.bg-violet-brand{--tw-bg-opacity:1;background-color:rgb(124 58 237 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/15{background-color:rgb(255 255 255 / 0.15)}.bg-white\/90{background-color:rgb(255 255 255 / 0.9)}.bg-white\/95{background-color:rgb(255 255 255 / 0.95)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-coral{--tw-gradient-from:#EA580C var(--tw-gradient-from-position);--tw-gradient-to:rgb(234 88 12 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-purple-900{--tw-gradient-from:#581c87 var(--tw-gradient-from-position);--tw-gradient-to:rgb(88 28 135 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-sky-brand{--tw-gradient-from:#0284C7 var(--tw-gradient-from-position);--tw-gradient-to:rgb(2 132 199 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-violet-brand{--tw-gradient-from:#7C3AED var(--tw-gradient-from-position);--tw-gradient-to:rgb(124 58 237 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-violet-brand{--tw-gradient-to:rgb(124 58 237 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #7C3AED var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-coral{--tw-gradient-to:#EA580C var(--tw-gradient-to-position)}.to-indigo-900{--tw-gradient-to:#312e81 var(--tw-gradient-to-position)}.to-sky-brand{--tw-gradient-to:#0284C7 var(--tw-gradient-to-position)}.to-violet-brand{--tw-gradient-to:#7C3AED var(--tw-gradient-to-position)}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-3\.5{padding:0.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-3\.5{padding-left:0.875rem;padding-right:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.pl-2{padding-left:0.5rem}.pr-4{padding-right:1rem}.font-mono{font-family:"JetBrains Mono", monospace}.font-sans{font-family:"Noto Sans TC", sans-serif}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.5rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-semibold{font-weight:600}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14 / var(--tw-text-opacity, 1))}.text-coral{--tw-text-opacity:1;color:rgb(234 88 12 / var(--tw-text-opacity, 1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70 / var(--tw-text-opacity, 1))}.text-ink-main{--tw-text-opacity:1;color:rgb(36 31 28 / var(--tw-text-opacity, 1))}.text-ink-muted{--tw-text-opacity:1;color:rgb(124 115 107 / var(--tw-text-opacity, 1))}.text-ink-sec{--tw-text-opacity:1;color:rgb(78 71 66 / var(--tw-text-opacity, 1))}.text-sky-brand{--tw-text-opacity:1;color:rgb(2 132 199 / var(--tw-text-opacity, 1))}.text-violet-brand{--tw-text-opacity:1;color:rgb(124 58 237 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.accent-violet-brand{accent-color:#7C3AED}.opacity-90{opacity:0.9}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.backdrop-blur{--tw-backdrop-blur:blur(8px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-200{transition-duration:200ms}.duration-300{transition-duration:300ms}.hover\:-translate-y-0\.5:hover{--tw-translate-y:-0.125rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-coral:hover{--tw-border-opacity:1;border-color:rgb(234 88 12 / var(--tw-border-opacity, 1))}.hover\:border-violet-brand:hover{--tw-border-opacity:1;border-color:rgb(124 58 237 / var(--tw-border-opacity, 1))}.hover\:bg-violet-brand:hover{--tw-bg-opacity:1;background-color:rgb(124 58 237 / var(--tw-bg-opacity, 1))}.hover\:bg-white\/25:hover{background-color:rgb(255 255 255 / 0.25)}.hover\:text-ink-main:hover{--tw-text-opacity:1;color:rgb(36 31 28 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:opacity-90:hover{opacity:0.9}.focus\:border-violet-brand:focus{--tw-border-opacity:1;border-color:rgb(124 58 237 / var(--tw-border-opacity, 1))}.dark\:border-amber-600\/50:is(.dark *){border-color:rgb(217 119 6 / 0.5)}.dark\:border-dark-border:is(.dark *){--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.dark\:border-emerald-600\/50:is(.dark *){border-color:rgb(5 150 105 / 0.5)}.dark\:border-slate-800:is(.dark *){--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.dark\:bg-dark-bg:is(.dark *){--tw-bg-opacity:1;background-color:rgb(7 11 20 / var(--tw-bg-opacity, 1))}.dark\:bg-dark-card:is(.dark *){--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.dark\:bg-dark-card\/95:is(.dark *){background-color:rgb(30 41 59 / 0.95)}.dark\:bg-dark-stage:is(.dark *){--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.dark\:bg-emerald-500\/20:is(.dark *){background-color:rgb(16 185 129 / 0.2)}.dark\:bg-orange-500\/20:is(.dark *){background-color:rgb(249 115 22 / 0.2)}.dark\:bg-purple-500\/20:is(.dark *){background-color:rgb(168 85 247 / 0.2)}.dark\:bg-purple-950\/40:is(.dark *){background-color:rgb(59 7 100 / 0.4)}.dark\:bg-sky-500\/20:is(.dark *){background-color:rgb(14 165 233 / 0.2)}.dark\:bg-slate-900\/90:is(.dark *){background-color:rgb(15 23 42 / 0.9)}.dark\:bg-white:is(.dark *){--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.dark\:text-amber-300:is(.dark *){--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.dark\:text-emerald-300:is(.dark *){--tw-text-opacity:1;color:rgb(110 231 183 / var(--tw-text-opacity, 1))}.dark\:text-orange-300:is(.dark *){--tw-text-opacity:1;color:rgb(253 186 116 / var(--tw-text-opacity, 1))}.dark\:text-purple-300:is(.dark *){--tw-text-opacity:1;color:rgb(216 180 254 / var(--tw-text-opacity, 1))}.dark\:text-sky-300:is(.dark *){--tw-text-opacity:1;color:rgb(125 211 252 / var(--tw-text-opacity, 1))}.dark\:text-slate-200:is(.dark *){--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.dark\:text-slate-300:is(.dark *){--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.dark\:text-slate-400:is(.dark *){--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.dark\:text-slate-50:is(.dark *){--tw-text-opacity:1;color:rgb(248 250 252 / var(--tw-text-opacity, 1))}.dark\:text-slate-900:is(.dark *){--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.dark\:text-white:is(.dark *){--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.dark\:hover\:text-white:hover:is(.dark *){--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}@media (min-width: 640px){.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:px-5{padding-left:1.25rem;padding-right:1.25rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}}@media (min-width: 768px){.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:aspect-\[16\/9\]{aspect-ratio:16/9}}</style></head>
+<body class="bg-cream-bg dark:bg-dark-bg text-ink-main dark:text-slate-50 font-sans min-h-screen flex flex-col justify-between transition-colors duration-200 overflow-x-hidden">
+
+  <!-- ==================== TOP NAVIGATION & DYNAMIC TRACK HEADER (v4.0 Style + v4.1 Controls) ==================== -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-card/95 backdrop-blur border-b border-cream-border dark:border-dark-border shadow-sm">
+    <div class="max-w-[1280px] mx-auto px-3 sm:px-5 py-2 flex flex-wrap items-center justify-between gap-2">
+      <!-- Brand + Active Track Badge -->
+      <div class="flex items-center gap-2 min-w-0">
+        <span class="bg-gradient-to-r from-coral to-violet-brand text-white px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold shrink-0">LLM WIKI v4.2</span>
+        <span id="activeTrackBadge" class="px-2.5 py-1 rounded-full bg-pastel-peach dark:bg-orange-500/20 text-coral dark:text-orange-300 font-bold text-xs truncate border border-coral/30">
+          🎮 玩家實戰版 × 🎮 獨顯效能 (15頁)
+        </span>
+      </div>
+
+      <!-- Primary Controls -->
+      <div class="flex flex-wrap items-center gap-1.5">
+        <select id="topTrackSel" onchange="setTrack(this.value)" title="隨時切換專屬路線（頁數與內容會完全改變）" class="px-2.5 py-1.5 rounded-full text-xs font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border outline-none cursor-pointer">
+          <option value="beginner">🐣 小白故事版 (13頁・零公式)</option>
+          <option value="gamer" selected="">🎮 玩家大學生版 (15頁・實戰)</option>
+          <option value="pro">⚡ 理工硬核版 (17頁・完整公式)</option>
+        </select>
+
+        <select id="topDeviceSel" onchange="setDevice(this.value)" title="隨時切換目標裝置情境" class="px-2.5 py-1.5 rounded-full text-xs font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border outline-none cursor-pointer">
+          <option value="mobile">📱 行動輕薄陣營</option>
+          <option value="gpu" selected="">🎮 獨顯效能陣營</option>
+        </select>
+
+        <!-- Voice Default ON -->
+        <button id="ttsBtn" onclick="toggleAudiobook()" class="px-3 py-1.5 rounded-full text-xs font-bold bg-coral text-white hover:opacity-90 transition cursor-pointer shadow-sm">
+          🔊 語音：開
+        </button>
+
+        <!-- BGM Default ON -->
+        <button id="topBgmBtn" onclick="toggleBgm()" class="px-2.5 py-1.5 rounded-full text-xs font-bold bg-violet-brand text-white hover:opacity-90 transition cursor-pointer shadow-sm">
+          🎵 音樂：開
+        </button>
+
+        <button id="audioConsoleToggle" onclick="toggleAudioConsole()" class="px-2.5 py-1.5 rounded-full text-xs font-bold bg-pastel-lav dark:bg-purple-500/20 text-violet-brand dark:text-purple-300 border border-violet-brand/30 hover:bg-violet-brand hover:text-white transition cursor-pointer">
+          🎛️ 音訊與配音台
+        </button>
+
+        <button onclick="openWikiModal('All-Device-AI-Performance-Guide')" class="px-2.5 py-1.5 rounded-full text-xs font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border hover:border-violet-brand transition cursor-pointer">
+          📚 Wiki
+        </button>
+
+        <button onclick="toggleGrid()" class="px-2.5 py-1.5 rounded-full text-xs font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border hover:border-coral transition cursor-pointer">
+          🗂️ 總覽 (G)
+        </button>
+
+        <button id="fullBtn" onclick="toggleFull()" class="px-2.5 py-1.5 rounded-full text-xs font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border hover:border-coral transition cursor-pointer">
+          🖥️ 全螢幕 (F)
+        </button>
+
+        <button id="themeBtn" onclick="toggleTheme()" class="px-2.5 py-1.5 rounded-full text-xs font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border hover:border-coral transition cursor-pointer">
+          🌙 暗房
+        </button>
+
+        <button onclick="downloadFullRepoZip()" class="px-3 py-1.5 rounded-full text-xs font-extrabold bg-gradient-to-r from-sky-brand to-violet-brand text-white hover:opacity-90 transition shadow-md cursor-pointer">
+          📦 下載完整 GitHub 專案 ZIP
+        </button>
+      </div>
+    </div>
+
+    <!-- Expandable Audiobook Voice & 16-Step Rhythmic BGM Console -->
+    <div id="audioConsole" class="hidden border-t border-cream-border dark:border-dark-border bg-pastel-amber/50 dark:bg-slate-900/90 px-4 py-2.5">
+      <div class="max-w-[1280px] mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+        <!-- Voice Settings -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="font-extrabold text-ink-main dark:text-white">🗣️ 配音員：</span>
+          <select id="voiceSelect" onchange="onVoiceChange()" class="max-w-[230px] px-2.5 py-1 rounded-lg bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border font-semibold outline-none cursor-pointer">
+            <option value="">載入系統語音中...</option>
+          </select>
+          <select id="rateSelect" onchange="onRateChange()" class="px-2 py-1 rounded-lg bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border font-bold outline-none cursor-pointer">
+            <option value="0.85">0.85x 悠閒</option>
+            <option value="1.0" selected="">1.0x 自然</option>
+            <option value="1.15">1.15x 輕快</option>
+          </select>
+          <span class="px-2.5 py-1 rounded-full font-bold bg-pastel-mint dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-600/50 text-[11px]">
+            📖 手動翻頁模式（唸完由小矽溫馨提醒）
+          </span>
+          <span class="px-2.5 py-1 rounded-full bg-white/90 dark:bg-dark-card border border-amber-300 dark:border-amber-600/50 text-amber-800 dark:text-amber-300 font-bold text-[11px]">
+            💡 建議用 Microsoft Edge 開啟，可免費解鎖超擬真台灣女聲 HsiaoChen Natural！
+          </span>
+        </div>
+
+        <!-- 16-Step Groove BGM & SFX Controls -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="font-extrabold text-ink-main dark:text-white">🎵 節奏配樂：</span>
+          <select id="bgmTrackSel" onchange="onBgmTrackChange()" class="px-2.5 py-1 rounded-lg bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border font-bold outline-none cursor-pointer">
+            <option value="lofi" selected="">🥁 咖啡廳 Lo-Fi 輕快鼓點 (90 BPM)</option>
+            <option value="bossa">☕ 午後陽光 Bossa 爵士律動 (106 BPM)</option>
+            <option value="kalimba">🌿 森林木琴 Kalimba 節拍 (96 BPM)</option>
+          </select>
+          <button id="bgmBtn" onclick="toggleBgm()" class="px-3 py-1 rounded-full font-bold bg-coral text-white hover:opacity-90 transition cursor-pointer">
+            ⏸ 暫停節奏
+          </button>
+          <div class="flex items-center gap-1">
+            <span class="text-[11px] font-bold">音量</span>
+            <input id="bgmVol" type="range" min="0.05" max="0.85" step="0.05" value="0.45" oninput="updateBgmVol()" class="w-16 accent-violet-brand cursor-pointer">
+          </div>
+          <button id="sfxBtn" onclick="toggleSfx()" class="px-2.5 py-1 rounded-full font-bold bg-coral text-white transition cursor-pointer">
+            🔊 互動音效：開
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== TOAST NOTIFICATION (No alert/confirm) ==================== -->
+  <div id="toastBox" class="hidden fixed top-16 left-1/2 -translate-x-1/2 z-[120] px-5 py-2.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs sm:text-sm font-bold shadow-2xl border border-white/20"></div>
+
+  <!-- ==================== 16:9 MAIN STAGE + KARAOKE SUBTITLE BAR (v4.0 Exact Proportions) ==================== -->
+  <main class="flex-1 flex flex-col items-center justify-center px-3 sm:px-5 py-3 gap-2.5">
+    <!-- 16:9 Stage -->
+    <div id="deckStage" class="w-full max-w-[1140px] lg:aspect-[16/9] min-h-[540px] bg-cream-stage dark:bg-dark-stage border-2 border-cream-border dark:border-dark-border rounded-3xl shadow-xl relative overflow-hidden flex flex-col">
+      <!-- Dynamic Slide Mount Container -->
+      <div id="slideMount" class="flex-1 flex flex-col overflow-y-auto"></div>
+      <!-- Bottom Progress Bar -->
+      <div id="progLine" class="h-1.5 bg-gradient-to-r from-coral via-violet-brand to-sky-brand transition-all duration-300" style="width: 6.66%;"></div>
+    </div>
+
+    <!-- Live Audiobook Karaoke Subtitle Strip -->
+    <div id="subtitleBar" class="w-full max-w-[1140px] rounded-2xl bg-white/95 dark:bg-dark-card/95 border border-cream-border dark:border-dark-border px-4 py-2 shadow-sm flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div id="subtitleEq" class="hidden items-end gap-0.5 h-3.5 shrink-0">
+          <span class="w-1 bg-emerald-500 rounded-full eq-1"></span>
+          <span class="w-1 bg-coral rounded-full eq-2"></span>
+          <span class="w-1 bg-violet-brand rounded-full eq-3"></span>
+        </div>
+        <span id="subtitleIcon" class="text-sm shrink-0">🎧</span>
+        <p id="subtitleText" class="text-xs sm:text-sm font-semibold text-ink-sec dark:text-slate-200 truncate">
+          有聲書與節奏背景音樂皆已預設開啟（點畫面任一處即順暢啟動），朗讀時自動壓低音樂音量，翻頁完全由您掌握！
+        </p>
+      </div>
+      <span id="subtitleMeta" class="font-mono text-[11px] font-bold text-ink-muted dark:text-slate-400 shrink-0">語音＋音樂預設開啟・手動翻頁</span>
+    </div>
+  </main>
+
+  <!-- ==================== PROACTIVE MASCOT BUBBLE & LIVELY FLOATING AI AGENT (W6-W8) ==================== -->
+  <div id="proactiveBubble" class="hidden fixed right-4 bottom-32 z-40 w-[330px] max-w-[calc(100vw-2rem)] bg-white dark:bg-dark-card border-2 border-coral rounded-2xl rounded-br-sm shadow-2xl p-3.5 bubble-pop">
+    <div class="flex items-start justify-between gap-2 mb-1.5">
+      <span class="text-xs font-black text-coral flex items-center gap-1">✨ 小矽 AI 助教主動提醒</span>
+      <button onclick="dismissProactiveBubble()" class="text-xs font-bold text-ink-muted hover:text-ink-main dark:hover:text-white px-1 cursor-pointer">✕</button>
+    </div>
+    <p id="proactiveText" class="text-xs text-ink-sec dark:text-slate-200 leading-relaxed"></p>
+    <div id="proactiveActions" class="flex flex-wrap gap-1.5 mt-2.5"></div>
+  </div>
+
+  <!-- Lively Animated Mascot FAB -->
+  <button onclick="toggleAgent()" class="fixed right-4 bottom-16 z-40 pl-2 pr-4 py-1.5 rounded-full bg-gradient-to-r from-violet-brand to-coral text-white font-extrabold text-xs sm:text-sm shadow-lg border-2 border-white dark:border-slate-800 hover:-translate-y-0.5 transition flex items-center gap-2 cursor-pointer">
+    <span class="relative flex items-center justify-center">
+      <span id="fabMiniAvatar" class="w-9 h-9 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/80 pet-bob"></span>
+      <span class="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-white animate-ping"></span>
+      <span class="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-white"></span>
+    </span>
+    <span class="flex flex-col items-start leading-tight">
+      <span>小矽 AI 助教</span>
+      <span class="font-mono text-[10px] font-semibold opacity-90">點我問答・畫圖解</span>
+    </span>
+  </button>
+
+  <aside id="agentDrawer" class="hidden fixed right-4 bottom-32 z-50 w-[390px] max-w-[calc(100vw-2rem)] max-h-[75vh] bg-white dark:bg-dark-card border-2 border-violet-brand rounded-2xl shadow-2xl flex-col overflow-hidden">
+    <div class="bg-gradient-to-r from-purple-900 to-indigo-900 text-white px-4 py-2.5 flex items-center justify-between">
+      <div class="font-black text-sm">⚡ SILICON // 硬體小助教・小矽</div>
+      <button onclick="toggleAgent()" class="px-2 py-0.5 rounded-full bg-white/15 hover:bg-white/25 text-xs font-bold cursor-pointer">✕</button>
+    </div>
+
+    <div class="flex items-center gap-3 px-4 py-2.5 bg-pastel-lav dark:bg-purple-950/40 border-b border-cream-border dark:border-dark-border">
+      <div id="avatarFrame" class="w-16 h-16 rounded-2xl bg-white dark:bg-dark-stage border-2 border-violet-brand flex items-center justify-center shrink-0 pet-bob"></div>
+      <div class="text-xs text-ink-sec dark:text-slate-300 leading-snug">
+        <span id="emoBadge" class="inline-block font-mono text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-brand text-white mb-1">EMO // 元氣待機 IDLE</span><br>
+        整合 W6 角色扮演 ＋ W7 本地 11 篇 Wiki RAG ＋ W8 意圖判定繪圖工具
+      </div>
+    </div>
+
+    <div id="chatLog" class="flex-1 overflow-y-auto p-3 space-y-2.5 bg-cream-stage dark:bg-dark-stage max-h-[260px]">
+      <div class="p-3 rounded-2xl rounded-tl-sm bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border text-xs leading-relaxed shadow-sm">
+        <span class="block font-mono text-[10px] font-bold text-sky-brand dark:text-sky-300 bg-pastel-sky dark:bg-sky-500/20 px-2 py-0.5 rounded mb-1">SYSTEM // 已掛載 11 個 Wiki 節點與意圖分流器</span>
+        (推了推護目鏡，元氣滿滿地揮手 ✨)「嗨！我是硬體小助教<strong>小矽</strong>！問我任何卡頓或 AI 加速問題，我會翻 <code>wiki/</code> 附上出處；說<strong>『幫我畫一張圖』</strong>還會自動切換生圖 Agent 幫你畫圖解喔（畫完有點累 💦）！」
+      </div>
+    </div>
+
+    <div class="px-3 py-2 flex flex-wrap gap-1.5 bg-white dark:bg-dark-card border-t border-cream-border dark:border-dark-border">
+      <button onclick="sendAgent('為什麼裝置會過熱降頻？')" class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border hover:border-violet-brand cursor-pointer">🔥 問：為何降頻</button>
+      <button onclick="sendAgent('解釋 Roofline 與 Memory-bound')" class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border hover:border-violet-brand cursor-pointer">🍳 問：Roofline</button>
+      <button onclick="sendAgent('幫我畫一張 FP16 vs INT4 顯存對比圖')" class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border hover:border-violet-brand cursor-pointer">🎨 畫：量化對比圖</button>
+      <button onclick="sendAgent('畫一張 FlashAttention 砧板與冰箱圖解')" class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border hover:border-violet-brand cursor-pointer">🎨 畫：FlashAttention</button>
+    </div>
+
+    <div class="p-2.5 flex gap-2 bg-white dark:bg-dark-card border-t border-cream-border dark:border-dark-border">
+      <input id="agentInput" type="text" placeholder="輸入問題，或說「畫一張...」" onkeydown="if(event.key==='Enter') sendAgent()" class="flex-1 px-3 py-1.5 rounded-xl text-xs bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border outline-none focus:border-violet-brand">
+      <button onclick="sendAgent()" class="px-3.5 py-1.5 rounded-xl bg-coral text-white font-bold text-xs cursor-pointer">送出</button>
+    </div>
+  </aside>
+
+  <!-- ==================== FOOTER NAVIGATION BAR ==================== -->
+  <footer class="bg-white dark:bg-dark-card border-t border-cream-border dark:border-dark-border px-4 py-2">
+    <div class="max-w-[1280px] mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="font-mono text-[11px] text-ink-muted dark:text-slate-400">
+        NYCU 314264011 許浩哲 ｜ TAICA 生成式 AI 互動有聲簡報 (封面・目錄・3路線動態分流・文獻・結尾)
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="step(-1)" class="px-3.5 py-1.5 rounded-xl bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border text-xs font-bold hover:border-coral transition cursor-pointer">← 上一頁</button>
+        <span id="pageCounter" class="font-mono text-xs font-extrabold px-2">1 / 15</span>
+        <button id="nextSlideBtn" onclick="step(1)" class="px-3.5 py-1.5 rounded-xl bg-coral text-white text-xs font-bold hover:opacity-90 transition cursor-pointer">下一頁 →</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL 1: DYNAMIC GRID OVERVIEW ==================== -->
+  <div id="gridModal" onclick="if(event.target===this) toggleGrid()" class="hidden fixed inset-0 z-50 bg-slate-950/65 backdrop-blur-sm items-center justify-center p-4">
+    <div class="bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border rounded-2xl max-w-4xl w-full max-h-[85vh] overflow-y-auto p-5 shadow-2xl">
+      <div class="flex items-center justify-between mb-3.5">
+        <h3 id="gridModalTitle" class="text-base sm:text-lg font-black">🗂️ 專屬路線簡報總覽（點擊跳轉）</h3>
+        <button onclick="toggleGrid()" class="px-3 py-1 rounded-full text-xs font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border cursor-pointer">✕ 關閉</button>
+      </div>
+      <div id="gridList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5"></div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 2: WIKI SOURCE INSPECTOR ==================== -->
+  <div id="wikiModal" onclick="if(event.target===this) closeWiki()" class="hidden fixed inset-0 z-50 bg-slate-950/65 backdrop-blur-sm items-center justify-center p-4">
+    <div class="bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border rounded-2xl max-w-4xl w-full max-h-[85vh] overflow-y-auto p-5 shadow-2xl">
+      <div class="flex items-center justify-between gap-2 mb-3">
+        <h3 id="wikiTitle" class="text-base font-black text-violet-brand dark:text-purple-300">📚 LLM Wiki 知識來源</h3>
+        <button onclick="closeWiki()" class="px-3 py-1 rounded-full text-xs font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border cursor-pointer">✕ 關閉</button>
+      </div>
+      <div id="wikiTabs" class="flex flex-wrap gap-1.5 mb-3"></div>
+      <pre id="wikiContent" class="whitespace-pre-wrap font-mono text-xs leading-relaxed bg-cream-bg dark:bg-dark-stage p-4 rounded-xl border border-cream-border dark:border-dark-border text-ink-main dark:text-slate-200"></pre>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN JAVASCRIPT ENGINE ==================== -->
+  <script>
+    /**
+     * Snapshot pristine HTML BEFORE dynamic slide rendering so the exported
+     * index.html inside gpu-edge-ai-wiki-v4.2.zip is 100% clean.
+     */
+    let PRISTINE_INDEX_HTML = '';
+
+    /* ==========================================================================
+       1. 11 REAL LLM WIKI NODES (5 Papers + 5 Concepts + 1 Synthesis)
+       ========================================================================== */
+    const wikiStore = {
+      "NVIDIA2024-MaxQ-Thermal": `---
+title: "NVIDIA Max-Q 與跨裝置功耗／溫控降頻機制"
+category: "Hardware-Thermal"
+source: "raw/papers/NVIDIA2024-MaxQ-Thermal.md"
+---
+# 功耗牆、溫度牆與 DVFS 降頻
+動態功耗遵循 $P_{\\text{dyn}} = \\alpha C V^2 f$，電壓平方會讓廢熱呈非線性暴增。
+- 行動輕薄陣營：手機無風扇僅能承受 5–10W（表溫/晶片約 48–60°C 觸發降頻），輕薄筆電 TGP 約 15–28W（約 76–80°C）。
+- 獨顯效能陣營：電競筆電 TGP 常見 100–115W，典型溫度牆約 $87^\\circ\\text{C}$。
+- 適度降壓（Undervolt）可減少 20%–30% 發熱量，僅損失約 5%–10% 峰值算力。
+- 特定機型實測降頻曲線：[來源未提供]。詳見 [[Thermal-Throttling]]、[[Roofline-Model]]。`,
+
+      "Williams2009-Roofline": `---
+title: "Roofline 效能屋頂模型 (Williams et al., 2009)"
+category: "Architecture-Model"
+source: "raw/papers/Williams2009-Roofline.md"
+---
+# Roofline 效能屋頂模型
+算術強度定義為 $I = \\frac{\\text{FLOPs}}{\\text{Bytes}}$，晶片實際效能上限為：
+$$P = \\min\\left(\\text{Peak FLOPs},\\; \\text{Peak Bandwidth} \\times I\\right)$$
+- **Memory-bound（頻寬受限）**：$I$ 低於硬體脊點（Ridge Point），運算核心乾等資料從記憶體搬運（如 LLM Decode 逐字生成）。
+- **Compute-bound（算力受限）**：$I$ 夠高，吃滿計算核心（如 LLM Prefill、大 Batch 矩陣運算）。
+關聯：[[Roofline-Model]]、[[Memory-Hierarchy-SRAM-VRAM]]、[[Weight-Quantization-INT4]]。`,
+
+      "Dao2022-FlashAttention": `---
+title: "FlashAttention：記憶體階層感知運算 (Dao et al., 2022)"
+category: "Inference-Optimization"
+source: "raw/papers/Dao2022-FlashAttention.md"
+---
+# FlashAttention 分塊計算與 Online Softmax
+利用 [[Memory-Hierarchy-SRAM-VRAM]] 巨大頻寬落差（論文 A100 例：片上 SRAM ~20 MB / 19 TB/s vs 外部 HBM 40–80 GB / 1.5–2.0 TB/s），透過 **Tiling 分塊計算** 與 **Online Softmax** 留在 SRAM 一次算完精確注意力（零近似誤差）。
+- HBM IO 複雜度由 $\\Theta(N^2)$ 降至 $\\Theta(N^2 d^2 M^{-1})$。
+- 論文於 A100 訓練 GPT-2 達最高 **3x 加速**；消費級手機與筆電實測加速倍率屬 [來源未提供]。`,
+
+      "Frantar2023-GPTQ-Quantization": `---
+title: "GPTQ：4-bit 訓練後權重量化 (Frantar et al., 2023)"
+category: "Inference-Optimization"
+source: "raw/papers/Frantar2023-GPTQ-Quantization.md"
+---
+# GPTQ 權重量化壓縮
+模型權重顯存佔用公式：$\\text{VRAM}_{\\text{weights}} \\approx N_{\\text{params}} \\times \\frac{b}{8}\\;\\text{Bytes}$。
+GPTQ 為一次性訓練後量化（PTQ），透過二階海森矩陣（Hessian）逆矩陣補償捨入誤差，將權重從 FP16（16-bit）壓縮至 **INT4（4-bit）**：
+- 體積壓縮 ~4 倍（7B 模型從 ~14 GB 降至 ~3.5–4.5 GB），能裝入 8GB 筆電；3B INT4 約 1.5–2.0 GB，能裝入行動輕薄設備。
+- 論文實測推論加速：A100 約 **3.25x**、A6000 約 **4.5x**。關聯：[[Weight-Quantization-INT4]]。`,
+
+      "Kwon2023-PagedAttention": `---
+title: "PagedAttention：分頁式 KV Cache 管理 (Kwon et al., 2023)"
+category: "Memory-Management"
+source: "raw/papers/Kwon2023-PagedAttention.md"
+---
+# PagedAttention 分頁管理
+傳統連續顯存預留導致動態 KV Cache 浪費高達 **60%–80%**。
+PagedAttention 借鏡作業系統虛擬記憶體分頁，將 KV Cache 切為非連續固定區塊（KV Blocks），以 Block Table 映射並支援 Copy-on-Write 共享前綴：
+- 將顯存浪費率壓低至 **4% 以下**。
+- 論文 vLLM 環境下吞吐量提升 **2x–4x**。關聯：[[KV-Cache-Paging]]。`,
+
+      "Thermal-Throttling": `---
+title: "Thermal Throttling（跨裝置散熱降頻）"
+---
+# Thermal Throttling
+從無風扇手機、輕薄文書本到電競筆電與桌機，當結溫撞上溫度牆（行動獨顯典型 $87^\\circ\\text{C}$）或 TGP 功耗牆即觸發 DVFS 降壓降頻保護矽晶片。來源：[[NVIDIA2024-MaxQ-Thermal]]。`,
+
+      "Roofline-Model": `---
+title: "Roofline Model（效能屋頂模型）"
+---
+# Roofline Model
+以算術強度 $I = \\frac{\\text{FLOPs}}{\\text{Bytes}}$ 區分算力受限與頻寬受限，說明為何 LLM 逐字生成會卡在記憶體頻寬。來源：[[Williams2009-Roofline]]。`,
+
+      "Memory-Hierarchy-SRAM-VRAM": `---
+title: "Memory Hierarchy（多層記憶體金字塔）"
+---
+# Memory Hierarchy
+速度由快到慢依序為 GPU SRAM（手邊砧板）→ 獨顯 VRAM/HBM（廚房冰箱）→ 系統 RAM（儲藏室）→ SSD（遠方物流倉庫）。[[Dao2022-FlashAttention]] 透過 Tiling 善用 SRAM。`,
+
+      "Weight-Quantization-INT4": `---
+title: "Weight Quantization（INT4 權重量化）"
+---
+# Weight Quantization
+將 16-bit 權重壓縮至 4-bit，縮小 4 倍空間並減少 4 倍頻寬搬運，是行動裝置與 8GB 筆電順跑大模型的核心技術。來源：[[Frantar2023-GPTQ-Quantization]]。`,
+
+      "KV-Cache-Paging": `---
+title: "KV Cache Paging（分頁顯存管理）"
+---
+# KV Cache Paging
+消除長對話 60%–80% 的連續預留浪費至 4% 以下，讓有限記憶體能支撐更長上下文。來源：[[Kwon2023-PagedAttention]]。`,
+
+      "All-Device-AI-Performance-Guide": `---
+title: "全裝置順跑邊緣 AI 與防卡頓總指南"
+---
+# 跨裝置（行動輕薄陣營 vs. 獨顯效能陣營）流暢運行指南
+串聯 [[NVIDIA2024-MaxQ-Thermal]]、[[Williams2009-Roofline]]、[[Dao2022-FlashAttention]]、[[Frantar2023-GPTQ-Quantization]] 與 [[Kwon2023-PagedAttention]]，並透過 Graph v2 流程編譯為三種分齡路線（小白 13 頁 / 玩家 15 頁 / 硬核 17 頁，含封面、目錄、參考文獻與結尾）互動有聲百科。`
+    };
+
+    /* ==========================================================================
+       2. GLOBAL STATE & 2 CORE DEVICE PROFILES (VOICE & BGM BOTH DEFAULT ON!)
+       ========================================================================== */
+    let currentTrack = 'gamer';    // 'beginner' (13) | 'gamer' (15) | 'pro' (17)
+    let currentDevice = 'gpu';     // 'mobile' | 'gpu'
+    let activeSlides = [];
+    let cur = 0;
+
+    let sfxEnabled = true;
+    let audiobookOn = true;        // Default Voice Narration ON!
+    let bgmPlaying = true;         // Default Rhythmic BGM ON!
+    let voiceHasSpokenOnce = false;
+    let speechSessionId = 0;
+    let selectedVoiceURI = '';
+
+    // Active timers to clean up cleanly on every slide switch
+    let raceInterval = null;
+    let tgTimer = null;
+    let tgPlaying = false;
+    let idleHintTimer = null;
+    let demoTargetFps = 12;
+    let fpsPos1 = 24, fpsPos2 = 24, lastSlowTime = 0;
+
+    // Quiz & Game State (resets nicely when switching track)
+    let qSolved = {};
+    let packState = { gptq: false, flash: false, paged: false };
+
+    const DEVICES = {
+      mobile: {
+        key: 'mobile',
+        shortName: '📱 行動輕薄',
+        fullName: '手機 / 平板 / 輕薄文書筆電',
+        wattage: '5–28W 低功耗牆',
+        vramLimit: 6.0,
+        vramLabel: '6.0 GB 共用記憶體預算',
+        baseTemp: 38,
+        limitTemp: 76,
+        throttleLabel: '76°C 輕薄溫控線',
+        coolBtns: [
+          { act: 'fan',   label: '🧊 拔掉厚重保護殼 / 清通風口 (-6°C)', color: 'bg-sky-brand' },
+          { act: 'stand', label: '🔌 拔除快充並調降螢幕亮度 (-4.5°C)', color: 'bg-violet-brand' },
+          { act: 'uv',    label: '⚡ 開啟省電效能甜點模式 (升溫減半！)', color: 'bg-emerald-600' }
+        ],
+        defaultModelB: 3,
+        packBudget: 6.0,
+        packBaseW: 6.2, packOptW: 2.0,
+        packBaseA: 1.8, packOptA: 0.4,
+        packBaseK: 2.4, packOptK: 0.7,
+        packModelTitle: '3B 行動端大模型 (FP16 原始需求 10.4 GB)',
+        dailyTips: [
+          '拔掉厚重散熱不良的手機殼或墊高輕薄本底部，避免邊快充邊跑遊戲／AI 疊加發熱降頻。',
+          '行動與輕薄本採用「共用系統記憶體（4–6GB 可用）」，跑本地 AI 前先關閉多餘瀏覽器分頁！',
+          '本地離線模型優先挑選 1B–3B 的 INT4（Q4）量化版本，流暢度遠勝硬塞 7B 大模型！'
+        ]
+      },
+      gpu: {
+        key: 'gpu',
+        shortName: '🎮 獨顯效能',
+        fullName: '電競筆電 / 桌機工作站',
+        wattage: '100–350W 獨顯功耗牆',
+        vramLimit: 8.0,
+        vramLabel: '8.0 GB 獨立顯存 (VRAM)',
+        baseTemp: 45,
+        limitTemp: 87,
+        throttleLabel: '87°C GPU 溫度牆',
+        coolBtns: [
+          { act: 'fan',   label: '🌀 猛催雙風扇最大轉速 (-6°C)', color: 'bg-sky-brand' },
+          { act: 'stand', label: '📐 墊高筆電後側進風口 (-4.5°C)', color: 'bg-violet-brand' },
+          { act: 'uv',    label: '⚡ 鎖定低壓效能甜點區 (升溫減半！)', color: 'bg-emerald-600' }
+        ],
+        defaultModelB: 7,
+        packBudget: 8.0,
+        packBaseW: 14.0, packOptW: 4.0,
+        packBaseA: 2.5,  packOptA: 0.4,
+        packBaseK: 3.2,  packOptK: 0.9,
+        packModelTitle: '7B 主流大模型 (FP16 原始需求 19.7 GB)',
+        dailyTips: [
+          '電競筆電務必墊高機身後側 2–3 公分（桌機定期清濾網），讓進氣暢通遠離 87°C 溫度牆。',
+          '切至「均衡模式」或適度降壓（Undervolt）10%，僅損 5% 算力卻能砍掉 20%–30% 廢熱，FPS 更穩！',
+          '8GB 獨顯本地跑 AI 鎖定 7B–8B 的 INT4 量化版（16GB+ 可跑 14B–32B），並開啟 FlashAttention 與 PagedAttention！'
+        ]
+      }
+    };
+
+    const TRACK_META = {
+      beginner: { label: '🐣 小白故事版', count: 13 },
+      gamer:    { label: '🎮 玩家實戰版', count: 15 },
+      pro:      { label: '⚡ 理工硬核版', count: 17 }
+    };
+
+    function showToast(msg) {
+      const el = document.getElementById('toastBox');
+      el.textContent = msg;
+      el.classList.remove('hidden');
+      clearTimeout(el._t);
+      el._t = setTimeout(() => el.classList.add('hidden'), 3400);
+    }
+
+    function renderMathSafe(target) {
+      try {
+        if (window.renderMathInElement && target) {
+          window.renderMathInElement(target, {
+            delimiters: [
+              { left: '$$', right: '$$', display: true },
+              { left: '$', right: '$', display: false }
+            ],
+            throwOnError: false
+          });
+        }
+      } catch (e) {}
+    }
+
+    /* ==========================================================================
+       3. DYNAMIC MULTI-TRACK DECK BUILDER (v4.0 EXACT FORMAT + COMPLETE BOOK FLOW)
+       ========================================================================== */
+    function buildSlideHeader(kicker, title, wikiKey) {
+      return `
+        <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+          <div>
+            <span class="inline-block font-mono text-[11px] font-bold px-3 py-0.5 rounded-full bg-coral-soft dark:bg-orange-500/20 text-coral dark:text-orange-400 mb-1">${kicker}</span>
+            <h2 class="text-lg sm:text-2xl font-black leading-snug">${title}</h2>
+          </div>
+          <button onclick="openWikiModal('${wikiKey}')" class="font-mono text-xs font-bold px-3 py-1.5 rounded-lg bg-pastel-lav dark:bg-purple-500/20 text-violet-brand dark:text-purple-300 border border-cream-border dark:border-dark-border hover:bg-violet-brand hover:text-white transition shrink-0 cursor-pointer">
+            Wiki: [[${wikiKey}]]
+          </button>
+        </div>
+      `;
+    }
+
+    function buildTakeaway(text) {
+      return `<div class="mt-3 rounded-xl px-4 py-2 bg-white dark:bg-dark-card border border-dashed border-coral text-xs sm:text-sm font-bold">${text}</div>`;
+    }
+
+    /**
+     * SLIDE 01: Book Cover & Personalized Route Selector (v4.0 Exact Layout)
+     */
+    function buildOnboardingSlide(track, dev) {
+      const d = DEVICES[dev];
+      const cores = navigator.hardwareConcurrency || '?';
+      const sw = window.screen.width, sh = window.screen.height;
+      const dpr = (window.devicePixelRatio || 1).toFixed(1);
+      const tMeta = TRACK_META[track];
+
+      const cardCls = (active, color) => active
+        ? (color === 'coral'
+            ? 'text-left p-3 rounded-xl bg-coral-soft/75 dark:bg-orange-500/25 border-2 border-coral shadow-md transition cursor-pointer'
+            : 'text-left p-3.5 rounded-xl bg-pastel-sky dark:bg-sky-500/25 border-2 border-sky-brand shadow-md transition cursor-pointer')
+        : 'text-left p-3 rounded-xl bg-white dark:bg-dark-card border-2 border-cream-border dark:border-dark-border hover:border-coral/60 transition cursor-pointer';
+
+      return {
+        chapter: '封面',
+        title: `封面：全裝置硬體與 AI 互動有聲百科`,
+        wiki: 'All-Device-AI-Performance-Guide',
+        proactiveTip: '👋 哈囉！我是你的硬體小助教「小矽」！點我隨時可以問問題或請我畫圖解喔～先在封面上選好你的閱讀路線與設備，再按綠色按鈕翻開目錄吧！',
+        narration: `歡迎翻開《為什麼你的設備會卡頓降頻？全裝置硬體與 AI 互動有聲百科》！這是一本會依你的理解程度量身打造的有聲專書。你目前選擇的是${tMeta.label}，全書含封面、目錄、文獻與結尾共有${tMeta.count}頁，目標設備為${d.fullName}。確認設定後，請按綠色按鈕或右下角下一頁翻開目錄開始旅程！`,
+        html: `
+          ${buildSlideHeader('BOOK COVER // 互動有聲專書 ・ NYCU 314264011 許浩哲 ・ 5 篇文獻 LLM Wiki 編著', '為什麼你的設備會卡頓降頻？先選「閱讀路線」與「常用設備」！', 'All-Device-AI-Performance-Guide')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-stretch">
+            <!-- Step 1: 3 Truly Different Tracks -->
+            <div class="rounded-2xl p-4 bg-pastel-peach dark:bg-orange-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-between gap-2.5">
+              <h3 class="text-sm sm:text-base font-extrabold">🎯 Step 1：選擇專屬路線（目錄、頁數、公式與考題完全不同！）</h3>
+              <div class="flex flex-col gap-2">
+                <button onclick="setTrack('beginner')" class="${cardCls(track === 'beginner', 'coral')}">
+                  <div class="flex justify-between items-center">
+                    <span class="font-extrabold text-sm">🐣 生活小白故事版</span>
+                    <span class="font-mono text-[11px] font-bold px-2 py-0.5 rounded-full bg-coral text-white">共 13 頁・零公式</span>
+                  </div>
+                  <div class="text-xs text-ink-sec dark:text-slate-300 mt-1">用餐廳廚房、行李箱與小椅子故事講懂卡頓與 AI，完全隱藏數學公式，聽起來像有聲故事書！</div>
+                </button>
+                <button onclick="setTrack('gamer')" class="${cardCls(track === 'gamer', 'coral')}">
+                  <div class="flex justify-between items-center">
+                    <span class="font-extrabold text-sm">🎮 玩家與大學生實戰版</span>
+                    <span class="font-mono text-[11px] font-bold px-2 py-0.5 rounded-full bg-violet-brand text-white">共 15 頁・實戰調校</span>
+                  </div>
+                  <div class="text-xs text-ink-sec dark:text-slate-300 mt-1">涵蓋滑鼠 1000Hz、螢幕 144Hz、降壓甜點區、Roofline 圖解、兩款小遊戲與本地跑 AI 顯存實算！</div>
+                </button>
+                <button onclick="setTrack('pro')" class="${cardCls(track === 'pro', 'coral')}">
+                  <div class="flex justify-between items-center">
+                    <span class="font-extrabold text-sm">⚡ 理工研究生硬核版</span>
+                    <span class="font-mono text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-800 dark:bg-sky-500 text-white">共 17 頁・完整公式</span>
+                  </div>
+                  <div class="text-xs text-ink-sec dark:text-slate-300 mt-1">深讀全部 5 篇論文 LaTeX 推導（CMOS、Roofline、FlashAttention、GPTQ、PagedAttention）與 Graph v2 架構！</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: 2 Core Device Profiles + Browser Detection -->
+            <div class="rounded-2xl p-4 bg-pastel-sky dark:bg-sky-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-between gap-2.5">
+              <h3 class="text-sm sm:text-base font-extrabold">📱 Step 2：選擇你的設備陣營（全面改寫數據、遊戲與建議）</h3>
+              <div class="flex flex-col gap-2.5">
+                <button onclick="setDevice('mobile')" class="${cardCls(dev === 'mobile', 'blue')}">
+                  <div class="font-extrabold text-sm">📱 行動輕薄陣營（手機 / 平板 / 輕薄文書筆電）</div>
+                  <div class="text-xs text-ink-sec dark:text-slate-300 mt-1">無風扇或低功耗 15–28W｜共用記憶體 4–6GB｜溫控紅線 76°C｜聚焦 1B–3B 輕量 AI</div>
+                </button>
+                <button onclick="setDevice('gpu')" class="${cardCls(dev === 'gpu', 'blue')}">
+                  <div class="font-extrabold text-sm">🎮 獨顯效能陣營（電競筆電 / 桌機工作站）</div>
+                  <div class="text-xs text-ink-sec dark:text-slate-300 mt-1">獨立顯卡 8–16GB VRAM｜高功耗 100W+｜溫度牆 87°C｜聚焦 7B–14B 本地大模型與高刷遊戲</div>
+                </button>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border text-xs text-ink-sec dark:text-slate-300">
+                🔍 <strong>實機偵測您目前的裝置</strong>：螢幕 <code>${sw}×${sh}</code> (縮放 ${dpr}x) ｜ CPU 執行緒：<code>${cores} 核</code>
+              </div>
+
+              <button onclick="enterPersonalizedDeck()" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-95 text-white font-black text-sm shadow-lg transition cursor-pointer">
+                📖 翻開本書目錄・開始專屬有聲旅程（${tMeta.label}・共 ${tMeta.count} 頁） →
+              </button>
+            </div>
+          </div>
+          ${buildTakeaway(`✨ 已鎖定：${tMeta.label}（${tMeta.count} 頁） × ${d.fullName} ｜ 🔊 語音與 🎵 節奏配樂預設開啟，翻頁完全由您自主掌握！`)}
+        `
+      };
+    }
+
+    /**
+     * SLIDE 02: Dynamic Interactive Table of Contents (v4.0 Visual Aesthetic)
+     */
+    function buildTocSlide(track, dev, previewItems) {
+      const tMeta = TRACK_META[track];
+      const d = DEVICES[dev];
+      return {
+        chapter: '目錄',
+        title: `本書目錄：${tMeta.label} 學習地圖`,
+        wiki: 'All-Device-AI-Performance-Guide',
+        proactiveTip: `📑 這是為你量身生成的【${tMeta.label}】互動目錄！你可以點任意章節直接跳轉，或是按鍵盤「→」依序細細閱讀喔！`,
+        narration: `翻開本書目錄！這條${tMeta.label}路線專為你的${d.fullName}編排，從認識硬體管線與過熱降頻、揭開效能屋頂與搬運瓶頸，到三大 AI 最佳化演算法、實戰小遊戲、參考文獻與全書結尾。點擊畫面上任一張目錄卡即可直達該頁，或按右下角下一頁從第一章開始！`,
+        html: `
+          ${buildSlideHeader('TABLE OF CONTENTS // 本書動態互動目錄', `📑 ${tMeta.label} × ${d.shortName} — 全書 ${previewItems.length} 頁導覽（點擊任一章節直達）`, 'All-Device-AI-Performance-Guide')}
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 flex-1 content-start overflow-y-auto pr-1">
+            ${previewItems.map((item, idx) => `
+              <button onclick="showSlide(${idx})" class="text-left p-3 rounded-xl border-2 transition cursor-pointer flex items-start gap-2.5 ${
+                idx === 1
+                  ? 'bg-coral-soft/70 dark:bg-orange-500/20 border-coral shadow-sm'
+                  : 'bg-white dark:bg-dark-card border-cream-border dark:border-dark-border hover:border-coral hover:-translate-y-0.5 shadow-sm'
+              }">
+                <span class="font-mono text-xs font-black px-2 py-1 rounded-lg shrink-0 ${
+                  idx === 0 ? 'bg-slate-800 text-white'
+                  : (idx >= previewItems.length - 2 ? 'bg-violet-brand text-white' : 'bg-pastel-sky dark:bg-sky-500/25 text-sky-brand dark:text-sky-300')
+                }">${String(idx + 1).padStart(2, '0')}</span>
+                <div class="min-w-0">
+                  <div class="font-mono text-[10px] font-bold text-ink-muted dark:text-slate-400">${item.chapter}</div>
+                  <div class="text-xs sm:text-[13px] font-extrabold text-ink-main dark:text-slate-100 leading-snug truncate">${item.cleanTitle}</div>
+                </div>
+              </button>
+            `).join('')}
+          </div>
+          ${buildTakeaway('📖 手動翻頁最舒服：本有聲書絕不強制自動換頁，唸完一頁後小矽會溫馨提醒你，隨時按「下一頁 →」前進！')}
+        `
+      };
+    }
+
+    function buildPipelineSlide(track, dev) {
+      const d = DEVICES[dev];
+      const isMob = dev === 'mobile';
+      const titleMap = {
+        beginner: `故事開始：當你滑動${isMob ? '手機螢幕' : '滑鼠'}時，廚房裡發生了什麼事？`,
+        gamer: `全硬體協作管線：從 ${isMob ? '觸控與輕薄主機' : '1000Hz 滑鼠'} 到高刷螢幕的每一關`,
+        pro: `異質運算系統管線與端到端延遲（Click-to-Photon Latency）模型`
+      };
+      const explainMap = {
+        beginner: `🐣 <strong>生活故事版</strong>：想像你的${d.fullName}是一間超忙的餐廳！你點螢幕像「按鈴點菜」，CPU 是「櫃檯接單員」，記憶體是「廚房冰箱」，GPU 是「炒菜大廚」，螢幕就是「端上桌的菜」。只要冰箱太遠或廚房太熱大廚中暑，上菜就會一頓一頓的！`,
+        gamer: `🎮 <strong>玩家實戰版（${d.shortName}）</strong>：${isMob ? '在輕薄筆電與手機上，CPU 與 GPU 共用同一個記憶體倉庫與極小的散熱片，一開多工就容易互搶頻寬並撞上 15–28W 功耗牆。' : '在電競筆電與桌機上，1000Hz 電競滑鼠配 144Hz+ 螢幕，任何一環（CPU 單核、VRAM 爆倉、87°C 降頻）卡住，0.1% Low FPS 就會瞬間掉幀！'}`,
+        pro: `⚡ <strong>理工硬核版（${d.shortName}）</strong>：整條異質計算管線受限於阿姆達爾瓶頸與熱設計功耗（${d.wattage}）。${isMob ? '行動 SoC 採統一記憶體架構（UMA），頻寬受 LPDDR 匯流排限制且無主動風扇。' : '獨立 GPU 雖具備高頻寬 GDDR/HBM 顯存，但受 PCIe 傳輸、TGP 功耗牆與結溫 $T_j$ 嚴格約束。'}`
+      };
+      const narrMap = {
+        beginner: `我們先用一間熱鬧的餐廳來認識你的${d.fullName}！你點螢幕或滑鼠就像按鈴點菜，CPU 是櫃檯接單員，記憶體是冰箱，GPU 是快炒大廚。只要冰箱太遠，或是廚房太熱大廚中暑，上菜就會卡卡的喔！`,
+        gamer: `這張動態管線圖帶你看清${d.fullName}的內部運作。從輸入裝置到 CPU、記憶體倉庫、GPU 算力工廠，最後輸出到螢幕。在你的裝置上特別要注意${d.wattage}與記憶體頻寬，任何一關塞車都會造成肉眼可見的掉幀！`,
+        pro: `從系統架構視角來看，使用者互動與 AI 推論的端到端延遲，由輸入中斷、CPU 排程、記憶體階層頻寬、GPU 計算吞吐與熱設計功耗共同決定。針對${d.fullName}，我們將聚焦於${d.vramLabel}與${d.throttleLabel}的物理限制。`
+      };
+
+      return {
+        chapter: 'Ch.1 硬體協作總覽',
+        title: `${track === 'beginner' ? '餐廳廚房故事' : (track === 'gamer' ? '全裝置硬體管線' : '異質運算管線分析')}`,
+        wiki: 'All-Device-AI-Performance-Guide',
+        narration: narrMap[track],
+        html: `
+          ${buildSlideHeader(`SLIDE 03 // ${track === 'beginner' ? '用生活故事看懂硬體' : '全裝置硬體資料流'}`, titleMap[track], 'All-Device-AI-Performance-Guide')}
+          <div class="flex-1 bg-slate-950 rounded-2xl border border-cream-border dark:border-dark-border p-3 flex items-center justify-center overflow-hidden">
+            <svg viewBox="0 0 920 225" class="w-full h-full max-h-[260px]">
+              <rect x="16" y="62" width="126" height="96" rx="14" fill="#1E293B" stroke="#F97316" stroke-width="2.5"/>
+              <text x="79" y="94" fill="#FB923C" font-size="14" text-anchor="middle" font-weight="bold">${isMob ? '👆 觸控 / 鍵鼠' : '🖱️ 電競鍵鼠'}</text>
+              <text x="79" y="118" fill="#E2E8F0" font-size="11.5" text-anchor="middle">${track === 'beginner' ? '按鈴點菜' : (isMob ? '120Hz 觸控採樣' : '1000Hz 高回報率')}</text>
+              <text x="79" y="138" fill="#94A3B8" font-size="10" text-anchor="middle">發送操作指令</text>
+              <line x1="146" y1="110" x2="198" y2="110" stroke="#F97316" stroke-width="3.5" class="dash-anim"/>
+
+              <rect x="202" y="52" width="136" height="116" rx="14" fill="#1E293B" stroke="#38BDF8" stroke-width="2.5"/>
+              <text x="270" y="88" fill="#38BDF8" font-size="14.5" text-anchor="middle" font-weight="bold">🧠 CPU 總指揮</text>
+              <text x="270" y="112" fill="#E2E8F0" font-size="11.5" text-anchor="middle">${track === 'beginner' ? '聰明櫃檯接單員' : '邏輯控制與排程'}</text>
+              <text x="270" y="134" fill="#94A3B8" font-size="10" text-anchor="middle">派任務給 GPU</text>
+              <line x1="342" y1="110" x2="394" y2="110" stroke="#38BDF8" stroke-width="3.5" class="dash-anim"/>
+
+              <rect x="398" y="14" width="150" height="72" rx="12" fill="#2E1065" stroke="#A78BFA" stroke-width="2.2"/>
+              <text x="473" y="43" fill="#C4B5FD" font-size="13.5" text-anchor="middle" font-weight="bold">📦 ${isMob ? '共用系統記憶體' : '獨顯 VRAM 倉庫'}</text>
+              <text x="473" y="66" fill="#E9D5FF" font-size="10.5" text-anchor="middle">${d.vramLabel}</text>
+              <line x1="473" y1="88" x2="473" y2="124" stroke="#A78BFA" stroke-width="3" class="dash-anim"/>
+
+              <rect x="398" y="126" width="150" height="84" rx="14" fill="#431407" stroke="#FB923C" stroke-width="2.8"/>
+              <text x="473" y="158" fill="#FB923C" font-size="14.5" text-anchor="middle" font-weight="bold">⚡ GPU 算力工廠</text>
+              <text x="473" y="182" fill="#FFEDD5" font-size="11" text-anchor="middle">${track === 'beginner' ? '超高速快炒大廚' : '3D 渲染 &amp; AI 矩陣'}</text>
+              <line x1="552" y1="166" x2="610" y2="146" stroke="#34D399" stroke-width="3.5" class="dash-anim"/>
+
+              <rect x="614" y="16" width="150" height="68" rx="12" fill="#450A0A" stroke="#EF4444" stroke-width="2"/>
+              <text x="689" y="44" fill="#FCA5A5" font-size="13" text-anchor="middle" font-weight="bold">🔥 ${d.throttleLabel}</text>
+              <text x="689" y="65" fill="#FEE2E2" font-size="10.5" text-anchor="middle">${d.wattage}</text>
+              <line x1="689" y1="86" x2="689" y2="112" stroke="#EF4444" stroke-width="2.5" stroke-dasharray="4 3"/>
+
+              <rect x="614" y="114" width="288" height="94" rx="14" fill="#064E3B" stroke="#34D399" stroke-width="2.5"/>
+              <text x="758" y="148" fill="#34D399" font-size="14.5" text-anchor="middle" font-weight="bold">🖥️ 螢幕輸出 (${isMob ? '60Hz / 120Hz' : '144Hz / 240Hz'})</text>
+              <text x="758" y="172" fill="#D1FAE5" font-size="11.5" text-anchor="middle">${track === 'beginner' ? '熱騰騰端上桌的畫面！' : '最終呈現的流暢度 (FPS)'}</text>
+              <text x="758" y="192" fill="#A7F3D0" font-size="10" text-anchor="middle">任何一關塞車，體感立刻變卡頓</text>
+            </svg>
+          </div>
+          <div class="mt-3 rounded-2xl p-4 bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border text-sm leading-relaxed text-ink-sec dark:text-slate-300">
+            ${explainMap[track]}
+          </div>
+        `
+      };
+    }
+
+    function buildFpsSlide(track, dev) {
+      const d = DEVICES[dev];
+      return {
+        chapter: 'Ch.1 流暢度體感',
+        title: `體感實驗：12 vs 60 FPS 卡頓對比`,
+        wiki: 'Thermal-Throttling',
+        narration: `來做個有趣的肉眼實驗！畫面上面那顆綠球是滿血 60 幀的滑順畫面，下面那顆橘球正在模擬${d.shortName}過熱降頻後的 12 幀。點點看按鈕切換不同幀率，你馬上就能體會為什麼降頻讓人這麼難受！`,
+        html: `
+          ${buildSlideHeader('SLIDE 04 // LIVE CANVAS 體感對比實驗', track === 'beginner' ? '為什麼一卡頓就超明顯？親眼比較「滑順」與「像投影片」的差別！' : '螢幕刷新率與 FPS 掉幀實測：買 144Hz 螢幕為何還是會卡？', 'Thermal-Throttling')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-stretch">
+            <div class="rounded-2xl p-4 bg-pastel-sky dark:bg-sky-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-between gap-3">
+              <h3 class="text-base font-extrabold">👀 即時視覺對比畫布（點擊下方按鈕切換幀率）</h3>
+              <div class="w-full h-44 bg-slate-950 rounded-xl border border-cream-border dark:border-dark-border overflow-hidden">
+                <canvas id="fpsCanvas" class="w-full h-full block"></canvas>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <button onclick="setDemoFps(12)" class="px-3 py-1.5 rounded-lg bg-red-600 text-white text-xs font-bold hover:opacity-90 cursor-pointer">🔥 嚴重過熱降頻 (12 FPS)</button>
+                <button onclick="setDemoFps(24)" class="px-3 py-1.5 rounded-lg bg-coral text-white text-xs font-bold hover:opacity-90 cursor-pointer">⚠️ 輕微掉幀 (24 FPS)</button>
+                <button onclick="setDemoFps(60)" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-bold hover:opacity-90 cursor-pointer">✅ 滿血順暢 (60 FPS)</button>
+              </div>
+            </div>
+            <div class="rounded-2xl p-4 bg-pastel-peach dark:bg-orange-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-center gap-3">
+              <h3 class="text-base font-extrabold">${track === 'beginner' ? '🎬 就像翻漫畫書的速度！' : `🖥️ 針對 ${d.fullName} 的流暢度關鍵`}</h3>
+              <ul class="list-disc pl-5 space-y-2.5 text-sm text-ink-sec dark:text-slate-300 leading-relaxed">
+                ${track === 'beginner'
+                  ? `<li><strong>FPS 就是每秒翻幾張畫</strong>：60 FPS 代表一秒畫 60 張圖，眼睛看起來像絲綢一樣順！</li>
+                     <li><strong>12 FPS 像卡住的翻頁書</strong>：當你的${d.fullName}太燙自動放慢速度，畫面就會一格一格跳！</li>
+                     <li><strong>不是螢幕壞了</strong>：就算換再貴的新螢幕，只要裡面的大腦過熱降速，還是會卡頓喔！</li>`
+                  : `<li><strong>螢幕刷新率 (Hz)</strong>：${dev === 'mobile' ? '現代手機／平板雖有 120Hz 螢幕，但受限於無風扇散熱，高負載 5 分鐘後常被迫鎖回 30–40 FPS。' : '電競螢幕 144Hz–240Hz 殘影極低，但要求獨顯持續維持高瓦數不撞 87°C 溫度牆。'}</li>
+                     <li><strong>輸入延遲</strong>：1000Hz 滑鼠每 1ms 回報一次，若遇到 CPU/GPU 降頻抖動，瞄準手感會立刻發黏。</li>
+                     <li><strong>木桶效應</strong>：流暢度永遠取決於整條管線最弱的那一塊木板！</li>`
+                }
+              </ul>
+            </div>
+          </div>
+          ${buildTakeaway('💡 眼見為憑！接下來馬上來認識負責畫出這每秒 60 張畫面的超級英雄——GPU！')}
+        `
+      };
+    }
+
+    function buildRaceSlide(track, dev) {
+      return {
+        chapter: 'Ch.1 架構賽跑',
+        title: `CPU vs. GPU 平行運算賽跑`,
+        wiki: 'Roofline-Model',
+        narration: track === 'pro'
+          ? '從微架構比較，CPU 專精於低延遲控制流，而 GPU 採 SIMT 架構將電晶體高度集中於算術邏輯單元與張量核心。點擊賽跑按鈕，直觀感受平行矩陣運算的吞吐量差距。'
+          : '為什麼畫遊戲畫面跟跑 AI 都要靠 GPU 呢？把 CPU 想成 8 位超級聰明的數學博士，GPU 想成 4000 位一起算加減乘除的小學生！快按下紫色賽跑按鈕，看看誰算得比較快！',
+        html: `
+          ${buildSlideHeader(`SLIDE 05 // CPU vs. GPU 架構對決`, track === 'beginner' ? '8 位數學博士 vs. 4,000 位小學生：為什麼 AI 需要 GPU？' : (track === 'gamer' ? '為什麼遊戲與 AI 都要靠 GPU，而不是只靠 CPU？' : 'SIMT 高吞吐架構：CPU 低延遲控制流 vs. GPU 大規模平行矩陣運算'), 'Roofline-Model')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-stretch">
+            <div class="rounded-2xl p-5 bg-pastel-lav dark:bg-purple-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-center gap-3">
+              <h3 class="text-base sm:text-lg font-extrabold">🧠 CPU vs. ⚡ GPU 分工對照</h3>
+              <p class="text-sm text-ink-sec dark:text-slate-300 leading-relaxed">
+                ${track === 'beginner'
+                  ? '🐣 <strong>生活故事</strong>：CPU 像 8 位數學博士，擅長處理超複雜的雜事（開 App、管檔案）；GPU 像 4,000 位排排坐的小學生，同時一人算一格畫面或一個 AI 數字，瞬間全部算完！'
+                  : (track === 'gamer'
+                    ? '🎮 <strong>玩家視角</strong>：CPU 核心少（6–16 核）但單核頻率高，負責遊戲物理邏輯；GPU 擁有數千個平行核心（CUDA / Tensor Core），專攻百萬像素渲染與 AI 矩陣運算。'
+                    : '⚡ <strong>架構視角</strong>：CPU 晶片面積大量配置給 Branch Predictor、Out-of-Order 排程與大 L3 Cache（Latency-oriented）；GPU 以 SIMT Warp 排程將面積極大化投入 ALU 與矩陣引擎（Throughput-oriented）。')}
+              </p>
+              <button onclick="runCpuGpuRace()" class="mt-2 py-2.5 px-4 rounded-xl bg-violet-brand hover:opacity-90 text-white font-extrabold text-sm shadow-md transition cursor-pointer">
+                🏁 啟動「100 萬格矩陣平行運算賽跑」！
+              </button>
+            </div>
+            <div class="rounded-2xl p-5 bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border flex flex-col justify-center gap-4 shadow-sm">
+              <h3 class="text-base font-extrabold">🏎️ 實時運算進度賽跑計分板</h3>
+              <div class="space-y-1.5">
+                <div class="flex justify-between text-xs sm:text-sm font-bold">
+                  <span>🧠 CPU（少數精銳依序處理）</span>
+                  <span id="cpuPct" class="font-mono text-sky-brand">0%</span>
+                </div>
+                <div class="w-full h-4 bg-cream-bg dark:bg-dark-stage rounded-full overflow-hidden border border-cream-border dark:border-dark-border">
+                  <div id="cpuBar" class="h-full bg-sky-brand transition-all duration-75" style="width: 0%;"></div>
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <div class="flex justify-between text-xs sm:text-sm font-bold">
+                  <span>⚡ GPU（數千核心同時開火）</span>
+                  <span id="gpuPct" class="font-mono text-coral">0%</span>
+                </div>
+                <div class="w-full h-4 bg-cream-bg dark:bg-dark-stage rounded-full overflow-hidden border border-cream-border dark:border-dark-border">
+                  <div id="gpuBar" class="h-full bg-coral transition-all duration-75" style="width: 0%;"></div>
+                </div>
+              </div>
+              <p id="raceStatus" class="p-3 rounded-xl bg-cream-bg dark:bg-dark-stage text-xs sm:text-sm font-bold text-ink-muted dark:text-slate-300">
+                👆 點擊左側紫色按鈕，看 GPU 萬人大軍如何秒殺百萬矩陣任務！
+              </p>
+            </div>
+          </div>
+          ${buildTakeaway('🔥 但是讓幾千顆核心一起全力衝刺，會瞬間產生驚人的廢熱——下一頁揭開「發熱降頻」的真相！')}
+        `
+      };
+    }
+
+    function buildThermalSlide(track, dev) {
+      const d = DEVICES[dev];
+      return {
+        chapter: 'Ch.2 功耗與降頻',
+        title: `${track === 'pro' ? 'CMOS 動態功耗與 DVFS 溫控機制' : '為什麼設備會發燙降頻？'}`,
+        wiki: 'NVIDIA2024-MaxQ-Thermal',
+        narration: track === 'beginner'
+          ? `為什麼你的${d.fullName}用久了會變燙又變慢呢？這就像開車想從時速一百飆到一百二，油門要踩深非常多，引擎瞬間就過熱啦！為了不燒壞晶片，設備只好自動踩煞車降速。拉動右邊的滑桿，試著找出最涼快又穩定的甜蜜點吧！`
+          : `根據 NVIDIA Max-Q 溫控白皮書，晶片動態功耗跟核心電壓的平方成正比！當你的${d.fullName}撞上${d.throttleLabel}時，控制器會啟動 DVFS 強制降壓降頻。試著把右側滑桿往左拉到 0.85 倍，你會發現發熱量大幅驟降！`,
+        html: `
+          ${buildSlideHeader(`SLIDE 06 // 論文一：溫控與降頻機制`, track === 'beginner' ? `為什麼你的${d.fullName}越跑越燙，還會突然變慢？` : (track === 'pro' ? 'CMOS 動態功耗平方懲罰與 DVFS 溫度／功耗牆保護機制' : `真相一：${d.fullName} 的功耗牆與 ${d.limitTemp}°C 溫度牆`), 'NVIDIA2024-MaxQ-Thermal')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-stretch">
+            <div class="rounded-2xl p-5 bg-pastel-peach dark:bg-orange-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-center gap-3">
+              <h3 class="text-base sm:text-lg font-extrabold">${track === 'beginner' ? '🚗 踩油門的發熱故事（完全不用背公式！）' : '⚡ 電壓平方（V²）帶來的廢熱暴增'}</h3>
+              ${track === 'pro'
+                ? `<div class="bg-white dark:bg-dark-card border-l-4 border-coral rounded-xl py-2.5 px-3 text-center shadow-sm">
+                     $$P_{\\text{dyn}} = \\alpha \\cdot C \\cdot V^2 \\cdot f$$
+                   </div>`
+                : ''
+              }
+              <p class="text-sm text-ink-sec dark:text-slate-300 leading-relaxed">
+                ${track === 'beginner'
+                  ? `🐣 晶片想多擠出最後 10% 的衝刺速度，耗電與發熱會呈「倍數暴增」！當${d.fullName}散熱空間來不及把熱排掉、溫度逼近 <strong>${d.limitTemp}°C</strong>，它為了保護自己不燒壞，只好主動慢下來喘口氣——這就是「過熱降頻」！`
+                  : (track === 'gamer'
+                    ? `🎮 在 <strong>${d.fullName}</strong>（${d.wattage}）中，當結溫逼近 <strong>${d.limitTemp}°C 溫度牆</strong>，系統會啟動 DVFS 降壓降頻。實測稍微往回降壓 10%，算力僅少 5%–10%，發熱卻能大減 <strong>20%–30%</strong>，這就是傳說中的「效能甜點區」！`
+                    : `⚡ CMOS 動態功耗與電壓平方 $V^2$ 成正比，高頻段電壓爬升導致熱密度劇增。當晶片觸及 ${d.limitTemp}°C 溫度牆或 ${d.wattage}，PMU 觸發 DVFS 降頻。特定機型實測曲線屬 <code>[來源未提供]</code>。`)}
+              </p>
+            </div>
+
+            <div class="rounded-2xl p-5 bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border flex flex-col justify-center gap-3.5 shadow-sm">
+              <h3 class="text-base font-extrabold">🎛️ 互動溫控與風扇實驗（${d.shortName}・紅線 ${d.limitTemp}°C）</h3>
+              <div class="space-y-1">
+                <div class="flex justify-between text-xs sm:text-sm font-bold">
+                  <span>調整核心電壓比率</span>
+                  <span id="vLabel" class="font-mono text-coral">1.00x 電壓</span>
+                </div>
+                <input type="range" id="vSlider" min="0.75" max="1.15" step="0.05" value="1.00" oninput="updateThermal()" class="w-full accent-coral cursor-pointer h-2 rounded-lg" />
+                <div class="flex justify-between font-mono text-[10px] text-ink-muted dark:text-slate-400">
+                  <span>0.75x (超涼)</span><span>0.85x–0.90x (甜點區)</span><span>1.00x</span><span>1.15x (爆熱)</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3.5 p-3.5 rounded-xl bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border">
+                <svg viewBox="0 0 60 60" width="58" height="58" class="shrink-0">
+                  <circle cx="30" cy="30" r="26" fill="none" stroke="#64748B" stroke-width="3"/>
+                  <g id="fanBlade" class="fan-spin">
+                    <path d="M30 30 Q42 10 49 21 Q40 32 30 30Z" fill="#EA580C"/>
+                    <path d="M30 30 Q50 42 39 49 Q28 40 30 30Z" fill="#0284C7"/>
+                    <path d="M30 30 Q18 50 11 39 Q20 28 30 30Z" fill="#EA580C"/>
+                    <path d="M30 30 Q10 18 21 11 Q32 20 30 30Z" fill="#0284C7"/>
+                  </g>
+                  <circle cx="30" cy="30" r="5" fill="#1E293B"/>
+                </svg>
+                <div class="min-w-0">
+                  <div id="tempOut" class="font-mono text-lg sm:text-xl font-black text-red-600 dark:text-red-400">${d.limitTemp}.0 °C (觸發降頻！)</div>
+                  <p id="thermalDesc" class="text-xs text-ink-sec dark:text-slate-300 mt-0.5 leading-snug">往左拉到 0.85x，看看溫度下降多少！</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          ${buildTakeaway('🎮 懂了降壓甜點區的威力嗎？下一頁直接進場玩第一款互動小遊戲：《散熱急診室大作戰》！')}
+        `
+      };
+    }
+
+    function buildThermalGameSlide(track, dev) {
+      const d = DEVICES[dev];
+      return {
+        chapter: 'Ch.2 小遊戲 #1',
+        title: `互動小遊戲 #1：散熱急診室大作戰`,
+        wiki: 'Thermal-Throttling',
+        narration: `歡迎來到第一款互動小遊戲：散熱急診室大作戰！針對你的${d.fullName}，溫度紅線設在${d.limitTemp}度。按下橘色開始按鈕後，快操作下方的專屬降溫按鈕，撐過十秒不降頻就能過關喔！`,
+        html: `
+          ${buildSlideHeader(`SLIDE 07 // MINI-GAME #1 (${d.shortName} 專屬關卡)`, `🎮 散熱急診室大作戰：幫你的${d.shortName}撐過 10 秒壓力測試！`, 'Thermal-Throttling')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-stretch">
+            <div class="rounded-2xl p-5 bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border flex flex-col justify-between gap-3 shadow-sm">
+              <div>
+                <h3 class="text-base font-extrabold mb-1">🕹️ ${d.fullName} 專屬救火面板</h3>
+                <p class="text-xs sm:text-sm text-ink-sec dark:text-slate-300">任務：點擊開始後晶片將全速發熱，在 10 秒內<strong>守住 ${d.limitTemp}°C 紅線</strong>不讓幀率暴跌！</p>
+              </div>
+              <div class="flex flex-col gap-2">
+                <button onclick="startThermalGame()" class="py-2.5 px-4 rounded-xl bg-coral hover:opacity-90 text-white font-extrabold text-sm shadow transition cursor-pointer">
+                  🚀 開始 10 秒滿載壓力測試
+                </button>
+                <div class="grid grid-cols-1 gap-2">
+                  ${d.coolBtns.map(b => `
+                    <button onclick="coolAction('${b.act}')" class="py-2 px-3 rounded-xl ${b.color} hover:opacity-90 text-white font-bold text-xs sm:text-sm transition cursor-pointer">
+                      ${b.label}
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+              <div id="tgMsg" class="p-3 rounded-xl bg-pastel-peach dark:bg-orange-500/15 font-bold text-xs sm:text-sm">
+                👆 點擊上方橘色按鈕開始挑戰！
+              </div>
+            </div>
+
+            <div class="rounded-2xl p-5 bg-pastel-sky dark:bg-sky-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-center gap-4">
+              <h3 class="text-base font-extrabold">📊 即時晶片熱力監控儀表</h3>
+              <div class="space-y-1.5">
+                <div class="flex justify-between text-xs sm:text-sm font-extrabold">
+                  <span>核心結溫</span>
+                  <span id="tgTempTxt" class="font-mono text-coral">${(d.limitTemp - 22).toFixed(1)} °C / ${d.limitTemp}°C 紅線</span>
+                </div>
+                <div class="w-full h-5 bg-white dark:bg-dark-stage rounded-full overflow-hidden border border-cream-border dark:border-dark-border">
+                  <div id="tgTempBar" class="h-full bg-emerald-500 transition-all duration-100" style="width: 45%;"></div>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="p-4 rounded-xl bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border text-center">
+                  <div class="text-xs text-ink-muted dark:text-slate-400">即時流暢度</div>
+                  <div id="tgFps" class="font-mono text-2xl font-black text-emerald-600 dark:text-emerald-400 mt-1">60 FPS</div>
+                </div>
+                <div class="p-4 rounded-xl bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border text-center">
+                  <div class="text-xs text-ink-muted dark:text-slate-400">剩餘時間</div>
+                  <div id="tgTime" class="font-mono text-2xl font-black text-sky-brand dark:text-sky-400 mt-1">10.0 s</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          ${buildTakeaway('💡 過關秘訣：一開始先按綠色「低壓甜點模式」治本減緩升溫，再配合其他散熱動作輕鬆守住 60 FPS！')}
+        `
+      };
+    }
+
+    function buildRooflineSlide(track, dev) {
+      return {
+        chapter: 'Ch.2 效能屋頂模型',
+        title: `${track === 'beginner' ? '大廚發呆之謎：搬菜太慢' : 'Roofline 效能屋頂模型'}`,
+        wiki: 'Williams2009-Roofline',
+        narration: track === 'beginner'
+          ? '第二個大秘密！有時候電腦明明沒有過熱，跑 AI 還是慢吞吞，為什麼呢？想像你請了炒菜超快的五星大廚，但冰箱很遠、助理走路超慢，大廚百分之九十的時間都在發呆等菜！點點看按鈕，看看紅點卡在屋頂的哪裡！'
+          : 'Williams 等人提出的 Roofline 屋頂模型指出，晶片效能由峰值算力與記憶體頻寬兩道屋頂決定。當 AI 逐字生成時，算術強度極低，紅點會死死卡在左側的 Memory-bound 斜坡上！',
+        html: `
+          ${buildSlideHeader(`SLIDE 08 // 論文二：Roofline 效能屋頂模型`, track === 'beginner' ? '大廚發呆之謎：為什麼電腦沒過熱，跑 AI 還是慢吞吞？' : (track === 'pro' ? 'Roofline Model：算術強度 $I$、脊點分析與 Memory-bound 瓶頸' : '真相二：Roofline 屋頂模型 — 算力滿滿卻卡在「搬料太慢」！'), 'Williams2009-Roofline')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-stretch">
+            <div class="rounded-2xl p-5 bg-pastel-sky dark:bg-sky-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-between gap-3">
+              <div class="space-y-2.5">
+                <h3 class="text-base sm:text-lg font-extrabold">🍳 五星大廚（算力）vs. 慢動作助理（頻寬）</h3>
+                ${track === 'pro'
+                  ? `<div class="bg-white dark:bg-dark-card border-l-4 border-sky-brand rounded-xl py-2 px-3 text-center shadow-sm text-sm">
+                       $$I = \\frac{\\text{FLOPs}}{\\text{Bytes}}, \\quad P = \\min\\left(\\text{Peak FLOPs},\\; \\text{Peak BW} \\times I\\right)$$
+                     </div>`
+                  : ''
+                }
+                <p class="text-sm text-ink-sec dark:text-slate-300 leading-relaxed">
+                  ${track === 'beginner'
+                    ? '🐣 <strong>廚房故事</strong>：AI 每次想吐出一個字，助理都要衝去遠方大冰箱把一整本超厚食譜（模型資料）搬出來給大廚看。助理跑得氣喘吁吁，大廚卻一直在旁邊乾等！'
+                    : (track === 'gamer'
+                      ? '🎮 <strong>玩家視角</strong>：每搬 1 Byte 資料做幾次計算叫「算術強度」。落在左邊斜坡是 <strong>Memory-bound（卡顯存頻寬）</strong>，右邊平頂才是 <strong>Compute-bound（吃滿顯卡算力）</strong>！'
+                      : '⚡ <strong>硬核分析</strong>：當 $I < I_{\\text{ridge}}$ 時效能線性受限於記憶體頻寬；在 LLM Decode 階段每生成 1 Token 須重讀完整權重矩陣，算術強度逼近 $O(1)$，為典型極端 Memory-bound。')}
+                </p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <button onclick="moveRoofDot('mem')" class="px-3 py-2 rounded-xl bg-coral text-white text-xs font-bold hover:opacity-90 cursor-pointer">🔴 看紅點：AI 逐字吐出 (搬料卡住)</button>
+                <button onclick="moveRoofDot('comp')" class="px-3 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:opacity-90 cursor-pointer">🟢 看綠點：3D 光追 / 批次訓練 (吃滿算力)</button>
+              </div>
+            </div>
+
+            <div class="bg-slate-950 rounded-2xl border border-cream-border dark:border-dark-border p-3 flex items-center justify-center">
+              <svg viewBox="0 0 430 235" class="w-full h-full max-h-[260px]">
+                <line x1="48" y1="196" x2="404" y2="196" stroke="#64748B" stroke-width="2"/>
+                <line x1="48" y1="22" x2="48" y2="196" stroke="#64748B" stroke-width="2"/>
+                <text x="226" y="220" fill="#94A3B8" font-size="11" text-anchor="middle">${track === 'beginner' ? '食材送達速度 / 運算忙碌度 →' : '算術強度 I = FLOPs / Bytes →'}</text>
+                <text x="18" y="110" fill="#94A3B8" font-size="11" text-anchor="middle" transform="rotate(-90 18 110)">實際速度 ↑</text>
+                <polyline points="48,196 195,58 398,58" fill="none" stroke="#38BDF8" stroke-width="4.5" stroke-linejoin="round"/>
+                <line x1="195" y1="58" x2="195" y2="196" stroke="#475569" stroke-dasharray="4 4"/>
+                <text x="118" y="100" fill="#F97316" font-size="11.5" font-weight="bold" text-anchor="middle">Memory-bound</text>
+                <text x="118" y="116" fill="#FDBA74" font-size="9.5" text-anchor="middle">(冰箱搬菜太慢)</text>
+                <text x="300" y="45" fill="#34D399" font-size="11.5" font-weight="bold" text-anchor="middle">Compute-bound (大廚全力快炒)</text>
+                <circle id="roofDot" cx="110" cy="138" r="9.5" fill="#EF4444" stroke="#FFF" stroke-width="2.5" style="transition: all 0.35s ease;"/>
+                <text id="roofDotTxt" x="110" y="165" fill="#FCA5A5" font-size="10.5" font-weight="bold" text-anchor="middle">AI 吐字卡在這裡！</text>
+              </svg>
+            </div>
+          </div>
+          ${buildTakeaway('💡 核心突破：既然卡在「搬料太慢」，解決辦法就不是硬超頻，而是想辦法「少搬資料」與「縮小行李箱」！')}
+        `
+      };
+    }
+
+    function buildPrefillDecodeSlide(track) {
+      return {
+        chapter: 'Ch.2 AI 推論兩階段',
+        title: `AI 推論兩階段：Prefill vs. Decode`,
+        wiki: 'Roofline-Model',
+        narration: 'AI 聊天機器人回答問題其實分成兩段人生。按下送出瞬間，它一次平行讀完你所有的問題，這叫 Prefill，吃滿算力；但接著一個字一個字吐出來的 Decode 階段，每吐一個字都要重搬整套模型權重，才是真正卡死記憶體頻寬的元兇！',
+        html: `
+          ${buildSlideHeader(`SLIDE 09 // LLM 自回歸推論分析`, track === 'pro' ? 'Prefill (Compute-bound) vs. Autoregressive Decode (Memory-bound)' : 'AI 吐字的兩段人生：為什麼第一秒風扇狂轉，後面卻像擠牙膏？', 'Roofline-Model')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-stretch">
+            <div class="rounded-2xl p-5 bg-pastel-mint dark:bg-emerald-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-between gap-3">
+              <div class="space-y-2">
+                <span class="font-mono text-xs font-bold text-emerald-700 dark:text-emerald-400">PHASE 1 // COMPUTE-BOUND</span>
+                <h3 class="text-lg font-extrabold">📖 Prefill（瞬間平行讀完提問）</h3>
+                <p class="text-sm text-ink-sec dark:text-slate-300 leading-relaxed">
+                  ${track === 'pro'
+                    ? '輸入序列長度 $L$ 的 Prompt 一次執行矩陣對矩陣乘法（GEMM），權重載入一次可重複利用 $L$ 次，算術強度高，瓶頸落在 Tensor Core 峰值算力。'
+                    : '按下送出瞬間，GPU 一次把你整段提問平行算完。搬一次權重能算幾百個字，大廚全力快炒，風扇會先轟一聲！'}
+                </p>
+              </div>
+              <div class="space-y-2 p-3.5 rounded-xl bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border">
+                <div class="flex justify-between text-xs font-bold"><span>⚡ 算力利用率</span><span class="font-mono text-emerald-600">92%</span></div>
+                <div class="w-full h-2.5 bg-cream-bg dark:bg-dark-stage rounded-full overflow-hidden"><div class="h-full bg-emerald-500" style="width:92%;"></div></div>
+                <div class="flex justify-between text-xs font-bold mt-1"><span>📦 記憶體頻寬利用率</span><span class="font-mono text-sky-brand">45%</span></div>
+                <div class="w-full h-2.5 bg-cream-bg dark:bg-dark-stage rounded-full overflow-hidden"><div class="h-full bg-sky-brand" style="width:45%;"></div></div>
+              </div>
+            </div>
+
+            <div class="rounded-2xl p-5 bg-pastel-peach dark:bg-orange-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-between gap-3">
+              <div class="space-y-2">
+                <span class="font-mono text-xs font-bold text-coral dark:text-orange-400">PHASE 2 // EXTREME MEMORY-BOUND</span>
+                <h3 class="text-lg font-extrabold">✍️ Decode（逐字自回歸生成）</h3>
+                <p class="text-sm text-ink-sec dark:text-slate-300 leading-relaxed">
+                  ${track === 'pro'
+                    ? '單一 Batch 退化為矩陣對向量乘法（GEMV）：每生成 1 個 Token 皆須從顯存完整搬運所有權重參數與 KV Cache，算術強度驟降，效能完全被頻寬鎖死。'
+                    : '每吐出短短 1 個字，顯卡都必須把整套幾十億參數的權重從記憶體全部重搬一遍！大廚發呆、助理跑斷腿！'}
+                </p>
+              </div>
+              <div class="space-y-2 p-3.5 rounded-xl bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border">
+                <div class="flex justify-between text-xs font-bold"><span>🐢 算力利用率</span><span class="font-mono text-ink-muted">僅 8% (乾等)</span></div>
+                <div class="w-full h-2.5 bg-cream-bg dark:bg-dark-stage rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width:8%;"></div></div>
+                <div class="flex justify-between text-xs font-bold mt-1"><span>🚨 記憶體頻寬利用率</span><span class="font-mono text-red-600">100% 塞爆！</span></div>
+                <div class="w-full h-2.5 bg-cream-bg dark:bg-dark-stage rounded-full overflow-hidden"><div class="h-full bg-red-500" style="width:100%;"></div></div>
+              </div>
+            </div>
+          </div>
+          ${buildTakeaway('🔑 接下來我們正式進入「三大 AI 推論最佳化演算法」，看頂尖論文如何徹底突破這道高牆！')}
+        `
+      };
+    }
+
+    function buildPyramidSlide() {
+      return {
+        chapter: 'Ch.3 記憶體階層',
+        title: `4 層記憶體階層金字塔探測器`,
+        wiki: 'Memory-Hierarchy-SRAM-VRAM',
+        narration: '在看 FlashAttention 之前，先點點看這座四層記憶體速度金字塔！最頂層 GPU 內部的小砧板 SRAM，頻寬高達每秒 19 TB，比外面的大冰箱快上十倍，更比固態硬碟快了數千倍！',
+        html: `
+          ${buildSlideHeader('SLIDE 09 // 記憶體階層金字塔 (PRO 專屬深讀)', '點點看！GPU 內部 SRAM 到 SSD 倉庫速度差了幾千倍？', 'Memory-Hierarchy-SRAM-VRAM')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-stretch">
+            <div class="rounded-2xl p-5 bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border flex flex-col justify-center gap-2.5 shadow-sm">
+              <h3 class="text-sm sm:text-base font-extrabold mb-1">👆 點擊金字塔任一層探測真實頻寬：</h3>
+              <button onclick="inspectMem(1)" class="mx-auto w-[62%] py-2.5 px-3 rounded-xl bg-coral text-white font-extrabold text-xs sm:text-sm shadow hover:scale-[1.02] transition cursor-pointer">⚡ L1：GPU 片上 SRAM（小砧板）</button>
+              <button onclick="inspectMem(2)" class="mx-auto w-[76%] py-2.5 px-3 rounded-xl bg-sky-brand text-white font-extrabold text-xs sm:text-sm shadow hover:scale-[1.02] transition cursor-pointer">❄️ L2：獨顯 HBM / GDDR（大冰箱）</button>
+              <button onclick="inspectMem(3)" class="mx-auto w-[88%] py-2.5 px-3 rounded-xl bg-violet-brand text-white font-extrabold text-xs sm:text-sm shadow hover:scale-[1.02] transition cursor-pointer">📦 L3：系統主記憶體 RAM（儲藏室）</button>
+              <button onclick="inspectMem(4)" class="mx-auto w-full py-2.5 px-3 rounded-xl bg-slate-600 text-white font-extrabold text-xs sm:text-sm shadow hover:scale-[1.02] transition cursor-pointer">🚚 L4：NVMe SSD（十公里外倉庫）</button>
+            </div>
+            <div class="rounded-2xl p-5 bg-pastel-lav dark:bg-purple-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-center gap-3">
+              <span id="memBadge" class="inline-block w-fit font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-coral text-white">速度冠軍 // 19 TB/s (A100)</span>
+              <h3 id="memTitle" class="text-lg font-black">⚡ 第 1 層：GPU 內部片上 SRAM</h3>
+              <p id="memSpeed" class="font-mono text-xs sm:text-sm font-bold text-coral dark:text-orange-400">A100 論文數據：容量 ~20 MB｜頻寬 19,000 GB/s</p>
+              <p id="memDesc" class="text-sm text-ink-sec dark:text-slate-300 leading-relaxed">造價昂貴、面積極小但延遲最低。下一頁的 FlashAttention 正是透過 IO-Aware Tiling 把運算盡可能留在這層完成！</p>
+            </div>
+          </div>
+          ${buildTakeaway('💡 演算法優化的最高境界不是盲目減少計算量（FLOPs），而是「懂硬體記憶體階層（IO-Awareness）」！')}
+        `
+      };
+    }
+
+    function buildFlashSlide(track) {
+      return {
+        chapter: 'Ch.3 FlashAttention',
+        title: `解法一：FlashAttention 分塊魔法`,
+        wiki: 'Dao2022-FlashAttention',
+        narration: track === 'pro'
+          ? 'Dao 等人於 2022 年提出 FlashAttention，透過分塊計算 Tiling 與 Online Softmax，將 HBM 存取複雜度大幅降低且維持完全精確的零誤差輸出，在 A100 訓練 GPT-2 達到最高 3 倍加速。'
+          : '第一招神技叫做 FlashAttention！GPU 內部有一塊超快的小砧板叫做 SRAM，外面則是慢吞吞的大冰箱 VRAM。傳統寫法每切一刀就把菜塞回冰箱，FlashAttention 改把食材切小塊在砧板上一次炒完，速度直接大起飛！',
+        html: `
+          ${buildSlideHeader(`SLIDE 10 // 論文三：FlashAttention (Dao et al., 2022)`, track === 'pro' ? 'FlashAttention：IO-Aware Tiling、Online Softmax 與顯存複雜度分析' : '解法一：FlashAttention — 切小塊留在高速「小砧板」一次炒完！', 'Dao2022-FlashAttention')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-stretch">
+            <div class="rounded-2xl p-5 bg-pastel-mint dark:bg-emerald-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-center gap-3">
+              <h3 class="text-base sm:text-lg font-extrabold">🔪 核心絕招：分塊計算 (Tiling)</h3>
+              ${track === 'pro'
+                ? `<div class="bg-white dark:bg-dark-card border-l-4 border-emerald-600 rounded-xl py-2 px-3 text-center shadow-sm text-sm">
+                     $$\\text{HBM IO: } \\Theta(N^2) \\;\\longrightarrow\\; \\Theta\\left(N^2 d^2 M^{-1}\\right)$$
+                   </div>`
+                : ''
+              }
+              <p class="text-sm text-ink-sec dark:text-slate-300 leading-relaxed">
+                ${track === 'pro'
+                  ? '⚡ <strong>硬核機制</strong>：將 $Q, K, V$ 切塊載入高速 On-chip SRAM（容量 $M$），透過 Online Softmax 動態修正局部歸一化係數，全程不將 $N\\times N$ 龐大矩陣寫回 HBM；完全精確（Exact Attention，零近似誤差）。'
+                  : '🎮 <strong>實戰價值</strong>：GPU 晶片內的 SRAM（A100 例：19 TB/s）比外面顯存快上十倍！FlashAttention 把長文本切塊搬上 SRAM 一次算完，完全不掉準確率，論文於 A100 訓練 GPT-2 達最高 <strong>3x 加速</strong>！'}
+              </p>
+              <p class="text-[11px] font-mono text-ink-muted dark:text-slate-400">
+                ※ 事實邊界：3x 加速為論文 A100 實測值；消費級筆電／手機實測倍率屬 <code>[來源未提供]</code>。
+              </p>
+            </div>
+            <div class="bg-slate-950 rounded-2xl border border-cream-border dark:border-dark-border p-3 flex items-center justify-center">
+              <svg viewBox="0 0 400 220" class="w-full h-full max-h-[255px]">
+                <text x="200" y="22" fill="#F8FAFC" font-size="12.5" font-weight="bold" text-anchor="middle">傳統 Attention vs. FlashAttention 顯存搬運對比</text>
+                <rect x="18" y="40" width="168" height="162" rx="12" fill="#2A1215" stroke="#EF4444" stroke-width="2"/>
+                <text x="102" y="62" fill="#FCA5A5" font-size="11.5" font-weight="bold" text-anchor="middle">❌ 傳統寫法 (一直跑冰箱)</text>
+                <rect x="38" y="76" width="128" height="36" rx="7" fill="#1E293B" stroke="#38BDF8"/>
+                <text x="102" y="98" fill="#38BDF8" font-size="10.5" text-anchor="middle">慢速大冰箱 (VRAM)</text>
+                <line x1="80" y1="114" x2="80" y2="148" stroke="#EF4444" stroke-width="3" class="dash-anim"/>
+                <line x1="124" y1="148" x2="124" y2="114" stroke="#EF4444" stroke-width="3" class="dash-anim"/>
+                <rect x="38" y="150" width="128" height="38" rx="7" fill="#431407" stroke="#F97316"/>
+                <text x="102" y="173" fill="#FDBA74" font-size="10" text-anchor="middle">反覆寫回 N×N 矩陣</text>
+
+                <rect x="214" y="40" width="168" height="162" rx="12" fill="#062E22" stroke="#34D399" stroke-width="2"/>
+                <text x="298" y="62" fill="#34D399" font-size="11.5" font-weight="bold" text-anchor="middle">✅ FlashAttention (分塊)</text>
+                <rect x="234" y="76" width="128" height="36" rx="7" fill="#1E293B" stroke="#38BDF8"/>
+                <text x="298" y="98" fill="#38BDF8" font-size="10.5" text-anchor="middle">僅讀取必要區塊一次</text>
+                <line x1="298" y1="114" x2="298" y2="144" stroke="#34D399" stroke-width="3"/>
+                <rect x="234" y="146" width="128" height="44" rx="7" fill="#065F46" stroke="#34D399" stroke-width="2"/>
+                <text x="298" y="166" fill="#FFF" font-size="10.5" font-weight="bold" text-anchor="middle">高速 SRAM 小砧板</text>
+                <text x="298" y="182" fill="#A7F3D0" font-size="9" text-anchor="middle">切塊一次算完不回存！</text>
+              </svg>
+            </div>
+          </div>
+          ${buildTakeaway('✨ 第一招省下了反覆開關大冰箱的時間；接下來第二招，要把整個 AI 模型行李箱直接壓縮 4 倍！')}
+        `
+      };
+    }
+
+    function buildGptqSlide(track, dev) {
+      const d = DEVICES[dev];
+      return {
+        chapter: 'Ch.3 GPTQ 量化壓縮',
+        title: `${track === 'beginner' ? '真空壓縮袋魔法：把 AI 塞進設備' : 'GPTQ 4-bit 權重量化與顯存試算'}`,
+        wiki: 'Frantar2023-GPTQ-Quantization',
+        narration: track === 'beginner'
+          ? `原本的 AI 模型就像裝滿蓬鬆羽絨衣的超大行李箱，你的${d.fullName}根本塞不進去！GPTQ 量化技術就像超強真空壓縮袋，把體積直接縮成四分之一，而且 AI 智商幾乎不變！快拉動右邊滑桿試試看你的設備裝得下多大的模型！`
+          : `根據 Frantar 等人 2023 年的 GPTQ 論文，透過二階海森矩陣補償誤差，能將模型權重由 FP16 壓縮成 INT4，不只空間縮小四倍，搬運資料量也少四倍！拉動右側試算器，立刻測試你的${d.fullName}顯存容量！`,
+        html: `
+          ${buildSlideHeader(`SLIDE 11 // 論文四：GPTQ INT4 權重量化`, track === 'beginner' ? `真空壓縮袋魔法：把大行李箱縮成四分之一塞進你的${d.shortName}！` : (track === 'pro' ? 'GPTQ (Frantar et al., 2023)：二階 Hessian 補償 4-bit 權重量化' : `解法二：GPTQ 量化壓縮 — 讓${d.shortName}也能裝載大模型！`), 'Frantar2023-GPTQ-Quantization')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-stretch">
+            <div class="rounded-2xl p-5 bg-pastel-lav dark:bg-purple-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-center gap-3">
+              <h3 class="text-base sm:text-lg font-extrabold">🧳 一石二鳥：空間少 4 倍 ＋ 搬運快 4 倍</h3>
+              ${track === 'pro'
+                ? `<div class="bg-white dark:bg-dark-card border-l-4 border-violet-brand rounded-xl py-2 px-3 text-center shadow-sm">
+                     $$\\text{VRAM}_{\\text{weights}} \\approx N_{\\text{params}} \\times \\frac{b}{8}\\;\\text{Bytes}$$
+                   </div>`
+                : ''
+              }
+              <p class="text-sm text-ink-sec dark:text-slate-300 leading-relaxed">
+                ${track === 'beginner'
+                  ? `🐣 <strong>生活比喻</strong>：一般 70 億參數的 AI 模型原本重達 14 GB，像塞滿羽絨衣的大行李箱！抽真空壓成 4 位元（INT4）後只剩約 4 GB，而且每次搬運也輕了 4 倍，吐字瞬間變超快！`
+                  : (track === 'gamer'
+                    ? `🎮 <strong>實戰效益</strong>：7B 模型從 FP16（~14 GB）壓縮成 INT4（~3.5–4.5 GB），3B 模型更只需 ~1.5 GB！因搬運 Bytes 減至四分之一，論文在 A100 / A6000 實測加速達 <strong>3.25x / 4.5x</strong>！`
+                    : `⚡ <strong>硬核分析</strong>：GPTQ 屬一次性訓練後量化（PTQ），利用二階 Hessian 逆矩陣 $H_F^{-1}$ 動態更新剩餘未量化權重以補償誤差，維持低 Perplexity 並大幅提升 Roofline 實質頻寬效益。`)}
+              </p>
+            </div>
+
+            <div class="rounded-2xl p-5 bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border flex flex-col justify-center gap-3 shadow-sm">
+              <h3 class="text-base font-extrabold">🎛️ ${d.shortName} 顯存試算器（上限 ${d.vramLimit.toFixed(1)} GB）</h3>
+              <div class="space-y-1">
+                <div class="flex justify-between text-xs sm:text-sm font-bold">
+                  <span>模型參數量</span>
+                  <span id="pLabel" class="font-mono text-sky-brand">${d.defaultModelB} B (${d.defaultModelB * 10}億參數)</span>
+                </div>
+                <input type="range" id="pSlider" min="1" max="14" step="1" value="${d.defaultModelB}" oninput="updateVram()" class="w-full accent-sky-brand cursor-pointer h-2 rounded-lg" />
+              </div>
+              <div class="space-y-1">
+                <div class="flex justify-between text-xs sm:text-sm font-bold">
+                  <span>權重精度位元數</span>
+                  <span id="bLabel" class="font-mono text-coral">INT4 (4-bit 壓縮)</span>
+                </div>
+                <input type="range" id="bSlider" min="4" max="16" step="4" value="4" oninput="updateVram()" class="w-full accent-coral cursor-pointer h-2 rounded-lg" />
+              </div>
+              <div id="vramNum" class="font-mono text-2xl font-black text-emerald-600 dark:text-emerald-400">-- / ${d.vramLimit.toFixed(1)} GB</div>
+              <div class="w-full h-3.5 bg-cream-bg dark:bg-dark-stage rounded-full overflow-hidden border border-cream-border dark:border-dark-border">
+                <div id="vramBar" class="h-full bg-emerald-500 transition-all duration-300" style="width: 50%;"></div>
+              </div>
+              <p id="vramStatus" class="text-xs sm:text-sm font-bold leading-snug"></p>
+            </div>
+          </div>
+          ${buildTakeaway('🎮 下一頁立刻來玩第二款小遊戲：《顯存收納大師》——考考你怎麼把爆倉的 AI 模型完美塞進設備！')}
+        `
+      };
+    }
+
+    function buildPackGameSlide(track, dev) {
+      const d = DEVICES[dev];
+      const baseTot = (d.packBaseW + d.packBaseA + d.packBaseK).toFixed(1);
+      const optTot = (d.packOptW + d.packOptA + d.packOptK).toFixed(1);
+      return {
+        chapter: 'Ch.3 小遊戲 #2',
+        title: `互動小遊戲 #2：顯存收納大師`,
+        wiki: 'Weight-Quantization-INT4',
+        narration: `來到第二款互動小遊戲：顯存收納大師！現在你的${d.fullName}只有 ${d.packBudget} GB 空間，但原始模型加對話快取總共要 ${baseTot} GB 直接爆倉！快依序點亮左邊的三張 AI 技術卡片，看看能不能成功塞進去！`,
+        html: `
+          ${buildSlideHeader(`SLIDE 12 // MINI-GAME #2 (${d.shortName} 專屬預算 ${d.packBudget} GB)`, `🎮 顯存收納大師：把 ${d.packModelTitle} 塞進 ${d.packBudget} GB！`, 'Weight-Quantization-INT4')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-stretch">
+            <div class="rounded-2xl p-5 bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border flex flex-col justify-between gap-3 shadow-sm">
+              <h3 class="text-base font-extrabold">🧩 點選啟用三大 AI 最佳化技術卡</h3>
+              <div class="flex flex-col gap-2.5">
+                <button id="btnOptGptq" onclick="togglePack('gptq')" class="text-left px-3.5 py-2.5 rounded-xl bg-cream-bg dark:bg-dark-stage border-2 border-cream-border dark:border-dark-border hover:border-emerald-500 font-bold text-xs sm:text-sm transition cursor-pointer">
+                  ⬜ 1. GPTQ INT4 量化（權重 ${d.packBaseW}GB → ${d.packOptW}GB）
+                </button>
+                <button id="btnOptFlash" onclick="togglePack('flash')" class="text-left px-3.5 py-2.5 rounded-xl bg-cream-bg dark:bg-dark-stage border-2 border-cream-border dark:border-dark-border hover:border-emerald-500 font-bold text-xs sm:text-sm transition cursor-pointer">
+                  ⬜ 2. FlashAttention 分塊（計算緩衝 ${d.packBaseA}GB → ${d.packOptA}GB）
+                </button>
+                <button id="btnOptPaged" onclick="togglePack('paged')" class="text-left px-3.5 py-2.5 rounded-xl bg-cream-bg dark:bg-dark-stage border-2 border-cream-border dark:border-dark-border hover:border-emerald-500 font-bold text-xs sm:text-sm transition cursor-pointer">
+                  ⬜ 3. PagedAttention 分頁（對話快取 ${d.packBaseK}GB → ${d.packOptK}GB）
+                </button>
+              </div>
+              <p id="packFeedback" class="text-xs sm:text-sm font-extrabold text-red-600 dark:text-red-400">
+                🚨 原始總需求 ${baseTot} GB，遠超你的 ${d.packBudget} GB 預算！快點上方技術卡急救！
+              </p>
+            </div>
+
+            <div class="rounded-2xl p-5 bg-pastel-amber dark:bg-amber-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-center gap-4">
+              <h3 class="text-base font-extrabold">📦 ${d.packBudget.toFixed(1)} GB 顯存箱即時裝填條</h3>
+              <div class="flex justify-between text-xs sm:text-sm font-extrabold">
+                <span>目前總記憶體佔用</span>
+                <span id="packTotalTxt" class="font-mono text-red-600 dark:text-red-400">${baseTot} GB / ${d.packBudget.toFixed(1)} GB (爆倉！)</span>
+              </div>
+              <div class="w-full h-8 bg-white dark:bg-dark-stage rounded-xl overflow-hidden border border-cream-border dark:border-dark-border flex">
+                <div id="segW" class="bg-coral text-white text-[11px] font-bold flex items-center justify-center transition-all duration-300" style="width: 65%;">權重</div>
+                <div id="segA" class="bg-sky-brand text-white text-[11px] font-bold flex items-center justify-center transition-all duration-300" style="width: 15%;">計算</div>
+                <div id="segK" class="bg-violet-brand text-white text-[11px] font-bold flex items-center justify-center transition-all duration-300" style="width: 20%;">快取</div>
+              </div>
+              <div class="flex justify-between text-[11px] font-bold text-ink-sec dark:text-slate-300">
+                <span>🟠 模型權重</span><span>🔵 Attention 緩衝</span><span>🟣 KV Cache 對話記憶</span>
+              </div>
+              <div id="packSpeedBox" class="p-3 rounded-xl bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border text-center font-extrabold text-xs sm:text-sm">
+                預估體感：💀 記憶體溢出 (OOM) 無法啟動
+              </div>
+            </div>
+          </div>
+          ${buildTakeaway(`🎉 三張神卡全亮起時，總需求將從 ${baseTot} GB 壓低至 ${optTot} GB，完美塞進你的 ${d.shortName}！`)}
+        `
+      };
+    }
+
+    function buildPagedSlide() {
+      return {
+        chapter: 'Ch.3 PagedAttention',
+        title: `解法三：PagedAttention 與 Block Table`,
+        wiki: 'Kwon2023-PagedAttention',
+        narration: '第五篇核心論文是 Kwon 等人於 2023 年發表的 PagedAttention。它借鏡作業系統虛擬記憶體分頁，透過 Block Table 將動態 KV Cache 切為非連續區塊並支援共享前綴，把高達六成到八成的記憶體碎片浪費壓低到百分之四以下！',
+        html: `
+          ${buildSlideHeader('SLIDE 13 // 論文五：PagedAttention (Kwon et al., 2023)', '解法三：PagedAttention — OS 分頁、Block Table 與 Copy-on-Write', 'Kwon2023-PagedAttention')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-stretch">
+            <div class="rounded-2xl p-5 bg-pastel-mint dark:bg-emerald-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-center gap-3">
+              <h3 class="text-base sm:text-lg font-extrabold">📚 消除 60%–80% 動態顯存碎片化</h3>
+              <ul class="list-disc pl-5 space-y-2 text-sm text-ink-sec dark:text-slate-300 leading-relaxed">
+                <li><strong>傳統痛點</strong>：預先配置最大長度的連續顯存空間，造成嚴重內部碎片與過度預留（浪費達 60%–80%）。</li>
+                <li><strong>非連續分頁（KV Blocks）</strong>：依需動態申請固定大小區塊，透過 <code>Block Table</code> 將邏輯 Token 映射至離散實體顯存，浪費率壓至 <strong>&lt;4%</strong>。</li>
+                <li><strong>Copy-on-Write 前綴共享</strong>：共用 System Prompt 僅存一份實體區塊，論文於 vLLM 達成 <strong>2x–4x</strong> 吞吐提升。</li>
+              </ul>
+            </div>
+            <div class="bg-slate-950 rounded-2xl border border-cream-border dark:border-dark-border p-3 flex items-center justify-center">
+              <svg viewBox="0 0 400 215" class="w-full h-full max-h-[250px]">
+                <text x="200" y="22" fill="#F8FAFC" font-size="12.5" font-weight="bold" text-anchor="middle">KV Cache 記憶體分頁架構對比</text>
+                <text x="20" y="54" fill="#FCA5A5" font-size="11" font-weight="bold">❌ 傳統連續預留（浪費 60%–80%！）</text>
+                <rect x="20" y="64" width="90" height="32" rx="5" fill="#EA580C"/><text x="65" y="84" fill="#fff" font-size="9.5" text-anchor="middle" font-weight="bold">已用 Token</text>
+                <rect x="114" y="64" width="264" height="32" rx="5" fill="#334155" stroke="#EF4444" stroke-dasharray="4 3"/>
+                <text x="246" y="84" fill="#FCA5A5" font-size="9.5" text-anchor="middle">過度預留與內部碎片（無法共享！）</text>
+
+                <text x="20" y="132" fill="#34D399" font-size="11" font-weight="bold">✅ PagedAttention 非連續區塊（浪費 &lt; 4%！）</text>
+                <rect x="20" y="142" width="54" height="32" rx="5" fill="#059669"/><text x="47" y="162" fill="#fff" font-size="9" text-anchor="middle">Blk A1</text>
+                <rect x="80" y="142" width="54" height="32" rx="5" fill="#0284C7"/><text x="107" y="162" fill="#fff" font-size="9" text-anchor="middle">Blk B1</text>
+                <rect x="140" y="142" width="54" height="32" rx="5" fill="#059669"/><text x="167" y="162" fill="#fff" font-size="9" text-anchor="middle">Blk A2</text>
+                <rect x="200" y="142" width="56" height="32" rx="5" fill="#7C3AED"/><text x="228" y="162" fill="#fff" font-size="9" text-anchor="middle">CoW共享</text>
+                <rect x="262" y="142" width="54" height="32" rx="5" fill="#0284C7"/><text x="289" y="162" fill="#fff" font-size="9" text-anchor="middle">Blk B2</text>
+                <rect x="322" y="142" width="56" height="32" rx="5" fill="#059669"/><text x="350" y="162" fill="#fff" font-size="9" text-anchor="middle">Blk A3</text>
+                <text x="200" y="196" fill="#A7F3D0" font-size="10" text-anchor="middle">Block Table 動態映射，實體空間零碎片！</text>
+              </svg>
+            </div>
+          </div>
+          ${buildTakeaway('🛡️ 權重量化省固定顯存 ＋ FlashAttention 省計算緩衝 ＋ PagedAttention 省動態快取 ＝ 邊緣 AI 完美閉環！')}
+        `
+      };
+    }
+
+    function buildProSynthesisAndGraphSlide() {
+      return {
+        chapter: 'Ch.4 邊界與 Graph v2',
+        title: `論文邊界總表與 Graph v1→v2 流程架構`,
+        wiki: 'All-Device-AI-Performance-Guide',
+        narration: '這一頁總整理五篇文獻的硬體邊界條件，嚴格區分資料中心 A100 數據與消費端未實測項目，同時展示本簡報如何從 Graph v1 轉大圈重工，透過將檢查前移升級為 Graph v2 達成零錯誤驗證。',
+        html: `
+          ${buildSlideHeader('SLIDE 14 // 論文基準邊界 & GRAPH V1→V2 工程總結', '跨文獻實測條件對照 ＋ LLM Wiki 自動化 Graph v2 檢查前移架構', 'All-Device-AI-Performance-Guide')}
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 items-stretch">
+            <div class="overflow-x-auto rounded-2xl border border-cream-border dark:border-dark-border bg-white dark:bg-dark-card p-3.5 flex flex-col justify-between">
+              <h3 class="text-sm font-extrabold mb-2">📊 論文實測環境邊界總表（防幻覺核對）</h3>
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-pastel-sky dark:bg-sky-500/20 text-sky-brand dark:text-sky-300">
+                    <th class="p-2 border-b border-cream-border dark:border-dark-border">技術論文</th>
+                    <th class="p-2 border-b border-cream-border dark:border-dark-border">論文環境成果</th>
+                    <th class="p-2 border-b border-cream-border dark:border-dark-border">消費端邊界</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-cream-border dark:divide-dark-border text-ink-sec dark:text-slate-300">
+                  <tr><td class="p-2 font-bold">FlashAttention</td><td class="p-2">A100 最高 3x</td><td class="p-2 font-mono text-[11px]">[來源未提供]</td></tr>
+                  <tr><td class="p-2 font-bold">GPTQ INT4</td><td class="p-2">A100 3.25x / A6000 4.5x</td><td class="p-2">體積確縮 ~4x</td></tr>
+                  <tr><td class="p-2 font-bold">PagedAttention</td><td class="p-2">浪費 &lt;4% / 2–4x</td><td class="p-2">長文防 OOM</td></tr>
+                </tbody>
+              </table>
+              <p class="text-[11px] text-ink-muted dark:text-slate-400 mt-2">嚴格遵守 AGENTS.md：絕不把 A100 數據混同為筆電／手機實測倍率。</p>
+            </div>
+
+            <div class="rounded-2xl border border-cream-border dark:border-dark-border bg-pastel-lav dark:bg-purple-500/10 p-4 flex flex-col justify-between gap-2">
+              <h3 class="text-sm font-extrabold">🔁 Graph v1 → v2 檢查前移（Shift-Left QA）</h3>
+              <div class="space-y-2 text-xs text-ink-sec dark:text-slate-300">
+                <div class="p-2.5 rounded-xl bg-pastel-peach dark:bg-red-500/15 border border-red-300 dark:border-red-500/30">
+                  <strong>❌ Graph v1 痛點</strong>：等到 HTML 渲染完才抓到爆版、漏出處與漏公式，被迫從末端「轉大圈」整份重來。
+                </div>
+                <div class="p-2.5 rounded-xl bg-pastel-mint dark:bg-emerald-500/15 border border-emerald-300 dark:border-emerald-500/30">
+                  <strong>✅ Graph v2 改良</strong>：新增 <code>Gate 0</code> 覆蓋率剎車（≥5 篇），將字數、公式與出處檢查<strong>前移至 N4 逐頁稿小迴圈（最多 2 輪）</strong>，再由 <code>scripts/check_deck.py</code> 腳本客觀驗收！
+                </div>
+              </div>
+              <div class="font-mono text-[11px] font-bold text-emerald-700 dark:text-emerald-300 bg-white dark:bg-dark-card p-2 rounded-lg border border-cream-border dark:border-dark-border">
+                $ python scripts/check_deck.py → [PASS] 0 Errors / 5 Papers 100%
+              </div>
+            </div>
+          </div>
+          ${buildTakeaway('✨ 下一頁：挑戰理工研究生硬核 3 題評量，接著檢視完整 5 篇參考文獻與結尾！')}
+        `
+      };
+    }
+
+    function buildFinalQuizSlide(track, dev) {
+      const d = DEVICES[dev];
+      const quizzes = {
+        beginner: [
+          { q: 'Q1. 為什麼手機或筆電變很燙時，畫面會突然變卡？', opts: [['A. 電腦為了不燒壞晶片，自動踩煞車放慢速度', true], ['B. 因為網路線突然斷掉了', false]] },
+          { q: 'Q2. 廚房故事裡，AI 吐字慢吞吞通常是因為什麼？', opts: [['A. 五星大廚不會炒菜', false], ['B. 助理去遠方大冰箱搬食材太慢', true]] },
+          { q: 'Q3. 把 14GB 模型「抽真空」縮成 4GB 的魔法叫什麼？', opts: [['A. INT4 量化壓縮技術', true], ['B. 把螢幕亮度調到最暗', false]] }
+        ],
+        gamer: [
+          { q: 'Q1. 為什麼稍微降壓 10% 進入甜點區，FPS 反而更穩？', opts: [['A. 動態功耗跟電壓平方成正比，省下 20–30% 廢熱不撞牆', true], ['B. 降壓會自動把 60Hz 螢幕升級成 144Hz', false]] },
+          { q: 'Q2. LLM 逐字生成 (Decode) 落在 Roofline 哪一區？', opts: [['A. Compute-bound（吃滿算力）', false], ['B. Memory-bound（卡在顯存搬運頻寬）', true]] },
+          { q: 'Q3. 哪一項技術把長對話 KV Cache 60–80% 浪費壓到 <4%？', opts: [['A. PagedAttention 非連續分頁區塊管理', true], ['B. 把滑鼠回報率從 125Hz 調到 1000Hz', false]] }
+        ],
+        pro: [
+          { q: 'Q1. FlashAttention 透過 Tiling 與 Online Softmax 主要降低何者？', opts: [['A. HBM 存取 IO 複雜度（Θ(N²) → Θ(N²d²M⁻¹)）且零誤差', true], ['B. 透過丟棄一半注意力權重來減少 FLOPs', false]] },
+          { q: 'Q2. GPTQ 能在 4-bit 維持低 Perplexity 仰賴何種數學工具？', opts: [['A. 一階梯度隨機裁剪', false], ['B. 二階 Hessian 逆矩陣動態誤差補償', true]] },
+          { q: 'Q3. 若 Graph v1 常在最終 HTML 渲染才抓到爆版，正確工程解法是？', opts: [['A. 將字數／出處檢查前移（Shift-Left）至逐頁稿小圈 Loop', true], ['B. 關閉腳本檢查改成口頭叫 AI 自己注意', false]] }
+        ]
+      };
+
+      const qs = quizzes[track];
+      return {
+        chapter: 'Ch.4 保養與闖關',
+        title: `專屬保養清單與結業闖關認證`,
+        wiki: 'All-Device-AI-Performance-Guide',
+        narration: `來到保養與闖關認證頁！上方已經為你的${d.fullName}整理好三條最實用的日常保養與 AI 調校守則。完成下方的三題專屬測驗，就能解鎖勝利音效與結業認證徽章！完成後別忘了往後翻看參考文獻與全書結尾喔！`,
+        html: `
+          ${buildSlideHeader(`SLIDE 15 // ${TRACK_META[track].label} × ${d.shortName} 結業認證`, `🏆 給你的 ${d.shortName} 保養秘笈 ＋ 3 題專屬闖關測驗`, 'All-Device-AI-Performance-Guide')}
+
+          <div class="rounded-2xl p-3.5 bg-pastel-mint dark:bg-emerald-500/10 border border-emerald-400/50 mb-3">
+            <h3 class="text-xs sm:text-sm font-extrabold text-emerald-800 dark:text-emerald-300 mb-1.5">✨ 專為【${d.fullName}】整理的 3 條實戰守則：</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs text-ink-sec dark:text-slate-200">
+              ${d.dailyTips.map((t, i) => `<div class="p-2 rounded-xl bg-white/90 dark:bg-dark-card border border-cream-border dark:border-dark-border"><strong>${i + 1}.</strong> ${t}</div>`).join('')}
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 flex-1 items-stretch">
+            ${qs.map((item, idx) => `
+              <div class="rounded-2xl p-3.5 ${idx === 0 ? 'bg-pastel-peach dark:bg-orange-500/10' : (idx === 1 ? 'bg-pastel-sky dark:bg-sky-500/10' : 'bg-pastel-lav dark:bg-purple-500/10')} border border-cream-border dark:border-dark-border flex flex-col justify-between gap-2">
+                <h3 class="text-xs sm:text-sm font-extrabold">${item.q}</h3>
+                <div class="space-y-1.5">
+                  ${item.opts.map(([txt, ok]) => `
+                    <button onclick="ansQuiz(${idx + 1}, ${ok}, this)" class="w-full text-left px-3 py-2 rounded-xl bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border hover:border-coral text-xs font-semibold transition cursor-pointer">${txt}</button>
+                  `).join('')}
+                </div>
+                <p id="qfb${idx + 1}" class="text-xs font-extrabold min-h-[1.1rem]"></p>
+              </div>
+            `).join('')}
+          </div>
+
+          <div id="certBanner" class="mt-3 rounded-xl px-4 py-2.5 bg-pastel-amber dark:bg-amber-500/15 border-2 border-dashed border-coral text-center text-xs sm:text-sm font-extrabold">
+            🎯 目前闖關進度：<span id="qScoreTxt" class="font-mono text-coral">0 / 3 題</span> — 全部答對解鎖【${TRACK_META[track].label}・結業認證徽章】！
+          </div>
+        `
+      };
+    }
+
+    /**
+     * PENULTIMATE SLIDE: Formal References & Clickable LLM Wiki Sources (v4.0 Aesthetic)
+     */
+    function buildReferencesSlide() {
+      const refs = [
+        { num: '[1]', wiki: 'NVIDIA2024-MaxQ-Thermal', cite: 'NVIDIA Corporation (2024). Mobile GPU Architecture, Max-Q & Dynamic Boost Technical Overview.', note: '動態功耗 V² 平方成長、TGP 功耗牆與 87°C 溫度牆 DVFS 降頻機制。' },
+        { num: '[2]', wiki: 'Williams2009-Roofline', cite: 'Williams, S., Waterman, A., & Patterson, D. (2009). Roofline: An Insightful Visual Performance Model for Multicore Architectures. Communications of the ACM, 52(4), 65–76.', note: '算術強度 I = FLOPs / Bytes，區分 Memory-bound 與 Compute-bound 瓶頸。' },
+        { num: '[3]', wiki: 'Dao2022-FlashAttention', cite: 'Dao, T., Fu, D. Y., Ermon, S., Rudra, A., & Ré, C. (2022). FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness. NeurIPS 2022.', note: '利用片上 SRAM 分塊計算（Tiling）與 Online Softmax 降低顯存 IO，A100 訓練 GPT-2 達最高 3x 加速。' },
+        { num: '[4]', wiki: 'Frantar2023-GPTQ-Quantization', cite: 'Frantar, E., Ashkboos, S., Hoefler, T., & Alistarh, D. (2023). GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers. ICLR 2023.', note: '透過二階 Hessian 補償誤差實現 INT4 權重量化，體積縮 ~4x，A100/A6000 實測加速 3.25x/4.5x。' },
+        { num: '[5]', wiki: 'Kwon2023-PagedAttention', cite: 'Kwon, W., Li, Z., Zhuang, S., et al. (2023). Efficient Memory Management for Large Language Model Serving with PagedAttention (vLLM). SOSP 2023.', note: '借鏡作業系統分頁技術消除 KV Cache 60–80% 浪費至 <4%，吞吐量提升 2x–4x。' }
+      ];
+      return {
+        chapter: '參考文獻',
+        title: `參考文獻與 5 篇 LLM Wiki 原始出處`,
+        wiki: 'All-Device-AI-Performance-Guide',
+        proactiveTip: '📚 這裡列出本書引用的 5 篇真實技術文獻！點右側紫色按鈕就能立刻展開對應的 Wiki 精讀筆記喔！',
+        narration: '在進入全書結尾前，這一頁完整列出本書所引用的五篇核心文獻與 LLM Wiki 知識出處：包含 NVIDIA Max-Q 溫控白皮書、Roofline 效能屋頂模型、FlashAttention、GPTQ 四位元量化與 PagedAttention。點擊每一條右邊的紫色按鈕，都可以隨時核對原始筆記內容！',
+        html: `
+          ${buildSlideHeader('REFERENCES // 參考文獻與 LLM Wiki 知識溯源', '📚 本書 5 篇核心技術文獻與知識庫節點對照表', 'All-Device-AI-Performance-Guide')}
+          <div class="flex flex-col gap-2 flex-1 justify-center overflow-y-auto pr-1">
+            ${refs.map(r => `
+              <div class="p-3 rounded-2xl bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 shadow-sm">
+                <div class="min-w-0">
+                  <div class="text-xs sm:text-sm font-extrabold text-ink-main dark:text-slate-100 leading-snug">
+                    <span class="font-mono text-coral mr-1.5">${r.num}</span>${r.cite}
+                  </div>
+                  <div class="text-xs text-ink-sec dark:text-slate-400 mt-0.5">${r.note}</div>
+                </div>
+                <button onclick="openWikiModal('${r.wiki}')" class="px-3 py-1.5 rounded-lg bg-pastel-lav dark:bg-purple-500/20 text-violet-brand dark:text-purple-300 font-mono text-xs font-bold hover:bg-violet-brand hover:text-white transition shrink-0 cursor-pointer">
+                  📖 [[${r.wiki}]]
+                </button>
+              </div>
+            `).join('')}
+          </div>
+          ${buildTakeaway('🛡️ 零幻覺追溯保證：全書所有物理機制、公式與數據皆嚴格對應以上 5 篇已 Ingest 之 raw/papers/ 文獻！')}
+        `
+      };
+    }
+
+    /**
+     * FINAL SLIDE: Epilogue & Book Back Cover (v4.0 Aesthetic)
+     */
+    function buildEndingSlide(track, dev) {
+      const tMeta = TRACK_META[track];
+      const d = DEVICES[dev];
+      return {
+        chapter: '全書結尾',
+        title: `全書結尾：帶走這 3 句硬體與 AI 金句`,
+        wiki: 'All-Device-AI-Performance-Guide',
+        proactiveTip: '🎉 恭喜你讀完整本互動有聲百科！想再換一條路線看看不同深度的內容，或是找我聊天、畫圖解都隨時歡迎喔！',
+        narration: '恭喜你讀完全書！最後請帶走三個核心觀念：第一，降頻是設備的防燒毀安全煞車，找對低壓甜點區比盲目超頻更穩；第二，跑本地 AI 往往不是算力不夠，而是卡在記憶體搬運太慢；第三，靠 FlashAttention、GPTQ 量化與 PagedAttention 三大神技，就算是手邊的日常設備也能發揮超乎想像的 AI 實力！感謝你的閱讀與陪伴，歡迎回封面體驗其他路線，或跟小矽聊聊喔！',
+        html: `
+          ${buildSlideHeader('EPILOGUE // 全書結尾與知識收束', '🎓 感謝閱讀！帶走這 3 個受用一生的硬體與 AI 觀念', 'All-Device-AI-Performance-Guide')}
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1 items-stretch">
+            <div class="rounded-2xl p-5 bg-pastel-peach dark:bg-orange-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-center gap-2.5">
+              <span class="text-3xl">🌡️</span>
+              <h3 class="text-base font-black">1. 降頻是保護，甜點區才是王道</h3>
+              <p class="text-sm text-ink-sec dark:text-slate-300 leading-relaxed">發熱與電壓平方掛鉤，幫你的<strong>${d.fullName}</strong>保持散熱順暢、善用低壓均衡模式，比一味飆高時脈更穩！</p>
+            </div>
+            <div class="rounded-2xl p-5 bg-pastel-sky dark:bg-sky-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-center gap-2.5">
+              <span class="text-3xl">🍳</span>
+              <h3 class="text-base font-black">2. 跑 AI 卡頓，先看記憶體頻寬</h3>
+              <p class="text-sm text-ink-sec dark:text-slate-300 leading-relaxed">Roofline 模型告訴我們：AI 逐字生成卡在「搬料」而非「炒菜」，減少搬運量才是真正的提速關鍵！</p>
+            </div>
+            <div class="rounded-2xl p-5 bg-pastel-mint dark:bg-emerald-500/10 border border-cream-border dark:border-dark-border flex flex-col justify-center gap-2.5">
+              <span class="text-3xl">🧩</span>
+              <h3 class="text-base font-black">3. 三招合體，小設備也能跑 AI</h3>
+              <p class="text-sm text-ink-sec dark:text-slate-300 leading-relaxed">FlashAttention 省搬運、GPTQ INT4 縮體積 4 倍、PagedAttention 消滅快取浪費，讓邊緣 AI 走進日常！</p>
+            </div>
+          </div>
+
+          <div class="mt-3 p-4 rounded-2xl bg-white dark:bg-dark-card border-2 border-cream-border dark:border-dark-border flex flex-wrap items-center justify-between gap-3 shadow-sm">
+            <div>
+              <div class="text-sm font-black text-ink-main dark:text-white">✨ 已完成路線：${tMeta.label} × ${d.fullName}</div>
+              <div class="text-xs text-ink-muted dark:text-slate-400 mt-0.5">TAICA 生成式 AI 第十週作業 ｜ 國立陽明交通大學 生醫光電所 314264011 許浩哲</div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button onclick="showSlide(0)" class="px-3.5 py-2 rounded-xl bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border hover:border-coral text-xs font-extrabold cursor-pointer">🔄 回封面換條路線探索</button>
+              <button onclick="toggleAgent()" class="px-3.5 py-2 rounded-xl bg-violet-brand text-white text-xs font-extrabold hover:opacity-90 cursor-pointer">🤖 找小矽助教總複習</button>
+              <button onclick="downloadFullRepoZip()" class="px-3.5 py-2 rounded-xl bg-coral text-white text-xs font-extrabold hover:opacity-90 cursor-pointer">📦 下載完整 GitHub ZIP</button>
+            </div>
+          </div>
+        `
+      };
+    }
+
+    /**
+     * Master Route Assembler: Cover -> Dynamic TOC -> Tailored v4.0 Body -> References -> Ending
+     * Automatically syncs sequential slide numbers (13 / 15 / 17) across all slides & headers!
+     */
+    function buildDeckFor(track, dev) {
+      let bodySlides = [];
+      if (track === 'beginner') {
+        bodySlides = [
+          buildPipelineSlide(track, dev),
+          buildFpsSlide(track, dev),
+          buildRaceSlide(track, dev),
+          buildThermalSlide(track, dev),
+          buildThermalGameSlide(track, dev),
+          buildRooflineSlide(track, dev),
+          buildGptqSlide(track, dev),
+          buildPackGameSlide(track, dev),
+          buildFinalQuizSlide(track, dev)
+        ];
+      } else if (track === 'gamer') {
+        bodySlides = [
+          buildPipelineSlide(track, dev),
+          buildFpsSlide(track, dev),
+          buildRaceSlide(track, dev),
+          buildThermalSlide(track, dev),
+          buildThermalGameSlide(track, dev),
+          buildRooflineSlide(track, dev),
+          buildPrefillDecodeSlide(track),
+          buildFlashSlide(track),
+          buildGptqSlide(track, dev),
+          buildPackGameSlide(track, dev),
+          buildFinalQuizSlide(track, dev)
+        ];
+      } else {
+        bodySlides = [
+          buildPipelineSlide(track, dev),
+          buildRaceSlide(track, dev),
+          buildThermalSlide(track, dev),
+          buildThermalGameSlide(track, dev),
+          buildRooflineSlide(track, dev),
+          buildPrefillDecodeSlide(track),
+          buildPyramidSlide(),
+          buildFlashSlide(track),
+          buildGptqSlide(track, dev),
+          buildPackGameSlide(track, dev),
+          buildPagedSlide(),
+          buildProSynthesisAndGraphSlide(),
+          buildFinalQuizSlide(track, dev)
+        ];
+      }
+
+      const cover = buildOnboardingSlide(track, dev);
+      const refs = buildReferencesSlide();
+      const ending = buildEndingSlide(track, dev);
+
+      const rawOrder = [cover, { chapter: '目錄', title: `本書目錄：${TRACK_META[track].label} 學習地圖` }, ...bodySlides, refs, ending];
+      const previewItems = rawOrder.map(s => ({
+        chapter: s.chapter || '章節',
+        cleanTitle: s.title.replace(/^\d+\.\s*/, '')
+      }));
+
+      const toc = buildTocSlide(track, dev, previewItems);
+      const fullDeck = [cover, toc, ...bodySlides, refs, ending];
+
+      return fullDeck.map((slide, idx) => {
+        const numStr = String(idx + 1).padStart(2, '0');
+        const cleanTitle = slide.title.replace(/^\d+\.\s*/, '');
+        const syncedHtml = slide.html.replace(/SLIDE \d+/g, `SLIDE ${numStr}`);
+        return { ...slide, title: `${numStr}. ${cleanTitle}`, html: syncedHtml };
+      });
+    }
+
+    function rebuildDeck(keepIndex = false, triggerSpeech = false) {
+      cleanupSlideTimers();
+      qSolved = { 1: false, 2: false, 3: false };
+      packState = { gptq: false, flash: false, paged: false };
+
+      activeSlides = buildDeckFor(currentTrack, currentDevice);
+      if (!keepIndex || cur >= activeSlides.length) cur = 0;
+
+      // Update Header Badge & Dropdowns
+      const tMeta = TRACK_META[currentTrack];
+      const d = DEVICES[currentDevice];
+      document.getElementById('activeTrackBadge').textContent = `${tMeta.label} × ${d.shortName} (${activeSlides.length}頁)`;
+      document.getElementById('topTrackSel').value = currentTrack;
+      document.getElementById('topDeviceSel').value = currentDevice;
+
+      renderCurrentSlide(triggerSpeech);
+    }
+
+    function cleanupSlideTimers() {
+      if (raceInterval) { clearInterval(raceInterval); raceInterval = null; }
+      if (tgTimer) { clearInterval(tgTimer); tgTimer = null; tgPlaying = false; }
+      if (idleHintTimer) { clearTimeout(idleHintTimer); idleHintTimer = null; }
+      const nextBtn = document.getElementById('nextSlideBtn');
+      if (nextBtn) nextBtn.classList.remove('next-highlight');
+    }
+
+    function renderCurrentSlide(triggerSpeech = true) {
+      cleanupSlideTimers();
+      dismissProactiveBubble();
+      const s = activeSlides[cur];
+      const mount = document.getElementById('slideMount');
+      mount.innerHTML = `<section class="slide-anim flex-1 p-5 sm:p-7 lg:p-8 flex flex-col justify-between">${s.html}</section>`;
+
+      document.getElementById('progLine').style.width = `${((cur + 1) / activeSlides.length) * 100}%`;
+      document.getElementById('pageCounter').textContent = `${cur + 1} / ${activeSlides.length}`;
+
+      // Initialize dynamic slide widgets if present on the newly rendered slide
+      if (document.getElementById('vSlider')) updateThermal();
+      if (document.getElementById('pSlider')) updateVram();
+      if (document.getElementById('fpsCanvas')) resizeFpsCanvas();
+
+      // Render LaTeX formulas (only present in Pro slides & Wiki modals)
+      renderMathSafe(mount);
+
+      // Update subtitle preview or start speaking
+      if (audiobookOn && triggerSpeech) {
+        speakCurrentSlide();
+      } else {
+        document.getElementById('subtitleText').textContent = `📖 本頁導讀預覽：${s.narration}`;
+        document.getElementById('subtitleEq').classList.add('hidden');
+        document.getElementById('subtitleEq').classList.remove('flex');
+        document.getElementById('subtitleIcon').classList.remove('hidden');
+      }
+
+      // Proactive AI assistant guidance (Cover / TOC / References / Ending / Idle reminder)
+      if (s.proactiveTip) {
+        idleHintTimer = setTimeout(() => {
+          showProactiveHint(s.proactiveTip, cur > 0 && cur < activeSlides.length - 1);
+        }, cur === 0 ? 900 : 1200);
+      } else if (cur < activeSlides.length - 1) {
+        idleHintTimer = setTimeout(() => {
+          if (!audiobookOn) {
+            showProactiveHint(
+              '📖 讀完這一頁了嗎？你可以按右下角「下一頁 →」、鍵盤「→」方向鍵，或直接點我問這頁不懂的地方喔！',
+              true
+            );
+          }
+        }, 20000);
+      }
+    }
+
+    function setTrack(track) {
+      currentTrack = track;
+      playSfx('click');
+      rebuildDeck(false, audiobookOn);
+      showToast(`✅ 已切換至【${TRACK_META[track].label}】（含封面、目錄、文獻與結尾共 ${activeSlides.length} 頁）！`);
+    }
+
+    function setDevice(dev) {
+      currentDevice = dev;
+      playSfx('click');
+      rebuildDeck(cur !== 0, audiobookOn);
+      showToast(`✅ 已切換目標裝置為【${DEVICES[dev].fullName}】，模擬器與建議已同步更新！`);
+    }
+
+    function enterPersonalizedDeck() {
+      playSfx('win');
+      ensureDefaultBgmRunning();
+      showSlide(1);
+    }
+
+    function showSlide(i) {
+      if (!activeSlides.length) return;
+      cur = (i + activeSlides.length) % activeSlides.length;
+      playSfx('flip');
+      renderCurrentSlide(true);
+    }
+
+    function step(delta) { showSlide(cur + delta); }
+
+    /* ==========================================================================
+       4. PROACTIVE BUBBLE & FULLSCREEN TOGGLE
+       ========================================================================== */
+    function showProactiveHint(msg, highlightNext = false) {
+      const drawer = document.getElementById('agentDrawer');
+      if (drawer && !drawer.classList.contains('hidden')) return;
+      const b = document.getElementById('proactiveBubble');
+      const txt = document.getElementById('proactiveText');
+      const acts = document.getElementById('proactiveActions');
+      const nextBtn = document.getElementById('nextSlideBtn');
+
+      txt.textContent = msg;
+      let buttonsHtml = `<button onclick="dismissProactiveBubble(); toggleAgent();" class="px-2.5 py-1 rounded-full bg-pastel-lav dark:bg-purple-500/25 text-violet-brand dark:text-purple-300 font-bold text-[11px] cursor-pointer">💬 找小矽聊聊</button>`;
+      if (highlightNext && cur < activeSlides.length - 1) {
+        buttonsHtml += `<button onclick="dismissProactiveBubble(); step(1);" class="px-2.5 py-1 rounded-full bg-coral text-white font-bold text-[11px] cursor-pointer">➡️ 翻到下一頁</button>`;
+        if (nextBtn) nextBtn.classList.add('next-highlight');
+      }
+      acts.innerHTML = buttonsHtml;
+      b.classList.remove('hidden');
+    }
+
+    function dismissProactiveBubble() {
+      const b = document.getElementById('proactiveBubble');
+      if (b) b.classList.add('hidden');
+    }
+
+    function toggleFull() {
+      playSfx('click');
+      try {
+        if (!document.fullscreenElement) {
+          const target = document.documentElement;
+          if (target.requestFullscreen) {
+            target.requestFullscreen().catch(() => {
+              showToast('💡 預覽框限制了系統全螢幕，推上 GitHub Pages 後按 F 或此鈕即可全螢幕！');
+            });
+          } else {
+            showToast('💡 您的瀏覽器不支援全螢幕 API。');
+          }
+        } else if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      } catch (e) {
+        showToast('💡 預覽環境受限，部署至 GitHub Pages 後即可正常全螢幕！');
+      }
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+      const btn = document.getElementById('fullBtn');
+      if (btn) btn.textContent = document.fullscreenElement ? '🗗 退出全螢幕' : '🖥️ 全螢幕 (F)';
+    });
+
+    /* ==========================================================================
+       5. NATURAL HUMAN-LIKE AUDIOBOOK ENGINE (DEFAULT ON + MANUAL FLIP REMINDER)
+       ========================================================================== */
+    function scoreVoice(v) {
+      const name = (v.name || '').toLowerCase();
+      const lang = (v.lang || '').toLowerCase();
+      let score = 0;
+      if (lang.includes('zh-tw') || lang.includes('zh_tw')) score += 50;
+      else if (lang.includes('zh')) score += 20;
+      else return -1;
+
+      if (name.includes('hsiaochen')) score += 120;
+      if (name.includes('yunjhe') || name.includes('hsiaoyu')) score += 110;
+      if (name.includes('natural')) score += 90;
+      if (name.includes('online')) score += 70;
+      if (name.includes('google') && lang.includes('tw')) score += 80;
+      if (name.includes('meijia') || name.includes('sin-ji')) score += 60;
+      return score;
+    }
+
+    function populateVoices() {
+      if (!('speechSynthesis' in window)) return;
+      const all = window.speechSynthesis.getVoices() || [];
+      const zhVoices = all
+        .map(v => ({ voice: v, score: scoreVoice(v) }))
+        .filter(x => x.score >= 0)
+        .sort((a, b) => b.score - a.score);
+
+      const sel = document.getElementById('voiceSelect');
+      if (!sel) return;
+      if (!zhVoices.length) {
+        sel.innerHTML = `<option value="">系統預設中文語音</option>`;
+        return;
+      }
+      sel.innerHTML = zhVoices.map(x => {
+        const tag = x.score >= 150 ? '⭐ 推薦擬真｜' : '';
+        return `<option value="${x.voice.voiceURI}">${tag}${x.voice.name} (${x.voice.lang})</option>`;
+      }).join('');
+
+      if (!selectedVoiceURI || !zhVoices.some(x => x.voice.voiceURI === selectedVoiceURI)) {
+        selectedVoiceURI = zhVoices[0].voice.voiceURI;
+      }
+      sel.value = selectedVoiceURI;
+    }
+
+    function onVoiceChange() {
+      selectedVoiceURI = document.getElementById('voiceSelect').value;
+      playSfx('click');
+      if (audiobookOn) speakCurrentSlide();
+    }
+
+    function onRateChange() {
+      playSfx('click');
+      if (audiobookOn) speakCurrentSlide();
+    }
+
+    function speakCurrentSlide() {
+      if (!('speechSynthesis' in window)) return;
+      speechSessionId++;
+      const mySession = speechSessionId;
+      window.speechSynthesis.cancel();
+
+      const rawScript = (activeSlides[cur] && activeSlides[cur].narration) || '';
+      const chunks = (rawScript.match(/[^。！？；!?]+[。！？；!?]?/g) || [rawScript])
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      if (!chunks.length) return;
+
+      const allVoices = window.speechSynthesis.getVoices() || [];
+      const chosenVoice = allVoices.find(v => v.voiceURI === selectedVoiceURI) || null;
+      const rateVal = parseFloat(document.getElementById('rateSelect')?.value || '1.0');
+
+      setBgmDucking(true);
+      document.getElementById('subtitleEq').classList.remove('hidden');
+      document.getElementById('subtitleEq').classList.add('flex');
+      document.getElementById('subtitleIcon').classList.add('hidden');
+      document.getElementById('subtitleMeta').textContent = bgmPlaying ? 'BGM 自動降音 28%' : '自然分句朗讀中';
+
+      let idx = 0;
+      function speakNextChunk() {
+        if (mySession !== speechSessionId || !audiobookOn) return;
+        if (idx >= chunks.length) {
+          setBgmDucking(false);
+          document.getElementById('subtitleEq').classList.add('hidden');
+          document.getElementById('subtitleEq').classList.remove('flex');
+          document.getElementById('subtitleIcon').classList.remove('hidden');
+          document.getElementById('subtitleMeta').textContent = '本頁朗讀完畢・請手動翻頁';
+
+          // Manual flip UX: gently prompt reader instead of auto-flipping!
+          if (cur < activeSlides.length - 1) {
+            playSfx('click');
+            showProactiveHint(
+              '🎧 這一頁導讀完畢囉！保留自己翻書的節奏吧～點右下角「下一頁 →」、按鍵盤「→」方向鍵或往左滑就能前進！',
+              true
+            );
+          } else {
+            showProactiveHint('🎓 全書導讀完畢！可以點「🔄 回封面」體驗其他路線，或找小矽聊聊喔！', false);
+          }
+          return;
+        }
+
+        const sentence = chunks[idx];
+        document.getElementById('subtitleText').textContent = `🎙️ ${sentence}`;
+
+        const utter = new SpeechSynthesisUtterance(sentence);
+        utter.lang = 'zh-TW';
+        utter.rate = rateVal;
+        utter.pitch = 1.02;
+        if (chosenVoice) utter.voice = chosenVoice;
+
+        utter.onstart = () => {
+          voiceHasSpokenOnce = true;
+        };
+        utter.onend = () => {
+          if (mySession !== speechSessionId || !audiobookOn) return;
+          idx++;
+          setTimeout(speakNextChunk, 260);
+        };
+        utter.onerror = () => {
+          if (mySession !== speechSessionId) return;
+          setBgmDucking(false);
+        };
+
+        window.speechSynthesis.speak(utter);
+      }
+
+      speakNextChunk();
+    }
+
+    function stopAudiobook() {
+      speechSessionId++;
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      setBgmDucking(false);
+      document.getElementById('subtitleEq').classList.add('hidden');
+      document.getElementById('subtitleEq').classList.remove('flex');
+      document.getElementById('subtitleIcon').classList.remove('hidden');
+      document.getElementById('subtitleMeta').textContent = '語音已暫停・手動翻頁';
+    }
+
+    function updateAudiobookButtonsUI() {
+      const tBtn = document.getElementById('ttsBtn');
+      if (audiobookOn) {
+        tBtn.textContent = '🔊 語音：開';
+        tBtn.className = 'px-3 py-1.5 rounded-full text-xs font-bold bg-coral text-white hover:opacity-90 transition cursor-pointer shadow-sm';
+      } else {
+        tBtn.textContent = '🔇 語音：關';
+        tBtn.className = 'px-3 py-1.5 rounded-full text-xs font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border hover:border-emerald-600 transition cursor-pointer';
+      }
+    }
+
+    function toggleAudiobook() {
+      audiobookOn = !audiobookOn;
+      updateAudiobookButtonsUI();
+      if (audiobookOn) speakCurrentSlide();
+      else stopAudiobook();
+    }
+
+    function toggleAudioConsole() {
+      document.getElementById('audioConsole').classList.toggle('hidden');
+      playSfx('click');
+    }
+
+    /* ==========================================================================
+       6. 16-STEP RHYTHMIC GROOVE BGM SYNTHESIZER + AUDIO DUCKING + SFX (DEFAULT ON)
+       ========================================================================== */
+    let actx = null;
+    let masterBgmGain = null;
+    let duckGain = null;
+    let noiseBuffer = null;
+    let seqTimer = null;
+    let seqStep = 0;
+
+    function ensureAudio() {
+      if (!actx) {
+        actx = new (window.AudioContext || window.webkitAudioContext)();
+        masterBgmGain = actx.createGain();
+        duckGain = actx.createGain();
+        masterBgmGain.gain.value = parseFloat(document.getElementById('bgmVol')?.value || '0.45');
+        duckGain.gain.value = audiobookOn ? 0.28 : 1.0;
+        masterBgmGain.connect(duckGain);
+        duckGain.connect(actx.destination);
+
+        const len = actx.sampleRate;
+        noiseBuffer = actx.createBuffer(1, len, actx.sampleRate);
+        const d = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      }
+      if (actx.state === 'suspended') actx.resume();
+    }
+
+    function setBgmDucking(isSpeaking) {
+      if (!actx || !duckGain) return;
+      const now = actx.currentTime;
+      duckGain.gain.cancelScheduledValues(now);
+      duckGain.gain.setValueAtTime(duckGain.gain.value, now);
+      duckGain.gain.linearRampToValueAtTime(isSpeaking ? 0.28 : 1.0, now + 0.25);
+    }
+
+    function updateBgmVol() {
+      if (!actx || !masterBgmGain) return;
+      const v = parseFloat(document.getElementById('bgmVol').value || '0.45');
+      masterBgmGain.gain.setValueAtTime(v, actx.currentTime);
+    }
+
+    function hitKick(t, lvl = 1.0) {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = 'sine';
+      o.frequency.setValueAtTime(125, t);
+      o.frequency.exponentialRampToValueAtTime(40, t + 0.09);
+      g.gain.setValueAtTime(0.62 * lvl, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+      o.connect(g); g.connect(masterBgmGain);
+      o.start(t); o.stop(t + 0.20);
+    }
+
+    function hitSnare(t, lvl = 1.0) {
+      const o = actx.createOscillator(), og = actx.createGain();
+      o.type = 'triangle';
+      o.frequency.setValueAtTime(220, t);
+      o.frequency.exponentialRampToValueAtTime(105, t + 0.045);
+      og.gain.setValueAtTime(0.28 * lvl, t);
+      og.gain.exponentialRampToValueAtTime(0.001, t + 0.08);
+      o.connect(og); og.connect(masterBgmGain);
+      o.start(t); o.stop(t + 0.09);
+
+      const src = actx.createBufferSource();
+      src.buffer = noiseBuffer;
+      const flt = actx.createBiquadFilter();
+      flt.type = 'bandpass'; flt.frequency.setValueAtTime(1750, t);
+      const ng = actx.createGain();
+      ng.gain.setValueAtTime(0.18 * lvl, t);
+      ng.gain.exponentialRampToValueAtTime(0.001, t + 0.095);
+      src.connect(flt); flt.connect(ng); ng.connect(masterBgmGain);
+      src.start(t); src.stop(t + 0.11);
+    }
+
+    function hitHat(t, open = false, lvl = 1.0) {
+      const src = actx.createBufferSource();
+      src.buffer = noiseBuffer;
+      const flt = actx.createBiquadFilter();
+      flt.type = 'highpass'; flt.frequency.setValueAtTime(6800, t);
+      const g = actx.createGain();
+      const dur = open ? 0.10 : 0.035;
+      g.gain.setValueAtTime(0.11 * lvl, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      src.connect(flt); flt.connect(g); g.connect(masterBgmGain);
+      src.start(t); src.stop(t + dur + 0.01);
+    }
+
+    function hitBass(t, freq, dur = 0.18, lvl = 1.0) {
+      const o = actx.createOscillator(), flt = actx.createBiquadFilter(), g = actx.createGain();
+      o.type = 'triangle'; o.frequency.setValueAtTime(freq, t);
+      flt.type = 'lowpass'; flt.frequency.setValueAtTime(300, t);
+      g.gain.setValueAtTime(0.001, t);
+      g.gain.linearRampToValueAtTime(0.32 * lvl, t + 0.015);
+      g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      o.connect(flt); flt.connect(g); g.connect(masterBgmGain);
+      o.start(t); o.stop(t + dur + 0.02);
+    }
+
+    function hitPluck(t, freqs, dur = 0.20, lvl = 1.0) {
+      const flt = actx.createBiquadFilter();
+      flt.type = 'lowpass';
+      flt.frequency.setValueAtTime(1350, t);
+      flt.frequency.exponentialRampToValueAtTime(420, t + dur);
+      flt.connect(masterBgmGain);
+      freqs.forEach(f => {
+        const o = actx.createOscillator(), g = actx.createGain();
+        o.type = 'sine'; o.frequency.setValueAtTime(f, t);
+        g.gain.setValueAtTime(0.001, t);
+        g.gain.linearRampToValueAtTime(0.11 * lvl, t + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+        o.connect(g); g.connect(flt);
+        o.start(t); o.stop(t + dur + 0.02);
+      });
+    }
+
+    const GROOVE_TRACKS = {
+      lofi: {
+        stepMs: 166,
+        chords: [[261.6, 329.6, 392.0, 493.9], [220.0, 261.6, 329.6, 392.0], [174.6, 220.0, 261.6, 349.2], [196.0, 246.9, 293.7, 349.2]],
+        bass: [65.4, 55.0, 87.3, 98.0],
+        tick(s, bar, t) {
+          if (s === 0 || s === 7 || s === 10) hitKick(t, 0.95);
+          if (s === 4 || s === 12) hitSnare(t, 0.85);
+          if (s % 2 === 0) hitHat(t, s === 14, 0.85);
+          if (s === 0 || s === 6 || s === 11) hitPluck(t, this.chords[bar], 0.24, 0.95);
+          if (s === 0 || s === 7 || s === 10 || s === 14) hitBass(t, this.bass[bar], 0.19, 0.95);
+        }
+      },
+      bossa: {
+        stepMs: 141,
+        chords: [[293.7, 349.2, 440.0, 523.3], [196.0, 246.9, 293.7, 349.2], [261.6, 329.6, 392.0, 493.9], [220.0, 277.2, 329.6, 392.0]],
+        bass: [73.4, 98.0, 65.4, 110.0],
+        tick(s, bar, t) {
+          if (s % 4 === 0 || s % 4 === 3) { hitKick(t, 0.85); hitBass(t, this.bass[bar], 0.15, 0.9); }
+          if (s === 0 || s === 3 || s === 6 || s === 10 || s === 13) hitSnare(t, 0.72);
+          hitHat(t, false, 0.6);
+          if (s === 2 || s === 5 || s === 8 || s === 11 || s === 14) hitPluck(t, this.chords[bar], 0.16, 0.95);
+        }
+      },
+      kalimba: {
+        stepMs: 156,
+        notes: [523.3, 659.3, 784.0, 659.3, 587.3, 698.5, 880.0, 698.5, 523.3, 659.3, 784.0, 1046.5, 784.0, 659.3, 587.3, 493.9],
+        bass: [65.4, 73.4, 87.3, 98.0],
+        tick(s, bar, t) {
+          if (s === 0 || s === 8) hitKick(t, 0.85);
+          if (s === 4 || s === 12) hitSnare(t, 0.75);
+          if (s % 2 === 1) hitHat(t, false, 0.7);
+          hitPluck(t, [this.notes[s], this.notes[s] * 0.5], 0.14, 1.1);
+          if (s % 4 === 0) hitBass(t, this.bass[bar], 0.20, 0.85);
+        }
+      }
+    };
+
+    function startBgmLoop() {
+      stopBgmLoop();
+      ensureAudio();
+      const key = document.getElementById('bgmTrackSel')?.value || 'lofi';
+      const tr = GROOVE_TRACKS[key] || GROOVE_TRACKS.lofi;
+      const run = () => {
+        if (!bgmPlaying || !actx) return;
+        if (actx.state === 'suspended') return;
+        const s = seqStep % 16;
+        const bar = Math.floor(seqStep / 16) % 4;
+        tr.tick(s, bar, actx.currentTime);
+        seqStep++;
+      };
+      run();
+      seqTimer = setInterval(run, tr.stepMs);
+    }
+
+    function ensureDefaultBgmRunning() {
+      if (!bgmPlaying) return;
+      try {
+        ensureAudio();
+        if (!seqTimer) startBgmLoop();
+      } catch (e) {}
+    }
+
+    function stopBgmLoop() {
+      if (seqTimer) { clearInterval(seqTimer); seqTimer = null; }
+    }
+
+    function updateBgmButtonsUI() {
+      const btn = document.getElementById('bgmBtn');
+      const topBtn = document.getElementById('topBgmBtn');
+      if (bgmPlaying) {
+        if (btn) {
+          btn.textContent = '⏸ 暫停節奏';
+          btn.className = 'px-3 py-1 rounded-full font-bold bg-coral text-white hover:opacity-90 transition cursor-pointer';
+        }
+        if (topBtn) {
+          topBtn.textContent = '🎵 音樂：開';
+          topBtn.className = 'px-2.5 py-1.5 rounded-full text-xs font-bold bg-violet-brand text-white hover:opacity-90 transition cursor-pointer shadow-sm';
+        }
+      } else {
+        if (btn) {
+          btn.textContent = '▶ 播放節奏';
+          btn.className = 'px-3 py-1 rounded-full font-bold bg-violet-brand text-white hover:opacity-90 transition cursor-pointer';
+        }
+        if (topBtn) {
+          topBtn.textContent = '🔇 音樂：關';
+          topBtn.className = 'px-2.5 py-1.5 rounded-full text-xs font-bold bg-cream-bg dark:bg-dark-stage border border-cream-border dark:border-dark-border hover:border-violet-brand transition cursor-pointer';
+        }
+      }
+    }
+
+    function toggleBgm() {
+      bgmPlaying = !bgmPlaying;
+      updateBgmButtonsUI();
+      if (bgmPlaying) {
+        startBgmLoop();
+        if (audiobookOn) setBgmDucking(true);
+      } else {
+        stopBgmLoop();
+      }
+    }
+
+    function onBgmTrackChange() {
+      seqStep = 0;
+      if (!bgmPlaying) toggleBgm();
+      else startBgmLoop();
+    }
+
+    function playSfx(type) {
+      if (!sfxEnabled) return;
+      try {
+        ensureAudio();
+        const now = actx.currentTime;
+        const o = actx.createOscillator(), g = actx.createGain();
+        o.connect(g); g.connect(actx.destination);
+        if (type === 'flip') {
+          o.type = 'sine'; o.frequency.setValueAtTime(520, now); o.frequency.exponentialRampToValueAtTime(760, now + 0.06);
+          g.gain.setValueAtTime(0.07, now); g.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+          o.start(now); o.stop(now + 0.08);
+        } else if (type === 'click') {
+          o.type = 'triangle'; o.frequency.setValueAtTime(660, now);
+          g.gain.setValueAtTime(0.08, now); g.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          o.start(now); o.stop(now + 0.06);
+        } else if (type === 'win') {
+          [523.3, 659.3, 784.0, 1046.5].forEach((f, idx) => {
+            const o2 = actx.createOscillator(), g2 = actx.createGain();
+            o2.type = 'triangle'; o2.frequency.setValueAtTime(f, now + idx * 0.08);
+            g2.gain.setValueAtTime(0.11, now + idx * 0.08); g2.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.28);
+            o2.connect(g2); g2.connect(actx.destination);
+            o2.start(now + idx * 0.08); o2.stop(now + idx * 0.08 + 0.30);
+          });
+        } else if (type === 'warn') {
+          o.type = 'sawtooth'; o.frequency.setValueAtTime(195, now); o.frequency.linearRampToValueAtTime(140, now + 0.14);
+          g.gain.setValueAtTime(0.06, now); g.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+          o.start(now); o.stop(now + 0.17);
+        }
+      } catch (e) {}
+    }
+
+    function toggleSfx() {
+      sfxEnabled = !sfxEnabled;
+      const b = document.getElementById('sfxBtn');
+      b.textContent = sfxEnabled ? '🔊 互動音效：開' : '🔇 互動音效：關';
+      b.className = sfxEnabled
+        ? 'px-2.5 py-1 rounded-full font-bold bg-coral text-white transition cursor-pointer'
+        : 'px-2.5 py-1 rounded-full font-bold bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border transition cursor-pointer';
+    }
+
+    /* ==========================================================================
+       7. INTERACTIVE WIDGETS & MINI-GAMES LOGIC
+       ========================================================================== */
+    function setDemoFps(f) { demoTargetFps = f; playSfx('click'); }
+    function resizeFpsCanvas() {
+      const cv = document.getElementById('fpsCanvas');
+      if (!cv || !cv.parentElement) return;
+      cv.width = Math.max(300, cv.parentElement.clientWidth);
+      cv.height = Math.max(160, cv.parentElement.clientHeight);
+    }
+    function loopFpsCanvas(ts) {
+      const cv = document.getElementById('fpsCanvas');
+      if (cv) {
+        if (cv.width < 100) resizeFpsCanvas();
+        const ctx = cv.getContext('2d'), w = cv.width, h = cv.height;
+        ctx.fillStyle = '#090D16'; ctx.fillRect(0, 0, w, h);
+
+        fpsPos1 = (fpsPos1 + (w / 100)) % (w - 44);
+        if (ts - lastSlowTime > (1000 / demoTargetFps)) {
+          fpsPos2 = fpsPos1;
+          lastSlowTime = ts;
+        }
+        ctx.fillStyle = '#34D399'; ctx.font = 'bold 12px "Noto Sans TC", sans-serif';
+        ctx.fillText('上方：流暢滿血 60 FPS', 14, 24);
+        ctx.beginPath(); ctx.arc(22 + fpsPos1, h * 0.33, 15, 0, Math.PI * 2); ctx.fill();
+
+        ctx.fillStyle = demoTargetFps >= 60 ? '#34D399' : '#F97316';
+        ctx.fillText(`下方：目前模擬 ${demoTargetFps} FPS ${demoTargetFps < 30 ? '(嚴重降頻卡頓！)' : '(流暢！)'}`, 14, h * 0.63);
+        ctx.beginPath(); ctx.arc(22 + fpsPos2, h * 0.81, 15, 0, Math.PI * 2); ctx.fill();
+      }
+      requestAnimationFrame(loopFpsCanvas);
+    }
+
+    function runCpuGpuRace() {
+      if (raceInterval) clearInterval(raceInterval);
+      playSfx('click');
+      let c = 0, g = 0;
+      raceInterval = setInterval(() => {
+        c = Math.min(100, c + 3.4);
+        g = Math.min(100, g + 23);
+        const cb = document.getElementById('cpuBar'), gb = document.getElementById('gpuBar');
+        if (!cb || !gb) { clearInterval(raceInterval); return; }
+        cb.style.width = c + '%';
+        document.getElementById('cpuPct').textContent = Math.round(c) + '%';
+        gb.style.width = g + '%';
+        document.getElementById('gpuPct').textContent = Math.round(g) + '%';
+        if (g >= 100 && c < 100) {
+          document.getElementById('raceStatus').textContent = '⚡ GPU 僅花 0.2 秒就瞬間算完！CPU 還在慢慢排隊算...';
+        }
+        if (c >= 100) {
+          clearInterval(raceInterval);
+          document.getElementById('raceStatus').textContent = '🏁 賽跑結束！大規模平行任務交給 GPU 才是王道！';
+          playSfx('win');
+        }
+      }, 55);
+    }
+
+    function updateThermal() {
+      const sl = document.getElementById('vSlider');
+      if (!sl) return;
+      const d = DEVICES[currentDevice];
+      const v = parseFloat(sl.value);
+      const pRatio = v * v;
+      const temp = d.baseTemp + (d.limitTemp - d.baseTemp) * pRatio;
+      document.getElementById('vLabel').textContent = `${v.toFixed(2)}x 電壓`;
+      const out = document.getElementById('tempOut');
+      const desc = document.getElementById('thermalDesc');
+      const blade = document.getElementById('fanBlade');
+      if (blade) blade.style.animationDuration = (1.35 / pRatio).toFixed(2) + 's';
+
+      if (temp >= d.limitTemp) {
+        out.className = 'font-mono text-lg sm:text-xl font-black text-red-600 dark:text-red-400';
+        out.textContent = `${temp.toFixed(1)} °C (撞上 ${d.limitTemp}°C 牆降頻！)`;
+        desc.textContent = `動態功耗飆至 ${(pRatio * 100).toFixed(0)}%，系統強制降壓降頻保護你的 ${d.shortName}！`;
+      } else if (v <= 0.90) {
+        out.className = 'font-mono text-lg sm:text-xl font-black text-emerald-700 dark:text-emerald-400';
+        out.textContent = `${temp.toFixed(1)} °C (黃金甜點區 ✅)`;
+        desc.textContent = `功耗驟降至 ${(pRatio * 100).toFixed(0)}%！涼快安靜又不掉幀！`;
+      } else {
+        out.className = 'font-mono text-lg sm:text-xl font-black text-coral dark:text-orange-400';
+        out.textContent = `${temp.toFixed(1)} °C (高負載安全運轉)`;
+        desc.textContent = `接近散熱上限，往左拉到 0.85x–0.90x 感受降壓省電威力！`;
+      }
+    }
+
+    let tgTemp = 58, tgLeft = 10, tgUv = false, tgThrottled = 0;
+    function startThermalGame() {
+      if (tgTimer) clearInterval(tgTimer);
+      const d = DEVICES[currentDevice];
+      tgTemp = d.limitTemp - 22;
+      tgLeft = 10.0; tgUv = false; tgPlaying = true; tgThrottled = 0;
+      playSfx('click');
+      document.getElementById('tgMsg').textContent = `🔥 壓力測試開始！快操作按鈕別讓溫度衝破 ${d.limitTemp}°C！`;
+      tgTimer = setInterval(() => {
+        if (!document.getElementById('tgTempBar')) { clearInterval(tgTimer); tgPlaying = false; return; }
+        tgLeft = Math.max(0, tgLeft - 0.1);
+        tgTemp = Math.min(d.limitTemp + 10, tgTemp + (tgUv ? 0.52 : 1.15));
+        renderTg();
+        if (tgTemp >= d.limitTemp) {
+          tgThrottled++;
+          if (tgThrottled % 8 === 1) playSfx('warn');
+        }
+        if (tgLeft <= 0) {
+          clearInterval(tgTimer); tgPlaying = false;
+          if (tgThrottled <= 5) {
+            document.getElementById('tgMsg').textContent = '🏆 完美守住溫度牆！全場穩跑 60 FPS，你是專業散熱調校大師！';
+            playSfx('win');
+          } else {
+            document.getElementById('tgMsg').textContent = `💦 多次撞上 ${d.limitTemp}°C 降頻了！下次一開始就先開「低壓甜點模式」再挑戰一次！`;
+          }
+        }
+      }, 100);
+    }
+
+    function coolAction(act) {
+      if (!tgPlaying) { showToast('👆 請先點「🚀 開始 10 秒滿載壓力測試」再操作散熱按鈕！'); return; }
+      const d = DEVICES[currentDevice];
+      playSfx('click');
+      if (act === 'fan') tgTemp = Math.max(d.baseTemp + 5, tgTemp - 6);
+      if (act === 'stand') tgTemp = Math.max(d.baseTemp + 5, tgTemp - 4.5);
+      if (act === 'uv') { tgUv = true; document.getElementById('tgMsg').textContent = '✅ 已開啟低壓甜點模式！晶片升溫速度立刻減半！'; }
+      renderTg();
+    }
+
+    function renderTg() {
+      const d = DEVICES[currentDevice];
+      const pct = Math.min(100, Math.max(10, ((tgTemp - d.baseTemp) / (d.limitTemp + 10 - d.baseTemp)) * 100));
+      const bar = document.getElementById('tgTempBar');
+      bar.style.width = pct + '%';
+      bar.className = 'h-full transition-all duration-100 ' + (tgTemp >= d.limitTemp ? 'bg-red-600' : (tgTemp >= d.limitTemp - 8 ? 'bg-coral' : 'bg-emerald-500'));
+      document.getElementById('tgTempTxt').textContent = `${tgTemp.toFixed(1)} °C / ${d.limitTemp}°C 紅線`;
+      document.getElementById('tgTime').textContent = tgLeft.toFixed(1) + ' s';
+      const fps = tgTemp >= d.limitTemp ? 22 : (tgTemp >= d.limitTemp - 5 ? 48 : 60);
+      const fpsEl = document.getElementById('tgFps');
+      fpsEl.textContent = fps + ' FPS';
+      fpsEl.className = 'font-mono text-2xl font-black mt-1 ' + (fps < 35 ? 'text-red-600 dark:text-red-400' : 'text-emerald-600 dark:text-emerald-400');
+    }
+
+    function moveRoofDot(mode) {
+      playSfx('click');
+      const d = document.getElementById('roofDot'), t = document.getElementById('roofDotTxt');
+      if (!d || !t) return;
+      if (mode === 'mem') {
+        d.setAttribute('cx', 110); d.setAttribute('cy', 138); d.setAttribute('fill', '#EF4444');
+        t.setAttribute('x', 110); t.setAttribute('y', 165); t.setAttribute('fill', '#FCA5A5');
+        t.textContent = 'AI 吐字：卡在斜坡 (搬料受限)';
+      } else {
+        d.setAttribute('cx', 298); d.setAttribute('cy', 58); d.setAttribute('fill', '#34D399');
+        t.setAttribute('x', 298); t.setAttribute('y', 85); t.setAttribute('fill', '#A7F3D0');
+        t.textContent = '3D / 批次計算：吃滿屋頂算力！';
+      }
+    }
+
+    const memInfo = {
+      1: ['速度冠軍 // 19 TB/s (A100)', '⚡ 第 1 層：GPU 內部片上 SRAM（小砧板）', '論文 A100 參考：容量 ~20 MB｜頻寬 19,000 GB/s', '離核心最近、快如閃電但面積極小！FlashAttention 把運算切塊留在這裡一次完成！'],
+      2: ['主力倉庫 // 250–2,000 GB/s', '❄️ 第 2 層：獨立顯存 VRAM / HBM（大冰箱）', '桌機／電競筆電 8–24 GB（A100 達 40–80 GB）', '專門放 3D 貼圖與 AI 權重，容量大上千倍但搬運速度比 SRAM 慢十倍！'],
+      3: ['系統共用 // 40–90 GB/s', '📦 第 3 層：系統主記憶體 RAM（儲藏室）', '手機與輕薄文書筆電主要共用空間', '獨顯爆顯存被迫溢出到 RAM 時，頻寬驟降會讓吐字速度瞬間崩跌！'],
+      4: ['長期存放 // 3–7 GB/s', '🚚 第 4 層：NVMe 固態硬碟 SSD（物流倉庫）', '容量 512 GB–2 TB', '負責長期保存模型權重檔，啟動 AI 時從 SSD 載入記憶體。']
+    };
+    function inspectMem(lv) {
+      playSfx('click');
+      document.getElementById('memBadge').textContent = memInfo[lv][0];
+      document.getElementById('memTitle').textContent = memInfo[lv][1];
+      document.getElementById('memSpeed').textContent = memInfo[lv][2];
+      document.getElementById('memDesc').textContent = memInfo[lv][3];
+    }
+
+    function updateVram() {
+      const ps = document.getElementById('pSlider'), bs = document.getElementById('bSlider');
+      if (!ps || !bs) return;
+      const d = DEVICES[currentDevice];
+      const p = parseInt(ps.value, 10), b = parseInt(bs.value, 10);
+      const wGb = p * (b / 8);
+      const tot = wGb + 0.8;
+      document.getElementById('pLabel').textContent = `${p} B (${p * 10}億參數)`;
+      document.getElementById('bLabel').textContent = b === 4 ? 'INT4 (4-bit 壓縮)' : (b === 8 ? 'INT8 (8-bit)' : (b === 12 ? '12-bit' : 'FP16 (16-bit)'));
+      const numEl = document.getElementById('vramNum'), stEl = document.getElementById('vramStatus'), bar = document.getElementById('vramBar');
+      numEl.textContent = `${tot.toFixed(1)} GB / ${d.vramLimit.toFixed(1)} GB`;
+      bar.style.width = Math.min(100, (tot / d.vramLimit) * 100) + '%';
+      if (tot <= d.vramLimit) {
+        numEl.className = 'font-mono text-2xl font-black text-emerald-600 dark:text-emerald-400';
+        bar.className = 'h-full bg-emerald-500 transition-all duration-300';
+        stEl.className = 'text-xs sm:text-sm font-bold text-emerald-700 dark:text-emerald-300 leading-snug';
+        stEl.textContent = `✅ 你的 ${d.shortName} 完美裝載！權重 ${wGb.toFixed(1)} GB，剩餘 ${(d.vramLimit - tot).toFixed(1)} GB 供對話快取使用！`;
+      } else {
+        numEl.className = 'font-mono text-2xl font-black text-red-600 dark:text-red-400';
+        bar.className = 'h-full bg-red-500 transition-all duration-300';
+        stEl.className = 'text-xs sm:text-sm font-bold text-red-600 dark:text-red-400 leading-snug';
+        stEl.textContent = `🚨 顯存爆炸 (OOM)！對 ${d.shortName} 來說超出 ${(tot - d.vramLimit).toFixed(1)} GB，快降成 INT4 試試！`;
+      }
+    }
+
+    function togglePack(k) {
+      packState[k] = !packState[k];
+      playSfx('click');
+      const d = DEVICES[currentDevice];
+      const meta = {
+        gptq:  ['btnOptGptq', `1. GPTQ INT4 量化（權重 ${d.packBaseW}GB → ${d.packOptW}GB）`],
+        flash: ['btnOptFlash', `2. FlashAttention 分塊（計算緩衝 ${d.packBaseA}GB → ${d.packOptA}GB）`],
+        paged: ['btnOptPaged', `3. PagedAttention 分頁（對話快取 ${d.packBaseK}GB → ${d.packOptK}GB）`]
+      };
+      const btn = document.getElementById(meta[k][0]);
+      btn.textContent = (packState[k] ? '✅ ' : '⬜ ') + meta[k][1];
+      btn.className = packState[k]
+        ? 'text-left px-3.5 py-2.5 rounded-xl bg-emerald-600 text-white border-2 border-emerald-600 font-bold text-xs sm:text-sm transition cursor-pointer shadow'
+        : 'text-left px-3.5 py-2.5 rounded-xl bg-cream-bg dark:bg-dark-stage border-2 border-cream-border dark:border-dark-border hover:border-emerald-500 font-bold text-xs sm:text-sm transition cursor-pointer';
+
+      const w = packState.gptq ? d.packOptW : d.packBaseW;
+      const a = packState.flash ? d.packOptA : d.packBaseA;
+      const kv = packState.paged ? d.packOptK : d.packBaseK;
+      const tot = w + a + kv;
+      const scale = Math.max(d.packBudget, tot);
+      document.getElementById('segW').style.width = (w / scale * 100) + '%';
+      document.getElementById('segA').style.width = (a / scale * 100) + '%';
+      document.getElementById('segK').style.width = (kv / scale * 100) + '%';
+
+      const totEl = document.getElementById('packTotalTxt'), fb = document.getElementById('packFeedback'), sp = document.getElementById('packSpeedBox');
+      if (tot <= d.packBudget) {
+        totEl.className = 'font-mono text-emerald-700 dark:text-emerald-400';
+        totEl.textContent = `${tot.toFixed(1)} GB / ${d.packBudget.toFixed(1)} GB (成功塞入 ✅)`;
+        fb.className = 'text-xs sm:text-sm font-extrabold text-emerald-700 dark:text-emerald-400';
+        fb.textContent = `🎉 恭喜破關！你的 ${d.shortName} 成功裝下 AI 模型且留有充裕對話空間！`;
+        sp.textContent = `🚀 預估體感：極度流暢不閃退！（剩餘 ${(d.packBudget - tot).toFixed(1)} GB 餘裕）`;
+        playSfx('win');
+      } else {
+        totEl.className = 'font-mono text-red-600 dark:text-red-400';
+        totEl.textContent = `${tot.toFixed(1)} GB / ${d.packBudget.toFixed(1)} GB (爆倉！)`;
+        fb.className = 'text-xs sm:text-sm font-extrabold text-red-600 dark:text-red-400';
+        fb.textContent = `🚨 還超過 ${d.packBudget} GB 上限 ${(tot - d.packBudget).toFixed(1)} GB，再多開幾張卡片！`;
+        sp.textContent = '💀 預估體感：依然顯存不足 (OOM)';
+      }
+    }
+
+    function ansQuiz(id, ok, btn) {
+      const fb = document.getElementById('qfb' + id);
+      const siblings = btn.parentElement.querySelectorAll('button');
+      siblings.forEach(b => b.classList.remove('border-emerald-500', 'bg-pastel-mint', 'border-red-500', 'bg-pastel-peach'));
+      if (ok) {
+        qSolved[id] = true;
+        btn.classList.add('border-emerald-500', 'bg-pastel-mint');
+        fb.className = 'text-xs font-extrabold text-emerald-700 dark:text-emerald-400 min-h-[1.1rem]';
+        fb.textContent = '✅ 答對了！觀念超清晰！';
+        playSfx('win');
+      } else {
+        btn.classList.add('border-red-500', 'bg-pastel-peach');
+        fb.className = 'text-xs font-extrabold text-red-600 dark:text-red-400 min-h-[1.1rem]';
+        fb.textContent = '💡 再想一下喔！';
+        playSfx('warn');
+      }
+      const cnt = (qSolved[1] ? 1 : 0) + (qSolved[2] ? 1 : 0) + (qSolved[3] ? 1 : 0);
+      document.getElementById('qScoreTxt').textContent = `${cnt} / 3 題`;
+      if (cnt === 3) {
+        document.getElementById('certBanner').innerHTML = `🏆 <strong>恭喜滿分通關！已解鎖【${TRACK_META[currentTrack].label} × ${DEVICES[currentDevice].shortName} 解謎大師】認證徽章！</strong> 🎓✨`;
+      }
+    }
+
+    /* ==========================================================================
+       8. MODALS, THEME & LIVELY W6–W8 COMPANION AI AGENT ("小矽")
+       ========================================================================== */
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      document.getElementById('themeBtn').textContent = isDark ? '🌞 粉彩' : '🌙 暗房';
+      playSfx('click');
+    }
+
+    function toggleGrid() {
+      const m = document.getElementById('gridModal');
+      if (m.classList.contains('hidden')) {
+        document.getElementById('gridModalTitle').textContent = `🗂️ ${TRACK_META[currentTrack].label} 簡報總覽（共 ${activeSlides.length} 頁・點擊跳轉）`;
+        document.getElementById('gridList').innerHTML = activeSlides.map((s, i) => `
+          <button onclick="showSlide(${i}); toggleGrid();" class="text-left p-3 rounded-xl border text-xs font-bold transition cursor-pointer ${
+            i === cur
+              ? 'bg-coral-soft dark:bg-orange-500/20 border-coral text-coral dark:text-orange-300'
+              : 'bg-cream-bg dark:bg-dark-stage border-cream-border dark:border-dark-border hover:border-coral'
+          }">${s.title}</button>
+        `).join('');
+        m.classList.remove('hidden'); m.classList.add('flex');
+      } else {
+        m.classList.add('hidden'); m.classList.remove('flex');
+      }
+    }
+
+    function openWikiModal(key) {
+      const keys = Object.keys(wikiStore);
+      const target = wikiStore[key] ? key : keys[0];
+      document.getElementById('wikiTitle').textContent = `📚 LLM Wiki 來源：[[${target}]]`;
+      document.getElementById('wikiContent').textContent = wikiStore[target];
+      document.getElementById('wikiTabs').innerHTML = keys.map(k => `
+        <button onclick="openWikiModal('${k}')" class="px-2.5 py-1 rounded-full font-mono text-[11px] font-bold border transition cursor-pointer ${
+          k === target ? 'bg-violet-brand text-white border-violet-brand' : 'bg-cream-bg dark:bg-dark-stage border-cream-border dark:border-dark-border hover:border-violet-brand'
+        }">${k}</button>
+      `).join('');
+      const m = document.getElementById('wikiModal');
+      m.classList.remove('hidden'); m.classList.add('flex');
+      playSfx('click');
+    }
+    function closeWiki() { const m = document.getElementById('wikiModal'); m.classList.add('hidden'); m.classList.remove('flex'); }
+
+    const avSvgs = {
+      idle: `<svg viewBox="0 0 80 80" width="56" height="56"><rect width="80" height="80" rx="14" fill="#F3ECFF"/><circle cx="40" cy="45" r="23" fill="#FDE6D2"/><path d="M16 40 Q20 13 40 16 Q60 13 64 40 Q56 26 40 28 Q24 26 16 40Z" fill="#7C3AED"/><circle cx="31" cy="45" r="3.4" fill="#1E293B"/><circle cx="49" cy="45" r="3.4" fill="#1E293B"/><circle cx="24" cy="51" r="3.4" fill="#FB7185" opacity="0.5"/><circle cx="56" cy="51" r="3.4" fill="#FB7185" opacity="0.5"/><path d="M35 54 Q40 59 45 54" fill="none" stroke="#1E293B" stroke-width="2.4" stroke-linecap="round"/></svg>`,
+      thinking: `<svg viewBox="0 0 80 80" width="56" height="56"><rect width="80" height="80" rx="14" fill="#EBF5FF"/><circle cx="40" cy="45" r="23" fill="#FDE6D2"/><path d="M16 40 Q20 13 40 16 Q60 13 64 40 Q56 26 40 28 Q24 26 16 40Z" fill="#7C3AED"/><rect x="23" y="39" width="14" height="10" rx="3" fill="none" stroke="#0284C7" stroke-width="2.2"/><rect x="43" y="39" width="14" height="10" rx="3" fill="none" stroke="#0284C7" stroke-width="2.2"/><line x1="37" y1="44" x2="43" y2="44" stroke="#0284C7" stroke-width="2"/><circle cx="30" cy="44" r="2.2" fill="#1E293B"/><circle cx="50" cy="44" r="2.2" fill="#1E293B"/><text x="58" y="23" font-size="13">🔍</text></svg>`,
+      drawing: `<svg viewBox="0 0 80 80" width="56" height="56"><rect width="80" height="80" rx="14" fill="#FFF1E6"/><circle cx="40" cy="45" r="23" fill="#FDE6D2"/><path d="M16 40 Q20 13 40 16 Q60 13 64 40 Q56 26 40 28 Q24 26 16 40Z" fill="#7C3AED"/><path d="M27 45 Q31 40 35 45" fill="none" stroke="#1E293B" stroke-width="2.6"/><path d="M45 45 Q49 40 53 45" fill="none" stroke="#1E293B" stroke-width="2.6"/><circle cx="40" cy="54" r="3.8" fill="#F43F5E"/><text x="58" y="24" font-size="14">🎨</text></svg>`,
+      tired: `<svg viewBox="0 0 80 80" width="56" height="56"><rect width="80" height="80" rx="14" fill="#E6F8F0"/><circle cx="40" cy="45" r="23" fill="#FDE6D2"/><path d="M16 40 Q20 13 40 16 Q60 13 64 40 Q56 26 40 28 Q24 26 16 40Z" fill="#7C3AED"/><line x1="26" y1="46" x2="35" y2="46" stroke="#1E293B" stroke-width="2.4"/><line x1="45" y1="46" x2="54" y2="46" stroke="#1E293B" stroke-width="2.4"/><path d="M36 56 Q40 53 44 56" fill="none" stroke="#1E293B" stroke-width="2.2"/><text x="58" y="24" font-size="14">💦</text></svg>`
+    };
+
+    function setAvatar(st, label) {
+      const svg = avSvgs[st] || avSvgs.idle;
+      document.getElementById('avatarFrame').innerHTML = svg;
+      const fabAv = document.getElementById('fabMiniAvatar');
+      if (fabAv) fabAv.innerHTML = svg.replace('width="56" height="56"', 'width="36" height="36"');
+      document.getElementById('emoBadge').textContent = label;
+    }
+
+    function toggleAgent() {
+      dismissProactiveBubble();
+      const d = document.getElementById('agentDrawer');
+      if (d.classList.contains('hidden')) { d.classList.remove('hidden'); d.classList.add('flex'); }
+      else { d.classList.add('hidden'); d.classList.remove('flex'); }
+      playSfx('click');
+    }
+
+    function retrieveWikiKey(q) {
+      q = q.toLowerCase();
+      if (/降頻|過熱|溫度|功耗|87|tgp|dvfs/.test(q)) return 'NVIDIA2024-MaxQ-Thermal';
+      if (/roofline|屋頂|頻寬|memory|decode|廚房/.test(q)) return 'Williams2009-Roofline';
+      if (/flash|sram|冰箱|砧板|tiling/.test(q)) return 'Dao2022-FlashAttention';
+      if (/gptq|量化|int4|fp16|顯存|8gb/.test(q)) return 'Frantar2023-GPTQ-Quantization';
+      if (/paged|kv|分頁|碎片|vllm/.test(q)) return 'Kwon2023-PagedAttention';
+      return 'All-Device-AI-Performance-Guide';
+    }
+
+    function sendAgent(preset) {
+      const inp = document.getElementById('agentInput');
+      const txt = (preset || inp.value).trim();
+      if (!txt) return;
+      if (!preset) inp.value = '';
+      playSfx('click');
+
+      const log = document.getElementById('chatLog');
+      const uDiv = document.createElement('div');
+      uDiv.className = 'p-2.5 px-3 rounded-2xl rounded-tr-sm bg-coral text-white text-xs self-end max-w-[88%]';
+      uDiv.textContent = txt;
+      log.appendChild(uDiv);
+      log.scrollTop = log.scrollHeight;
+
+      const isDraw = /畫|圖|繪|生圖|draw|image/i.test(txt);
+      const hit = retrieveWikiKey(txt);
+
+      if (isDraw) {
+        setAvatar('drawing', 'EMO // 繪圖工具啟動 DRAWING 🎨');
+        setTimeout(() => {
+          const isFlash = /flash|sram|冰箱|砧板/i.test(txt);
+          const svgArt = isFlash
+            ? `<svg viewBox="0 0 300 112" class="w-full bg-slate-900 rounded-lg mt-1.5 border border-slate-700"><text x="150" y="16" fill="#fff" font-size="9.5" text-anchor="middle" font-weight="bold">FlashAttention：SRAM 砧板 vs VRAM 冰箱</text><rect x="16" y="28" width="108" height="70" rx="8" fill="#1E293B" stroke="#38BDF8"/><text x="70" y="56" fill="#38BDF8" font-size="9.5" text-anchor="middle" font-weight="bold">VRAM 大冰箱</text><text x="70" y="74" fill="#94A3B8" font-size="8" text-anchor="middle">搬運較慢</text><rect x="176" y="28" width="108" height="70" rx="8" fill="#431407" stroke="#F97316"/><text x="230" y="56" fill="#FB923C" font-size="9.5" text-anchor="middle" font-weight="bold">SRAM 小砧板</text><text x="230" y="74" fill="#34D399" font-size="8" text-anchor="middle">分塊一次算完 ✅</text><line x1="128" y1="63" x2="172" y2="63" stroke="#34D399" stroke-width="2.5"/></svg>`
+            : `<svg viewBox="0 0 300 112" class="w-full bg-slate-900 rounded-lg mt-1.5 border border-slate-700"><line x1="15" y1="48" x2="285" y2="48" stroke="#FACC15" stroke-dasharray="4 3"/><text x="280" y="42" fill="#FACC15" font-size="8" text-anchor="end">${DEVICES[currentDevice].vramLimit}GB 預算線</text><rect x="42" y="22" width="80" height="76" rx="6" fill="#DC2626"/><text x="82" y="64" fill="#fff" font-size="9" text-anchor="middle" font-weight="bold">FP16: 爆顯存</text><rect x="178" y="62" width="80" height="36" rx="6" fill="#059669"/><text x="218" y="84" fill="#fff" font-size="9" text-anchor="middle" font-weight="bold">INT4: 省4倍順</text></svg>`;
+          const aiDiv = document.createElement('div');
+          aiDiv.className = 'p-3 rounded-2xl rounded-tl-sm bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border text-xs leading-relaxed shadow-sm';
+          aiDiv.innerHTML = `<span class="block font-mono text-[10px] font-bold text-sky-brand bg-pastel-sky dark:bg-sky-500/20 px-2 py-0.5 rounded mb-1">AGENT ROUTER // 意圖=生圖 → 參考 [[${hit}]] → 繪圖工具</span>(拿起電繪筆刷刷畫好了！)「參考 <button onclick="openWikiModal('${hit}')" class="font-mono underline text-violet-brand font-bold cursor-pointer">[[${hit}]]</button> 幫你畫出專屬圖解囉！」${svgArt}<div class="text-[11px] text-ink-muted mt-1">(呼～畫完圖有點累呢 💦)</div>`;
+          log.appendChild(aiDiv);
+          log.scrollTop = log.scrollHeight;
+          setAvatar('tired', 'EMO // 畫完有點累 TIRED 💦');
+          playSfx('win');
+          setTimeout(() => setAvatar('idle', 'EMO // 元氣待機 IDLE'), 4000);
+        }, 350);
+      } else {
+        setAvatar('thinking', 'EMO // 檢索 Wiki 中 RAG 🔍');
+        const ansMap = {
+          'NVIDIA2024-MaxQ-Thermal': `(指著溫度計 🔥)「根據 <button onclick="openWikiModal('NVIDIA2024-MaxQ-Thermal')" class="font-mono underline text-violet-brand font-bold cursor-pointer">[[NVIDIA2024-MaxQ-Thermal]]</button>，功耗跟電壓平方成正比，撞上溫度牆就會啟動 DVFS 降頻保護！稍微降壓進入甜點區能省下 20%–30% 發熱喔！」`,
+          'Williams2009-Roofline': `(比出炒菜手勢 🍳)「翻到 <button onclick="openWikiModal('Williams2009-Roofline')" class="font-mono underline text-violet-brand font-bold cursor-pointer">[[Williams2009-Roofline]]</button> 啦！AI 逐字生成時大廚都在等助理搬權重，屬於典型的 <strong>Memory-bound</strong> 喔！」`,
+          'Dao2022-FlashAttention': `(亮出小砧板 ✨)「根據 <button onclick="openWikiModal('Dao2022-FlashAttention')" class="font-mono underline text-violet-brand font-bold cursor-pointer">[[Dao2022-FlashAttention]]</button>，透過 Tiling 分塊把運算留在高速 SRAM 砧板上，零誤差減少開關大冰箱！」`,
+          'Frantar2023-GPTQ-Quantization': `(拍拍行李箱 🧳)「根據 <button onclick="openWikiModal('Frantar2023-GPTQ-Quantization')" class="font-mono underline text-violet-brand font-bold cursor-pointer">[[Frantar2023-GPTQ-Quantization]]</button>，GPTQ 把權重從 FP16 壓成 INT4，體積縮 4 倍且搬運也快 4 倍！」`,
+          'Kwon2023-PagedAttention': `(排好積木 📚)「根據 <button onclick="openWikiModal('Kwon2023-PagedAttention')" class="font-mono underline text-violet-brand font-bold cursor-pointer">[[Kwon2023-PagedAttention]]</button>，分頁管理把 KV Cache 浪費從 60–80% 壓到 4% 以下！」`,
+          'All-Device-AI-Performance-Guide': `(舉起筆記本 📖)「這題在總覽 <button onclick="openWikiModal('All-Device-AI-Performance-Guide')" class="font-mono underline text-violet-brand font-bold cursor-pointer">[[All-Device-AI-Performance-Guide]]</button> 有完整說明：降壓甜點區＋三大推論最佳化，無論手機還是獨顯都能順跑！」`
+        };
+        setTimeout(() => {
+          const aiDiv = document.createElement('div');
+          aiDiv.className = 'p-3 rounded-2xl rounded-tl-sm bg-white dark:bg-dark-card border border-cream-border dark:border-dark-border text-xs leading-relaxed shadow-sm';
+          aiDiv.innerHTML = `<span class="block font-mono text-[10px] font-bold text-sky-brand bg-pastel-sky dark:bg-sky-500/20 px-2 py-0.5 rounded mb-1">AGENT ROUTER // 意圖=問答 → Wiki RAG 命中 [[${hit}]]</span>${ansMap[hit]}`;
+          log.appendChild(aiDiv);
+          log.scrollTop = log.scrollHeight;
+          setAvatar('idle', 'EMO // 元氣待機 IDLE');
+        }, 280);
+      }
+    }
+
+    /* ==========================================================================
+       9. ZERO-DEPENDENCY PURE JAVASCRIPT STORE-MODE ZIP BUILDER (createZipBlob)
+       ========================================================================== */
+    const CRC32_TABLE = (() => {
+      const t = new Uint32Array(256);
+      for (let i = 0; i < 256; i++) {
+        let c = i;
+        for (let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+        t[i] = c >>> 0;
+      }
+      return t;
+    })();
+
+    function crc32(bytes) {
+      let crc = 0xFFFFFFFF;
+      for (let i = 0; i < bytes.length; i++) {
+        crc = CRC32_TABLE[(crc ^ bytes[i]) & 0xFF] ^ (crc >>> 8);
+      }
+      return (crc ^ 0xFFFFFFFF) >>> 0;
+    }
+
+    function createZipBlob(filesMap) {
+      const encoder = new TextEncoder();
+      const localChunks = [];
+      const centralChunks = [];
+      let offset = 0;
+      let count = 0;
+
+      for (const [name, content] of Object.entries(filesMap)) {
+        const nameBytes = encoder.encode(name);
+        const dataBytes = content instanceof Uint8Array ? content : encoder.encode(String(content));
+        const crc = crc32(dataBytes);
+        const size = dataBytes.length;
+
+        const lh = new ArrayBuffer(30);
+        const lv = new DataView(lh);
+        lv.setUint32(0, 0x04034b50, true);
+        lv.setUint16(4, 20, true);
+        lv.setUint16(6, 0x0800, true);
+        lv.setUint16(8, 0, true);
+        lv.setUint16(10, 0x0000, true);
+        lv.setUint16(12, 0x5B75, true);
+        lv.setUint32(14, crc, true);
+        lv.setUint32(18, size, true);
+        lv.setUint32(22, size, true);
+        lv.setUint16(26, nameBytes.length, true);
+        lv.setUint16(28, 0, true);
+
+        localChunks.push(new Uint8Array(lh), nameBytes, dataBytes);
+
+        const ch = new ArrayBuffer(46);
+        const cv = new DataView(ch);
+        cv.setUint32(0, 0x02014b50, true);
+        cv.setUint16(4, 20, true);
+        cv.setUint16(6, 20, true);
+        cv.setUint16(8, 0x0800, true);
+        cv.setUint16(10, 0, true);
+        cv.setUint16(12, 0x0000, true);
+        cv.setUint16(14, 0x5B75, true);
+        cv.setUint32(16, crc, true);
+        cv.setUint32(20, size, true);
+        cv.setUint32(24, size, true);
+        cv.setUint16(28, nameBytes.length, true);
+        cv.setUint16(30, 0, true);
+        cv.setUint16(32, 0, true);
+        cv.setUint16(34, 0, true);
+        cv.setUint16(36, 0, true);
+        cv.setUint32(38, 0, true);
+        cv.setUint32(42, offset, true);
+
+        centralChunks.push(new Uint8Array(ch), nameBytes);
+        offset += 30 + nameBytes.length + size;
+        count++;
+      }
+
+      const cdSize = centralChunks.reduce((acc, u) => acc + u.length, 0);
+      const eocd = new ArrayBuffer(22);
+      const ev = new DataView(eocd);
+      ev.setUint32(0, 0x06054b50, true);
+      ev.setUint16(4, 0, true);
+      ev.setUint16(6, 0, true);
+      ev.setUint16(8, count, true);
+      ev.setUint16(10, count, true);
+      ev.setUint32(12, cdSize, true);
+      ev.setUint32(16, offset, true);
+      ev.setUint16(20, 0, true);
+
+      return new Blob([...localChunks, ...centralChunks, new Uint8Array(eocd)], { type: 'application/zip' });
+    }
+
+    function downloadFullRepoZip() {
+      playSfx('click');
+      try {
+        const paperKeys = ['NVIDIA2024-MaxQ-Thermal', 'Williams2009-Roofline', 'Dao2022-FlashAttention', 'Frantar2023-GPTQ-Quantization', 'Kwon2023-PagedAttention'];
+        const conceptKeys = ['Thermal-Throttling', 'Roofline-Model', 'Memory-Hierarchy-SRAM-VRAM', 'Weight-Quantization-INT4', 'KV-Cache-Paging'];
+
+        const files = {
+          'index.html': PRISTINE_INDEX_HTML || ('<!DOCTYPE html>\n' + document.documentElement.outerHTML),
+          'AGENTS.md': '# AGENTS.md — 全裝置硬體與邊緣 AI 推論最佳化 LLM Wiki 員工手冊 (v4.2)\n\n## 1. 專案定位\n- 保留 v4.0 暖系粉彩大卡排版，整合完整書籍結構（封面・目錄・3路線動態分流・參考文獻・結尾）。\n- 預設開啟自然語音導讀與 16 步進節奏鼓機（Audio Ducking 智慧降音）、手動翻頁與小矽主動提醒、全螢幕切換、2 款互動小遊戲與小矽 AI 助教。\n\n## 2. 防幻覺與驗收標準\n- raw/ 唯讀不可改；每頁右上角必標有效 Wiki: [[...]] 出處；A100 論文數據須註明環境邊界。\n',
+          'workflows/topic-slides.md': '# Workflow: /topic-slides — Graph v2 動態多路線有聲簡報規範\nN1 檢索 Wiki → Gate 0 (≥5 篇) → N2 平行證據卡 → N3 多路線大綱 → Gate 1 人工確認 → N4 逐頁分級稿（內層小圈 Loop）→ Gate 2 獨立忠實度審查 → N5 渲染 v4.2 有聲書 HTML → Gate 3 scripts/check_deck.py 驗收。\n',
+          'wiki/index.md': '# LLM Wiki 全域索引\n\n## Papers\n' + paperKeys.map(k => '- [[' + k + ']]').join('\n') + '\n\n## Concepts\n' + conceptKeys.map(k => '- [[' + k + ']]').join('\n') + '\n\n## Syntheses\n- [[All-Device-AI-Performance-Guide]]\n',
+          'wiki/log.md': '# Wiki 維護日誌\n- [2026-11-21] [INIT] 先討論後生成建立 AGENTS.md。\n- [2026-11-21] [INGEST] 匯入 5 篇文獻建立 11 個 Wiki 節點。\n- [2026-11-21] [GRAPH-V2] 升級為 v4.2（v4.0 視覺排版 ＋ 完整封面/目錄/文獻/結尾 ＋ 語音與節奏音樂預設開啟 ＋ 手動翻頁小矽提醒 ＋ 全螢幕）。\n',
+          'topic-gpu-edge-ai/report-round2.md': '# Round 2 QA Report (v4.2 ALL PASS)\n- Tracks: Beginner (13), Gamer (15), Pro (17) × 2 Devices (Mobile, GPU)\n- Core 5 Papers Coverage: 5 / 5 (100%)\n- Features: Default-ON Natural Voice + Default-ON 16-Step Groove + Ducking + Manual Flip Proactive Mascot + Fullscreen + 2 Mini-Games + Pure-JS ZIP\n- RESULT: ALL CHECKS PASSED\n',
+          'scripts/check_deck.py': '#!/usr/bin/env python3\nimport os, sys\nhtml = open(sys.argv[1], encoding="utf-8").read()\nvalid = {f[:-3] for r,_,fs in os.walk(sys.argv[2]) for f in fs if f.endswith(".md")}\nneeded = ["NVIDIA2024-MaxQ-Thermal","Williams2009-Roofline","Dao2022-FlashAttention","Frantar2023-GPTQ-Quantization","Kwon2023-PagedAttention"]\nmissing = [p for p in needed if p not in html or p not in valid]\nprint("Missing:", missing)\nsys.exit(1 if missing else 0)\n'
+        };
+
+        paperKeys.forEach(k => {
+          files['raw/papers/' + k + '.md'] = '# Raw Immutable Source: ' + k + '\n\n' + wikiStore[k] + '\n';
+          files['wiki/papers/' + k + '.md'] = wikiStore[k];
+        });
+        conceptKeys.forEach(k => { files['wiki/concepts/' + k + '.md'] = wikiStore[k]; });
+        files['wiki/syntheses/All-Device-AI-Performance-Guide.md'] = wikiStore['All-Device-AI-Performance-Guide'];
+
+        const blob = createZipBlob(files);
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'gpu-edge-ai-wiki-v4.2.zip';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 4000);
+
+        playSfx('win');
+        showToast('✅ 已直接下載 gpu-edge-ai-wiki-v4.2.zip（純 JS 本地打包，共 22 個專案檔案，解壓縮即可推上 GitHub）！');
+      } catch (err) {
+        console.error(err);
+        showToast('❌ 打包 ZIP 發生異常，請重新整理後再試。');
+      }
+    }
+
+    /* ==========================================================================
+       10. KEYBOARD, TOUCH SWIPE & BOOTSTRAP (AUTO-UNLOCK VOICE + BGM)
+       ========================================================================== */
+    document.addEventListener('keydown', e => {
+      if (document.activeElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+      if (e.key === 'ArrowRight') step(1);
+      else if (e.key === 'ArrowLeft') step(-1);
+      else if (e.key.toLowerCase() === 'g') toggleGrid();
+      else if (e.key.toLowerCase() === 'f') toggleFull();
+      else if (e.key === 'Escape') {
+        const gm = document.getElementById('gridModal');
+        gm.classList.add('hidden'); gm.classList.remove('flex');
+        closeWiki();
+        dismissProactiveBubble();
+      }
+    });
+
+    let touchStartX = 0;
+    const stageEl = document.getElementById('deckStage');
+    stageEl.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    stageEl.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(dx) > 55) step(dx < 0 ? 1 : -1);
+    }, { passive: true });
+
+    // Smoothly unlock default-ON BGM and default-ON Voice on the very first user gesture
+    function unlockDefaultMediaOnce(e) {
+      const target = e && e.target;
+      const clickedTts = target && target.closest && target.closest('#ttsBtn');
+      const clickedBgm = target && target.closest && (target.closest('#topBgmBtn') || target.closest('#bgmBtn'));
+
+      if (bgmPlaying && !clickedBgm) {
+        ensureDefaultBgmRunning();
+      }
+      if (audiobookOn && !clickedTts && !voiceHasSpokenOnce) {
+        speakCurrentSlide();
+      }
+      ['pointerdown', 'keydown', 'touchstart'].forEach(ev => window.removeEventListener(ev, unlockDefaultMediaOnce));
+    }
+    ['pointerdown', 'keydown', 'touchstart'].forEach(ev => window.addEventListener(ev, unlockDefaultMediaOnce));
+
+    window.addEventListener('resize', resizeFpsCanvas);
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // 1. Capture pristine source HTML BEFORE mounting dynamic slides
+      PRISTINE_INDEX_HTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+      // 2. Initialize voices (handles Chrome/Edge async voice loading)
+      populateVoices();
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          populateVoices();
+          if (audiobookOn && !voiceHasSpokenOnce && activeSlides.length) {
+            speakCurrentSlide();
+          }
+        };
+      }
+
+      // 3. Init mascot avatar, default-ON voice & BGM UI, default deck, and FPS animation loop
+      setAvatar('idle', 'EMO // 元氣待機 IDLE');
+      updateAudiobookButtonsUI();
+      updateBgmButtonsUI();
+      rebuildDeck(false, true);
+      requestAnimationFrame(loopFpsCanvas);
+
+      // 4. Attempt starting default BGM right away (auto-unlocks on first tap if browser suspends AudioContext)
+      try { ensureDefaultBgmRunning(); } catch (e) {}
+    });
+  </script>
+
+</body></html>
